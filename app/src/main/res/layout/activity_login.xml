@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+    </data>
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg_color"
+    tools:context=".activity.LoginActivity">
+
+    <com.thimble.customer.view.TypedfaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_80"
+        android:gravity="center"
+        android:textColor="@color/app_theme_color"
+        android:textSize="@dimen/sp_13"
+        android:text="@string/welcome_to_customer_profiler_creation"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:paddingLeft="@dimen/dp_45"
+            android:paddingRight="@dimen/dp_45">
+
+            <EditText
+                android:id="@+id/etUserId"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_44"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:background="@drawable/edt_round_bg"
+                android:gravity="center_vertical"
+                android:hint="@string/user_id_hint"
+                android:textSize="@dimen/sp_13"/>
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_44"
+                android:layout_marginTop="@dimen/dp_1"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:background="@drawable/edt_round_bg"
+                android:gravity="center_vertical"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword"
+                android:textSize="@dimen/sp_13"/>
+
+            <com.thimble.customer.view.TypedfaceTextView
+                android:id="@+id/tvSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_44"
+                android:layout_marginTop="@dimen/dp_25"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@drawable/btn_round_bg"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_13"
+                android:text="@string/sign_in_btn_text"/>
+
+            <com.thimble.customer.view.TypedfaceTextView
+                android:id="@+id/tvForgotPWD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:padding="@dimen/dp_10"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:textSize="@dimen/sp_13"
+                android:textColor="@color/app_theme_color"
+                android:text="@string/forgot_password"/>
+
+        </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+
+</layout>
+
+
