@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.thimble.customer.adapter.CustomerAdapter;
 import com.thimble.customer.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,8 +24,20 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         setSupportActionBar(binding.toolbar);
+
+        binding.rvUser.setAdapter(new CustomerAdapter(this));
+
+
     }
 
+
+    private void OnClick(View view){
+        switch (view.getId()){
+            case R.id.fabAdd:
+                break;
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

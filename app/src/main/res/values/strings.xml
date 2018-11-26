@@ -15,4 +15,16 @@
     <string name="menu_delete">Delete</string>
 
 
+    <string name="shop_outside_picture">Shop Outside Picture</string>
+    <string name="shop_inside_picture">Shop Inside Picture</string>
+    <string name="section_picture">Section / Rack picture</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+
+    <string name="entry_hours">Entry Hours</string>
+    <string name="time_from">From</string>
+    <string name="time_to">To</string>
+
+
 </resources>

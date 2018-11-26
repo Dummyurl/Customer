@@ -7,4 +7,11 @@
 
     <color name="app_theme_color">#0584A5</color>
     <color name="page_bg_color">#E5EAED</color>
+    <color name="item_selected_color">#ECECEC</color>
+    <color name="radio_btn_inactive_color">#C3C7C8</color>
+    <color name="radio_btn_active_color">#44BAD8</color>
+
+
+    <color name="text_color1">#0584A5</color>
+    <color name="text_color2">#9A9A9A</color>
 </resources>

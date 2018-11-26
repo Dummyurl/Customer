@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+    </data>
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.thimble.customer.activity.DateTimeAddressActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorAccent"
+        app:contentInsetStartWithNavigation="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:titleTextAppearance="@style/ToolbarTextAppearance"
+        app:title="@string/customer_profile_page_title" />
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.thimble.customer.view.TypedfaceTextView
+                android:id="@+id/tvOutSide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:textSize="@dimen/sp_16"
+                android:text="@string/entry_hours"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdbSunday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="SUN"/>
+
+                <RadioButton
+                    android:id="@+id/rdbMonday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="MON"/>
+
+                <RadioButton
+                    android:id="@+id/rdbTuesday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="TUE"/>
+
+                <RadioButton
+                    android:id="@+id/rdbWednesday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="WED"/>
+
+                <RadioButton
+                    android:id="@+id/rdbThursday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="THU"/>
+
+                <RadioButton
+                    android:id="@+id/rdbFriday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="FRI"/>
+
+                <RadioButton
+                    android:id="@+id/rdbSaturday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="SAT"/>
+
+            </RadioGroup>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:orientation="horizontal"
+                android:background="@color/radio_btn_active_color">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvFrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:text="@string/time_from" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvTimeFrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_25"
+                        android:text="10:00 AM" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:text="@string/time_to" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvTimeTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_25"
+                        android:text="10:00 AM" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
+</layout>

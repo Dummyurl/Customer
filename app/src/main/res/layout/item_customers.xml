@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+    </data>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_1"
+    android:paddingLeft="@dimen/dp_16"
+    android:paddingRight="@dimen/dp_16"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10"
+    android:background="@android:color/white"
+    android:id="@+id/listItem">
+
+    <com.thimble.customer.view.TypedfaceTextView
+        android:id="@+id/tvCustName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/app_theme_color"
+        android:text="Customer Name"
+        tools:text="Customer Name"/>
+
+    <com.thimble.customer.view.TypedfaceTextView
+        android:id="@+id/tvCustId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCustName"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/text_color2"
+        android:text="CUSTID003"
+        tools:text="CUSTID003"/>
+
+    <ImageView
+        android:id="@+id/imvSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCustName"
+        android:layout_toRightOf="@+id/tvCustId"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:src="@drawable/ic_check_circle"/>
+
+    <ImageView
+        android:id="@+id/imvArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:src="@drawable/ic_arrow_right"/>
+
+</RelativeLayout>
+</layout>
