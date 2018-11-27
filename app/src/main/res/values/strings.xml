@@ -25,6 +25,21 @@
     <string name="entry_hours">Entry Hours</string>
     <string name="time_from">From</string>
     <string name="time_to">To</string>
+    <string name="store_entrance">Store Entrance</string>
+
+
+    <string name="cust_name_hint">Customer Name</string>
+    <string name="cust_id_hint">Customer ID</string>
+    <string name="upload_shop_outside_picture">Upload Shop Outside Picture</string>
+    <string name="upload_shop_inside_picture">Upload Shop Inside Picture</string>
+    <string name="upload_section_picture">Upload Section / Rack picture</string>
+
+
+
+    <string name="address_hint">Address</string>
+    <string name="phone_hint">Phone</string>
+    <string name="email_hint">Email ID</string>
+    <string name="web_hint">https://…</string>
 
 
 </resources>

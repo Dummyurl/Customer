@@ -17,7 +17,8 @@ public class DateTimeAddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_date_time_address);
+        setContentView(R.layout.activity_edit_date_time_address);
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_date_time_address);
 
     }
 
