@@ -1,7 +1,7 @@
 package com.thimble.customer.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+//import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.thimble.customer.R;
 import com.thimble.customer.base.AppConstant;
-import com.thimble.customer.databinding.ActivitySplashBinding;
+//import com.thimble.customer.databinding.ActivitySplashBinding;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivitySplashBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
+//        ActivitySplashBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
