@@ -43,14 +43,11 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
     public ItemRowHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int type) {
         ItemImagesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_images, viewGroup, false);
         return new ItemRowHolder(binding);
-
-//        return new ItemRowHolder(viewGroup);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemRowHolder holder, int position) {
 //        holder.binding.setEdu(eduList.get(position));position
-
 
     }
 
@@ -58,7 +55,7 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
 
     @Override
     public int getItemCount() {
-        return (null != customerList ? customerList.size() : 10);
+        return (null != customerList ? customerList.size() : 3);
     }
 
     public static class ItemRowHolder extends RecyclerView.ViewHolder {

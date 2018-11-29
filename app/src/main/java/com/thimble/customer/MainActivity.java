@@ -4,6 +4,9 @@ package com.thimble.customer;
 import android.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.thimble.customer.activity.EditImageActivity;
 import com.thimble.customer.adapter.CustomerAdapter;
+import com.thimble.customer.adapter.ViewPagerAdapter;
 import com.thimble.customer.db.AppDB;
 import com.thimble.customer.db.DBClient;
 import com.thimble.customer.db.dao.CustomerDao;
@@ -22,6 +27,7 @@ import com.thimble.customer.db.model.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.thimble.customer.databinding.ActivityMainBinding;
+import com.thimble.customer.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,9 +48,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        setupViewPager(binding.viewpager);
+        binding.tabs.setupWithViewPager(binding.viewpager);
+
+
         new SaveTask().execute();
 
 
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new UserFragment(), "Server");
+        adapter.addFrag(new UserFragment(), "Local");
+        viewPager.setAdapter(adapter);
     }
 
 
@@ -108,13 +125,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
     public void OnClick(View view){
         switch (view.getId()){
             case R.id.fabAdd:
+                startActivity(new Intent(this,EditImageActivity.class));
 
                 new GetTasks().execute();
 

@@ -5,13 +5,15 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 /**
  * Created by pasari on 28/11/18.
  */
 
 
 @Entity(foreignKeys = @ForeignKey(entity = Customer.class, parentColumns = "id",
-        childColumns = "userId", onDelete = ForeignKey.CASCADE))
+        childColumns = "userId", onDelete = CASCADE,onUpdate = CASCADE))
 
 public class Image {
 
