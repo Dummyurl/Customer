@@ -1,5 +1,7 @@
 package com.thimble.customer.db.model;
 
+import android.arch.persistence.room.Ignore;
+
 /**
  * Created by pasari on 29/11/18.
  */
@@ -10,14 +12,15 @@ public class DateTime {
     private String fromTime;
     private String toTime;
 
-    public DateTime() {
-    }
+//    public DateTime() {
+//    }
 
-    public DateTime(String date, String fromTime, String toTime) {
-        this.date = date;
-        this.fromTime = fromTime;
-        this.toTime = toTime;
-    }
+//    @Ignore
+//    public DateTime(String date, String fromTime, String toTime) {
+//        this.date = date;
+//        this.fromTime = fromTime;
+//        this.toTime = toTime;
+//    }
 
     public String getDate() {
         return date;

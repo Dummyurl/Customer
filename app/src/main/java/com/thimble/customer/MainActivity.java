@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        binding.fabAdd.setOnClickListener(this::OnClick);
 //
 //        setSupportActionBar(binding.toolbar);
 //
@@ -48,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
     class SaveTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -60,12 +61,10 @@ public class MainActivity extends AppCompatActivity {
             customer.setLocAddress("setLocAddress");
             customer.setUserName("setAddress");
 
-//            customer.setDateTime(new ArrayList<DateTime>(){{
-//                add(new DateTime("sun","10:00","8:00"));
-//                add(new DateTime("mon","10:00","8:00"));
-//                add(new DateTime("tue","10:00","8:00"));
-//                add(new DateTime("wed","10:00","8:00"));
-//            }});
+            DateTime dateTime = new DateTime();
+            dateTime.setDate("nbjv,mnxc,mvn");
+
+            customer.setDateTime(dateTime);
 
             //adding to database
             DBClient.getInstance(getApplicationContext()).getAppDB()
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
 
 
-            new GetTasks().execute();
+//            new GetTasks().execute();
         }
     }
 
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void OnClick(View view){
+    public void OnClick(View view){
         switch (view.getId()){
             case R.id.fabAdd:
 

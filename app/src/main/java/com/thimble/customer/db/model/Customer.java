@@ -4,6 +4,9 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
+import com.thimble.customer.db.AnswerTypeConverter;
 
 import java.util.List;
 
@@ -13,11 +16,12 @@ import java.util.List;
 
 
 @Entity
+//@TypeConverters(AnswerTypeConverter.class)
 public class Customer {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private int userId;
+    private int id;
 
     private int userServerId;
 
@@ -33,16 +37,19 @@ public class Customer {
 //    @Embedded
 //    private List<DateTime> dateTime;
 
+    @Embedded
+    private DateTime dateTime;
+
 
     public Customer() {
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUserServerId() {
@@ -117,6 +124,13 @@ public class Customer {
         this.locLongitude = locLongitude;
     }
 
+    public DateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
+    }
 
 //    public List<DateTime> getDateTime() {
 //        return dateTime;
