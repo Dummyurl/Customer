@@ -1,7 +1,7 @@
 package com.thimble.customer.adapter;
 
 import android.content.Context;
-//import android.databinding.DataBindingUtil;DataBindingUtil
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.thimble.customer.R;
+import com.thimble.customer.databinding.ItemImagesBinding;
 import com.thimble.customer.db.model.Customer;
-//import com.thimble.customer.databinding.ItemImagesBinding;
 
 
 import java.util.List;
@@ -41,10 +41,10 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
     @NonNull
     @Override
     public ItemRowHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int type) {
-//        ItemImagesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_images, viewGroup, false);
-//        return new ItemRowHolder(binding);
+        ItemImagesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_images, viewGroup, false);
+        return new ItemRowHolder(binding);
 
-        return new ItemRowHolder(viewGroup);
+//        return new ItemRowHolder(viewGroup);
     }
 
     @Override
@@ -63,16 +63,17 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
 
     public static class ItemRowHolder extends RecyclerView.ViewHolder {
 
-//        private ItemImagesBinding binding;
+        private ItemImagesBinding binding;
 
         private ItemRowHolder(View view) {
             super(view);
         }
 
-//        private ItemRowHolder(ItemImagesBinding itemBinding) {
-//            super(itemBinding.getRoot());
-//            this.binding = itemBinding;
+        private ItemRowHolder(ItemImagesBinding itemBinding) {
+            super(itemBinding.getRoot());
+            this.binding = itemBinding;
         }
+    }
 
 }
 

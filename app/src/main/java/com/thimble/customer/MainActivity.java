@@ -1,7 +1,7 @@
 package com.thimble.customer;
 
 
-//import android.databinding.DataBindingUtil;
+import android.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -21,18 +21,18 @@ import com.thimble.customer.db.model.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
-//import com.thimble.customer.databinding.ActivityMainBinding;
+import com.thimble.customer.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
 
-//    private ActivityMainBinding binding;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 //
 //        setSupportActionBar(binding.toolbar);
 //

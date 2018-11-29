@@ -1,17 +1,15 @@
 package com.thimble.customer.adapter;
 
 import android.content.Context;
-//import android.databinding.DataBindingUtil;
-import android.os.Handler;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.thimble.customer.R;
-//import com.thimble.customer.databinding.ItemCustomersBinding;
+import com.thimble.customer.databinding.ItemCustomersBinding;
 import com.thimble.customer.db.model.Customer;
 
 
@@ -43,8 +41,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
     @NonNull
     @Override
     public ItemRowHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int type) {
-//        ItemCustomersBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_customers, viewGroup, false);
-        return new ItemRowHolder(viewGroup);
+        ItemCustomersBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_customers, viewGroup, false);
+        return new ItemRowHolder(binding);
     }
 
     @Override
@@ -63,17 +61,19 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
 
     public static class ItemRowHolder extends RecyclerView.ViewHolder {
 
-//        private ItemCustomersBinding binding;
+        private ItemCustomersBinding binding;
 
 
-        private ItemRowHolder(View view) {
-            super(view);
+//        private ItemRowHolder(View view) {
+//            super(view);
+//
+//        }
 
+        private ItemRowHolder(ItemCustomersBinding itemBinding) {
+            super(itemBinding.getRoot());
+            this.binding = itemBinding;
         }
-//        private ItemRowHolder(ItemCustomersBinding itemBinding) {
-//            super(itemBinding.getRoot());
-//            this.binding = itemBinding;
-        }
+    }
 
 
 }
