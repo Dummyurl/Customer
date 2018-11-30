@@ -2,6 +2,8 @@ package com.thimble.customer.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +13,8 @@ import android.view.ViewGroup;
 import com.thimble.customer.R;
 import com.thimble.customer.databinding.ItemImagesBinding;
 import com.thimble.customer.db.model.Customer;
+import com.thimble.customer.model.Image;
+import com.thimble.customer.util.CaptureImage;
 
 
 import java.util.List;
@@ -22,8 +26,9 @@ import java.util.List;
 
 public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowHolder> {
 
-    private List<Customer> customerList;
+    private List<Image> imageList;
     private Context mContext;
+    private onItemClickListener listener;
 
 
     public ShowImgAdapter(Context mContext) {
@@ -31,9 +36,11 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
     }
 
 
-    public ShowImgAdapter(Context mContext, List<Customer> customerList) {
+
+    public ShowImgAdapter(Context mContext, onItemClickListener listener, List<Image> imageList) {
         this.mContext = mContext;
-        this.customerList = customerList;
+        this.listener = listener;
+        this.imageList = imageList;
     }
 
 
@@ -47,7 +54,19 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
 
     @Override
     public void onBindViewHolder(@NonNull ItemRowHolder holder, int position) {
-//        holder.binding.setEdu(eduList.get(position));position
+//        holder.binding.setEdu(eduList.get(position));
+        if(imageList.get(position).getImgUri() != null){
+            String imgPath = CaptureImage.getPath(mContext, imageList.get(position).getImgUri());
+            Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
+            holder.binding.imvItem.setImageBitmap(bitmap);
+        }else {
+//            holder.binding.imvItem.setImageBitmap(null);
+        }
+
+
+        holder.binding.imvItem.setOnClickListener(view -> {
+            listener.onItemClick(position,imageList.get(position).getImgType());
+        });
 
     }
 
@@ -55,7 +74,7 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
 
     @Override
     public int getItemCount() {
-        return (null != customerList ? customerList.size() : 3);
+        return (null != imageList ? imageList.size() : 0);
     }
 
     public static class ItemRowHolder extends RecyclerView.ViewHolder {
@@ -70,6 +89,10 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
             super(itemBinding.getRoot());
             this.binding = itemBinding;
         }
+    }
+
+    public interface onItemClickListener {
+        void onItemClick(int position, String imgType);
     }
 
 }

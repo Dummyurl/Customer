@@ -29,6 +29,9 @@ public class AppConstant {
             "(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 
+    public static final String OUTSIDE_PIC = "image_type_outside";
+    public static final String INSIDE_PIC = "image_type_inside";
+    public static final String SECTION_PIC = "image_type_section";
 
 
 
