@@ -16,7 +16,7 @@
         tools:context="com.thimble.customer.MainActivity">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/tabanim_appbar"
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -33,10 +33,91 @@
                 app:contentInsetEnd="0dp"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:navigationIcon="@drawable/ic_arrow_back"
                 app:titleTextAppearance="@style/ToolbarTextAppearance"
                 app:title="@string/customer_profile_page_title"
-                app:layout_scrollFlags="scroll|enterAlways|snap"/>
+                app:layout_scrollFlags="scroll|enterAlways|snap">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageButton
+                            android:id="@+id/imbBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/dp_5"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_arrow_back"
+                            android:onClick="onClick"/>
+
+                        <ImageButton
+                            android:id="@+id/imbMenu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/dp_5"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_menu"
+                            android:onClick="onClick"/>
+
+                        <ImageButton
+                            android:id="@+id/imbSearch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/imbMenu"
+                            android:padding="@dimen/dp_5"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_search"
+                            android:onClick="onClick"/>
+
+                    </RelativeLayout>
+
+                    <io.codetail.widget.RevealFrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize">
+
+                        <RelativeLayout
+                            android:id="@+id/rlRevealItems"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dp_2"
+                            android:background="@android:color/white"
+                            android:visibility="invisible">
+
+                            <ImageButton
+                                android:id="@+id/imbCancelSrch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:padding="@dimen/dp_5"
+                                android:background="?attr/selectableItemBackground"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:src="@drawable/ic_arrow_back"
+                                android:tint="@color/app_theme_color"
+                                android:onClick="onClick"/>
+
+                            <EditText
+                                android:id="@+id/etSearch"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toRightOf="@+id/imbCancelSrch"
+                                android:backgroundTint="@android:color/transparent"
+                                android:textColor="@color/app_theme_color"/>
+
+                        </RelativeLayout>
+
+                    </io.codetail.widget.RevealFrameLayout>
+
+                </FrameLayout>
+
+            </android.support.v7.widget.Toolbar>
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"

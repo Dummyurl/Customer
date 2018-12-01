@@ -65,6 +65,7 @@
                     android:background="@drawable/edt_round_bg"
                     android:gravity="center_vertical"
                     android:hint="@string/cust_name_hint"
+                    android:inputType="textCapWords"
                     android:textSize="@dimen/sp_13"/>
 
                 <EditText
@@ -104,8 +105,9 @@
                     android:padding="@dimen/dp_35"
                     android:src="@drawable/ic_camera"
                     android:background="@color/colorAccent"
+                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
-                    android:onClick="OnClick"/>
+                    android:onClick="onClick"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvOutside"
@@ -140,8 +142,9 @@
                     android:padding="@dimen/dp_35"
                     android:src="@drawable/ic_camera"
                     android:background="@color/colorAccent"
+                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
-                    android:onClick="OnClick"/>
+                    android:onClick="onClick"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvInside"
@@ -176,8 +179,9 @@
                     android:padding="@dimen/dp_35"
                     android:src="@drawable/ic_camera"
                     android:background="@color/colorAccent"
+                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
-                    android:onClick="OnClick"/>
+                    android:onClick="onClick"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvSection"
@@ -208,7 +212,7 @@
             android:background="@color/page_bg_color">
 
             <TextView
-                android:id="@+id/tvEdit"
+                android:id="@+id/tvSave"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -221,10 +225,10 @@
                 android:onClick="onClick"
                 android:gravity="center"
                 android:textSize="@dimen/sp_12"
-                android:text="@string/edit"/>
+                android:text="@string/save"/>
 
             <TextView
-                android:id="@+id/tvDelete"
+                android:id="@+id/tvCancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -237,7 +241,7 @@
                 android:onClick="onClick"
                 android:gravity="center"
                 android:textSize="@dimen/sp_12"
-                android:text="@string/delete"/>
+                android:text="@string/cancel"/>
 
         </LinearLayout>
 

@@ -22,5 +22,16 @@
         android:scaleType="centerCrop"
         android:src="@drawable/ic_camera"/>
 
+    <ImageButton
+        android:id="@+id/imbDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/dp_5"
+        android:padding="@dimen/dp_5"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:background="@null"
+        android:src="@drawable/delete" />
+
 </RelativeLayout>
 </layout>

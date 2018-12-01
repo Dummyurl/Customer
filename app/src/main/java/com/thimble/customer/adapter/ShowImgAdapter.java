@@ -68,6 +68,9 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
             listener.onItemClick(position,imageList.get(position).getImgType());
         });
 
+        holder.binding.imbDelete.setOnClickListener(view -> {
+            listener.onDeleteClick(position,imageList.get(position).getImgType());
+        });
     }
 
 
@@ -93,6 +96,7 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
 
     public interface onItemClickListener {
         void onItemClick(int position, String imgType);
+        void onDeleteClick(int position, String imgType);
     }
 
 }

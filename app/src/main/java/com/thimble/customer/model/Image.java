@@ -21,6 +21,7 @@ public class Image {
     private int userId;
     private String imgType;
     private Uri imgUri;
+    private String imgUrl;
 
 
     public Image() {
@@ -29,6 +30,11 @@ public class Image {
 
     public Image(String imgType) {
         this.imgType = imgType;
+    }
+
+    public Image(String imgType, Uri imgUri) {
+        this.imgType = imgType;
+        this.imgUri = imgUri;
     }
 
     public int getId() {
@@ -61,5 +67,13 @@ public class Image {
 
     public void setImgUri(Uri imgUri) {
         this.imgUri = imgUri;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/page_bg_color"
-    tools:context="com.thimble.customer.activity.DateTimeAddressActivity">
+    tools:context="com.thimble.customer.activity.EditDateTimeAddressActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -172,15 +172,16 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true">
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical">
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvFrom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_5"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:text="@string/time_from" />
@@ -188,19 +189,25 @@
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvTimeFrom"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:gravity="center_vertical"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/sp_24"
-                        android:text="10:00 AM" />
+                        android:text="00:00 AM" />
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvTo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_marginRight="@dimen/dp_5"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:text="@string/time_to" />
@@ -208,11 +215,17 @@
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvTimeTo"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:gravity="center_vertical"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/sp_24"
-                        android:text="10:00 AM" />
+                        android:text="00:00 AM" />
 
                 </LinearLayout>
 
@@ -284,7 +297,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_44"
                     android:layout_marginBottom="@dimen/dp_8"
-                    android:padding="@dimen/dp_5"
+                    android:paddingTop="@dimen/dp_5"
+                    android:paddingBottom="@dimen/dp_5"
+                    android:paddingLeft="7.5dp"
+                    android:paddingRight="@dimen/dp_5"
                     android:drawableLeft="@drawable/ic_web"
                     android:drawablePadding="@dimen/dp_10"
                     android:background="@drawable/edt_round_bg"
@@ -312,7 +328,7 @@
             android:background="@color/page_bg_color">
 
             <TextView
-                android:id="@+id/tvEdit"
+                android:id="@+id/tvSave"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -325,10 +341,10 @@
                 android:onClick="onClick"
                 android:gravity="center"
                 android:textSize="@dimen/sp_12"
-                android:text="@string/edit"/>
+                android:text="@string/save"/>
 
             <TextView
-                android:id="@+id/tvDelete"
+                android:id="@+id/tvCancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -341,7 +357,7 @@
                 android:onClick="onClick"
                 android:gravity="center"
                 android:textSize="@dimen/sp_12"
-                android:text="@string/delete"/>
+                android:text="@string/cancel"/>
 
         </LinearLayout>
 

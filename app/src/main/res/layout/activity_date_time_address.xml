@@ -12,7 +12,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thimble.customer.activity.DateTimeAddressActivity">
+    tools:context="com.thimble.customer.activity.EditDateTimeAddressActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

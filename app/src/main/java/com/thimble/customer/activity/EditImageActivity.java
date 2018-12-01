@@ -47,7 +47,6 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
 
     private ActivityEditImagesBinding binding;
 
-    private Uri fileUri;
 
     private List<Image> outsideList;
     private List<Image> insideList;
@@ -67,47 +66,86 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_images);
 
+        init();
+    }
+
+    private void init(){
+        setSupportActionBar(binding.toolbar);
+        binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
+
         binding.rvOutside.setAdapter(
                 outsideAdapter = new ShowImgAdapter(this,this,
-                        outsideList = getEmptyImgList(String.valueOf(OUTSIDE_PIC))));
+                        outsideList = new ArrayList<>()));
 
         binding.rvInside.setAdapter(
                 insideAdapter = new ShowImgAdapter(this,this,
-                        insideList = getEmptyImgList(String.valueOf(INSIDE_PIC))));
+                        insideList = new ArrayList<>()));
 
         binding.rvSection.setAdapter(
                 sectionAdapter = new ShowImgAdapter(this,this,
-                        sectionList = getEmptyImgList(SECTION_PIC)));
+                        sectionList = new ArrayList<>()));
     }
 
 
-    private List<Image> getEmptyImgList(String imgType){
-        return new ArrayList<Image>(){{
-            for(int i=0 ; i<3 ;i++){
-                add(new Image(imgType));
-            }
-        }};
-    }
+//    private List<Image> getEmptyImgList(String imgType){
+//        return new ArrayList<Image>(){{
+//            for(int i=0 ; i<3 ;i++){
+//                add(new Image(imgType));
+//            }
+//        }};
+//    }
 
 
-    public void OnClick(View view){
+    public void onClick(View view){
         switch (view.getId()){
             case R.id.imvOutSide:
+                if(outsideList.size()==3) return;
+                selectedImgType = AppConstant.OUTSIDE_PIC;
                 requestPermission();
                 break;
             case R.id.imvInside:
+                if(insideList.size()==3) return;
+                selectedImgType = AppConstant.INSIDE_PIC;
+                requestPermission();
                 break;
-            case R.id.tvSection:
+            case R.id.imvSection:
+                if(sectionList.size()==3) return;
+                selectedImgType = AppConstant.SECTION_PIC;
+                requestPermission();
                 break;
-
+            case R.id.tvSave:
+                startActivity(new Intent(this,EditDateTimeAddressActivity.class));
+                break;
+            case R.id.tvCancel:
+                break;
         }
     }
+
+
 
     @Override
     public void onItemClick(int position, String imgType) {
         this.clickedPosition = position;
         this.selectedImgType = imgType;
-        requestPermission();
+//        requestPermission();
+    }
+
+    @Override
+    public void onDeleteClick(int position, String imgType) {
+        switch (imgType){
+            case OUTSIDE_PIC:
+                outsideList.remove(position);
+                outsideAdapter.notifyDataSetChanged();
+                break;
+            case INSIDE_PIC:
+                insideList.remove(position);
+                insideAdapter.notifyDataSetChanged();
+                break;
+            case SECTION_PIC:
+                sectionList.remove(position);
+                sectionAdapter.notifyDataSetChanged();
+                break;
+        }
     }
 
 
@@ -145,10 +183,27 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
     }
 
 
+    private void addPictureInList(String imgType, Uri uri){
+        switch (imgType){
+            case OUTSIDE_PIC:
+               outsideList.add(new Image(imgType,uri));
+               outsideAdapter.notifyDataSetChanged();
+                break;
+            case INSIDE_PIC:
+                insideList.add(new Image(imgType,uri));
+                insideAdapter.notifyDataSetChanged();
+                break;
+            case SECTION_PIC:
+                sectionList.add(new Image(imgType,uri));
+                sectionAdapter.notifyDataSetChanged();
+                break;
+        }
+    }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@ onActivityResult @@@@@@@@@@@@@@@@@@@@@@@@@@");
         switch (requestCode) {
             case CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK) {
@@ -161,30 +216,15 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
                 if (resultCode == RESULT_OK) {
                     try {
                         Uri fileUri = result.getUri();
-                        switch (selectedImgType){
-                            case OUTSIDE_PIC:
-                                outsideList.get(clickedPosition).setImgUri(fileUri);
-                                outsideAdapter.notifyItemChanged(clickedPosition);
-                                break;
-                            case INSIDE_PIC:
-                                insideList.get(clickedPosition).setImgUri(fileUri);
-                                insideAdapter.notifyItemChanged(clickedPosition);
-                                break;
-                            case SECTION_PIC:
-                                sectionList.get(clickedPosition).setImgUri(fileUri);
-                                sectionAdapter.notifyItemChanged(clickedPosition);
-                                break;
-                        }
+
+                        addPictureInList(selectedImgType,fileUri);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                     //Toast.makeText(this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
                 }
                 break;
         }
     }
-
-
 }
