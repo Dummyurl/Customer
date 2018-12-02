@@ -1,6 +1,7 @@
 package com.thimble.customer.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.thimble.customer.MainActivity;
 import com.thimble.customer.R;
+import com.thimble.customer.activity.ShowImagesActivity;
 import com.thimble.customer.adapter.CustomerAdapter;
 import com.thimble.customer.databinding.FragmentUserBinding;
 import com.thimble.customer.db.model.Customer;
@@ -63,6 +65,7 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
 
     @Override
     public void onClick(int position) {
+        startActivity(new Intent(getActivity(),ShowImagesActivity.class));
 
     }
 

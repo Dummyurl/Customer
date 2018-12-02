@@ -70,6 +70,10 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
             listner.onLongClick(position);
             return false;
         });
+
+        holder.binding.listItem.setOnClickListener(view -> {
+            listner.onClick(position);
+        });
     }
 
 

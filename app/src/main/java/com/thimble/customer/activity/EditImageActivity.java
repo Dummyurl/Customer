@@ -117,6 +117,7 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
                 startActivity(new Intent(this,EditDateTimeAddressActivity.class));
                 break;
             case R.id.tvCancel:
+                onBackPressed();
                 break;
         }
     }

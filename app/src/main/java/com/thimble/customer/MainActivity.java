@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         binding.tabs.setVisibility(View.GONE);
         binding.imbSearch.setVisibility(View.GONE);
         binding.imbMenu.setVisibility(View.GONE);
-        binding.imbBack.setVisibility(View.GONE);
+//        binding.imbBack.setVisibility(View.GONE);
 
         binding.imbDelete.setVisibility(View.VISIBLE);
         binding.imbCancelSelection.setVisibility(View.VISIBLE);

@@ -55,7 +55,8 @@
                             android:padding="@dimen/dp_5"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_arrow_back"
-                            android:onClick="onClick"/>
+                            android:onClick="onClick"
+                            android:visibility="gone"/>
 
                         <ImageButton
                             android:id="@+id/imbCancelSelection"

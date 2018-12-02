@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+    </data>
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg_color"
+    tools:context="com.thimble.customer.activity.LocationActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorAccent"
+        app:contentInsetStartWithNavigation="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:titleTextAppearance="@style/ToolbarTextAppearance"
+        app:title="@string/customer_profile_page_title" />
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="@dimen/dp_60"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.thimble.customer.view.TypedfaceTextView
+                android:id="@+id/tvOutSide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:textSize="@dimen/sp_18"
+                android:text="@string/store_entrance"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp_30"
+                android:paddingBottom="@dimen/dp_30"
+                android:paddingLeft="@dimen/dp_50"
+                android:paddingRight="@dimen/dp_50">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbLocAddress"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/store_entrance_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbLocAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_5">
+
+                    <EditText
+                        android:id="@+id/etLat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbLat"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/lattitude_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbLat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_5">
+
+                    <EditText
+                        android:id="@+id/etLng"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbLng"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/longitude_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbLng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_gravity="bottom"
+        app:cardElevation="@dimen/dp_4"
+        app:cardBackgroundColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/page_bg_color">
+
+            <TextView
+                android:id="@+id/tvSave"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/dp_0.5"
+                android:paddingTop="@dimen/dp_10"
+                android:drawableTop="@drawable/ic_save"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/white"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:gravity="center"
+                android:textSize="@dimen/sp_12"
+                android:text="@string/save"/>
+
+            <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/dp_0.5"
+                android:paddingTop="@dimen/dp_10"
+                android:drawableTop="@drawable/ic_cancel"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/white"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:gravity="center"
+                android:textSize="@dimen/sp_12"
+                android:text="@string/cancel"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</android.support.design.widget.CoordinatorLayout>
+</layout>

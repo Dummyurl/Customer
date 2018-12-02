@@ -17,6 +17,8 @@
     android:paddingTop="@dimen/dp_10"
     android:paddingBottom="@dimen/dp_10"
     android:background="@android:color/white"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
     android:id="@+id/listItem">
 
     <com.thimble.customer.view.TypedfaceTextView

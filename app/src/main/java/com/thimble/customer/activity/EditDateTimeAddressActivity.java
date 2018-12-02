@@ -1,6 +1,7 @@
 package com.thimble.customer.activity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,8 +39,10 @@ public class EditDateTimeAddressActivity extends AppCompatActivity {
     public void onClick(View view ){
         switch (view.getId()){
             case R.id.tvSave:
+                startActivity(new Intent(this,LocationActivity.class));
                 break;
             case R.id.tvCancel:
+                onBackPressed();
                 break;
             case R.id.tvTimeFrom:
                 pickTime(binding.tvTimeFrom);

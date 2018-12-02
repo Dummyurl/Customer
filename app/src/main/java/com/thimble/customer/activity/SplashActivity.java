@@ -34,9 +34,12 @@ public class SplashActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        new Handler().postDelayed(()->{startActivity(new Intent(this,LoginActivity.class));
-
+        new Handler().postDelayed(()->{
+            startActivity(new Intent(this,LoginActivity.class));
+            finish();
         }, AppConstant.SPLASH_TIME);
     }
+
+
 
 }

@@ -21,7 +21,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_api_key" />
+
+
+        <activity android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +43,11 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".activity.ShowImagesActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait" />
@@ -46,7 +58,17 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".activity.DateTimeAddressActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".activity.EditDateTimeAddressActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.LocationActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait" />
 

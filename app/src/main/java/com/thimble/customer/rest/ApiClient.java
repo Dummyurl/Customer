@@ -12,20 +12,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final String BASE_URL = "http://staging.uiplonline.com:7457/service/";
-//    public static final String BASE_URL = "http://192.168.1.129:7457/service/";
+    public static final String BASE_URL = "http://107.21.119.157/OMSmobile/api/";
     public static final String BASE_URL_IMG = "http://staging.uiplonline.com/lystant-server/uploads/";
 
-
-    public static final String URL_FEES_COMMISSIONS = "https://www.lystant.com/fees-and-commissions";
-    public static final String URL_FAQ = "https://www.lystant.com/mobile/faq";
-    public static final String URL_PRIVACY_POLICY = "https://www.lystant.com/mobile/privacy-policy";
-    public static final String URL_TERMS_CONDITIONS = "https://www.lystant.com/mobile/terms-condition";
 
     private static Retrofit retrofit ;
 
     public static Retrofit getClient(Context context) {
-
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)

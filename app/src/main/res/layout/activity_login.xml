@@ -41,7 +41,8 @@
                 android:background="@drawable/edt_round_bg"
                 android:gravity="center_vertical"
                 android:hint="@string/user_id_hint"
-                android:textSize="@dimen/sp_13"/>
+                android:textSize="@dimen/sp_13"
+                android:text="015937"/>
 
             <EditText
                 android:id="@+id/etPassword"
@@ -54,7 +55,8 @@
                 android:gravity="center_vertical"
                 android:hint="@string/password_hint"
                 android:inputType="textPassword"
-                android:textSize="@dimen/sp_13"/>
+                android:textSize="@dimen/sp_13"
+                android:text="Pwd@015937"/>
 
             <com.thimble.customer.view.TypedfaceTextView
                 android:id="@+id/tvSignIn"
