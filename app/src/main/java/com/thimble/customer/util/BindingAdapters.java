@@ -7,7 +7,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-
+import com.thimble.customer.R;
+import com.thimble.customer.rest.ApiClient;
 
 
 /**
@@ -30,16 +31,14 @@ public class BindingAdapters {
         if(imageUrl.contains("null")) return;
         if (imageUrl.isEmpty()) return;
 
-//        RequestOptions requestOptions = new RequestOptions();
-//        requestOptions.placeholder(R.drawable.no_data);
-//        requestOptions.error(R.drawable.no_data);
-//
-//        Glide.with(view.getContext())
-//                .setDefaultRequestOptions(requestOptions)
-//                .load(ApiClient.BASE_URL_IMG + itemImgUrl)
-//                .into(view);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.ic_image_placeholder);
+        requestOptions.error(R.drawable.ic_image_placeholder);
 
-//                view.setColorFilter(ContextCompat.getColor(view.getContext(), R.color.tint_color), android.graphics.PorterDuff.Mode.MULTIPLY);
+        Glide.with(view.getContext())
+                .setDefaultRequestOptions(requestOptions)
+                .load(ApiClient.BASE_URL_IMG + imageUrl)
+                .into(view);
 
     }
 

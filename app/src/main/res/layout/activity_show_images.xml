@@ -85,13 +85,14 @@
                 android:text="@string/shop_outside_picture"/>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvOutside"
+                android:id="@+id/rvInside"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
                 app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_images" />
+
 
             <com.thimble.customer.view.TypedfaceTextView
                 android:id="@+id/tvInside"
@@ -104,13 +105,13 @@
                 android:text="@string/shop_inside_picture"/>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvInside"
+                android:id="@+id/rvOutside"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:clipToPadding="false"
-                tools:listitem="@layout/item_images"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                android:orientation="horizontal"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_images" />
 
             <com.thimble.customer.view.TypedfaceTextView
                 android:id="@+id/tvSection"

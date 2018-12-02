@@ -12,6 +12,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.ActionMode;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    private  ViewPagerAdapter adapter;
+
     private RelativeLayout rlRevealItems;
-    boolean hidden = true;
+    private boolean hidden = true;
+    private boolean isMultiSelect = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +59,87 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        binding.fabAdd.setOnClickListener(this::OnClick);
-
         rlRevealItems = binding.rlRevealItems;
 //
         setSupportActionBar(binding.toolbar);
-//
-//        binding.rvUser.setAdapter(new CustomerAdapter(this));
-
 
 
         setupViewPager(binding.viewpager);
         binding.tabs.setupWithViewPager(binding.viewpager);
 
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        new SaveTask().execute();
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int currentItem = binding.viewpager.getCurrentItem();
+                UserFragment userFrag = (UserFragment)adapter.getItem(currentItem);
+                userFrag.filterList(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+//                int currentItem = binding.viewpager.getCurrentItem();
+//                UserFragment userFrag = (UserFragment)adapter.getItem(currentItem);
+
+
+            }
+        });
+
+
+//        new SaveTask().execute();
 
     }
 
+    public void onLongClick(){
+        if(isMultiSelect){
+            hideMultiSelectMode();
+        }else {
+            showMultiSelectMode();
+        }
+    }
+
+    private void showMultiSelectMode(){
+        isMultiSelect = true;
+        binding.tabs.setVisibility(View.GONE);
+        binding.imbSearch.setVisibility(View.GONE);
+        binding.imbMenu.setVisibility(View.GONE);
+        binding.imbBack.setVisibility(View.GONE);
+
+        binding.imbDelete.setVisibility(View.VISIBLE);
+        binding.imbCancelSelection.setVisibility(View.VISIBLE);
+    }
+
+    private void hideMultiSelectMode(){
+        isMultiSelect = false;
+        binding.tabs.setVisibility(View.VISIBLE);
+        binding.imbSearch.setVisibility(View.VISIBLE);
+        binding.imbMenu.setVisibility(View.VISIBLE);
+
+        binding.imbDelete.setVisibility(View.GONE);
+        binding.imbCancelSelection.setVisibility(View.GONE);
+    }
+
+
+
+
+    private void setPopup(){
+        PopupMenu popup = new PopupMenu(MainActivity.this, binding.imbMenu);
+        popup.getMenuInflater().inflate(R.menu.menu_main, popup.getMenu());
+        popup.setOnMenuItemClickListener(item -> {
+            Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+            return true;
+        });
+
+        popup.show();//showing popup menu
+    }
+
+
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new UserFragment(), "Server");
         adapter.addFrag(new UserFragment(), "Local");
         viewPager.setAdapter(adapter);
@@ -159,14 +227,28 @@ public class MainActivity extends AppCompatActivity {
             case R.id.imbBack:
                 break;
             case R.id.imbMenu:
+                setPopup();
+                break;
+            case R.id.fabAdd:
+                startActivity(new Intent(this,EditImageActivity.class));
+                new GetTasks().execute();
                 break;
             case R.id.imbSearch:
             case R.id.imbCancelSrch:
+                if (hidden){
+                    binding.tabs.setVisibility(View.GONE);
+                } else {
+                    binding.tabs.setVisibility(View.VISIBLE);
+                }
                 openSearch();
+                break;
+            case R.id.imbDelete:
+                break;
+            case R.id.imbCancelSelection:
+                hideMultiSelectMode();
                 break;
 
         }
-
     }
 
 
@@ -228,19 +310,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-    public void OnClick(View view){
-        switch (view.getId()){
-            case R.id.fabAdd:
-                startActivity(new Intent(this,EditImageActivity.class));
-
-                new GetTasks().execute();
-
-
-                break;
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

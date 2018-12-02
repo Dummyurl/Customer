@@ -3,6 +3,7 @@ package com.thimble.customer.db.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 
@@ -34,6 +35,9 @@ public class Customer {
     private String locLattitude;
     private String locLongitude;
 
+    @Ignore
+    private boolean isSelect;
+
 //    @Embedded
 //    private List<DateTime> dateTime;
 
@@ -42,6 +46,10 @@ public class Customer {
 
 
     public Customer() {
+    }
+
+    public Customer(String userName) {
+        this.userName = userName;
     }
 
     public int getId() {
@@ -132,7 +140,15 @@ public class Customer {
         this.dateTime = dateTime;
     }
 
-//    public List<DateTime> getDateTime() {
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
+
+    //    public List<DateTime> getDateTime() {
 //        return dateTime;
 //    }
 //

@@ -1,14 +1,8 @@
 package com.thimble.customer.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
 import android.net.Uri;
 
-import com.thimble.customer.db.model.Customer;
 
-import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 /**
  * Created by pasari on 28/11/18.

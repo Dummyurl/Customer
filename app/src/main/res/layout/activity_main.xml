@@ -43,7 +43,9 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/dp_5"
+                        android:paddingRight="@dimen/dp_5">
 
                         <ImageButton
                             android:id="@+id/imbBack"
@@ -54,6 +56,17 @@
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_arrow_back"
                             android:onClick="onClick"/>
+
+                        <ImageButton
+                            android:id="@+id/imbCancelSelection"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/dp_5"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_cancel_multi_select"
+                            android:onClick="onClick"
+                            android:visibility="gone"/>
 
                         <ImageButton
                             android:id="@+id/imbMenu"
@@ -77,9 +90,23 @@
                             android:src="@drawable/ic_search"
                             android:onClick="onClick"/>
 
+                        <ImageButton
+                            android:id="@+id/imbDelete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/dp_5"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_delete"
+                            android:tint="@android:color/white"
+                            android:visibility="gone"
+                            android:onClick="onClick"/>
+
                     </RelativeLayout>
 
                     <io.codetail.widget.RevealFrameLayout
+                        android:id="@+id/revealLayout"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize">
 
