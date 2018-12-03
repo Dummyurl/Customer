@@ -10,9 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.thimble.customer.MainActivity;
 import com.thimble.customer.R;
-import com.thimble.customer.base.AppConstant;
 import com.thimble.customer.databinding.ActivityLoginBinding;
 import com.thimble.customer.model.LoginResponse;
 import com.thimble.customer.rest.ApiClient;

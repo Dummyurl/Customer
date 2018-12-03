@@ -6,36 +6,18 @@
 
     </data>
 
-<android.support.design.widget.CoordinatorLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thimble.customer.activity.DateTimeAddressActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorAccent"
-        app:contentInsetStartWithNavigation="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetEnd="0dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:titleTextAppearance="@style/ToolbarTextAppearance"
-        app:title="@string/customer_profile_page_title" />
+    android:background="@color/page_bg_color">
 
     <ScrollView
         android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginBottom="@dimen/dp_60"
         android:fillViewport="true">
 
         <LinearLayout
@@ -171,15 +153,16 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true">
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical">
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvFrom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_5"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:text="@string/time_from" />
@@ -187,19 +170,25 @@
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvTimeFrom"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:gravity="center_vertical"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/sp_24"
-                        android:text="10:00 AM" />
+                        android:text="00:00 AM" />
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvTo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_marginRight="@dimen/dp_5"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:text="@string/time_to" />
@@ -207,11 +196,17 @@
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvTimeTo"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:gravity="center_vertical"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/sp_24"
-                        android:text="10:00 AM" />
+                        android:text="00:00 AM" />
 
                 </LinearLayout>
 
@@ -223,92 +218,76 @@
                 android:orientation="vertical"
                 android:paddingTop="@dimen/dp_30"
                 android:paddingBottom="@dimen/dp_30"
-                android:paddingLeft="@dimen/dp_30"
-                android:paddingRight="@dimen/dp_30">
+                android:paddingLeft="@dimen/dp_50"
+                android:paddingRight="@dimen/dp_50">
 
-                <com.thimble.customer.view.TypedfaceTextView
-                    android:id="@+id/tvAddress"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_8"
-                    android:drawableLeft="@drawable/ic_map_marker"
-                    android:drawablePadding="@dimen/dp_10"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2"
-                    android:text="Belgharia Jatindas nagar"/>
+                    android:minHeight="@dimen/dp_100"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:padding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg">
 
-                <com.thimble.customer.view.TypedfaceTextView
-                    android:id="@+id/tvPh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_map_marker"/>
+
+                    <EditText
+                        android:id="@+id/etCustName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:background="@null"
+                        android:gravity="start"
+                        android:hint="@string/cust_name_hint"
+                        android:textSize="@dimen/sp_13"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/etPh"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
                     android:layout_marginBottom="@dimen/dp_8"
+                    android:padding="@dimen/dp_5"
                     android:drawableLeft="@drawable/ic_phone"
                     android:drawablePadding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg"
+                    android:hint="@string/phone_hint"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2"
-                    android:text="00000000"/>
+                    android:textColor="@color/text_color2" />
 
-                <com.thimble.customer.view.TypedfaceTextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
                     android:layout_marginBottom="@dimen/dp_8"
+                    android:padding="@dimen/dp_5"
                     android:drawableLeft="@drawable/ic_email"
                     android:drawablePadding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg"
+                    android:hint="@string/email_hint"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2"
-                    android:text="abc@gmail.com"/>
+                    android:textColor="@color/text_color2" />
 
-                <com.thimble.customer.view.TypedfaceTextView
-                    android:id="@+id/tvUrl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <EditText
+                    android:id="@+id/etWeb"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:paddingTop="@dimen/dp_5"
+                    android:paddingBottom="@dimen/dp_5"
+                    android:paddingLeft="7.5dp"
+                    android:paddingRight="@dimen/dp_5"
                     android:drawableLeft="@drawable/ic_web"
                     android:drawablePadding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg"
+                    android:hint="@string/web_hint"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2"
-                    android:text="www.google.com"/>
-
-                <com.thimble.customer.view.TypedfaceTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:layout_marginBottom="@dimen/dp_20"
-                    android:textSize="@dimen/sp_18"
-                    android:text="@string/store_entrance"/>
-
-                <com.thimble.customer.view.TypedfaceTextView
-                    android:id="@+id/tvAdrs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_8"
-                    android:drawableLeft="@drawable/ic_map_marker"
-                    android:drawablePadding="@dimen/dp_10"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2"
-                    android:text="Belgharia Jatindas nagar"/>
-
-                <com.thimble.customer.view.TypedfaceTextView
-                    android:id="@+id/tvLat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_8"
-                    android:drawableLeft="@drawable/ic_map_marker"
-                    android:drawablePadding="@dimen/dp_10"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2"
-                    android:text="00000000"/>
-
-                <com.thimble.customer.view.TypedfaceTextView
-                    android:id="@+id/tvLng"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_map_marker"
-                    android:drawablePadding="@dimen/dp_10"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2"
-                    android:text="abc@gmail.com"/>
+                    android:textColor="@color/text_color2" />
 
             </LinearLayout>
 
@@ -316,53 +295,5 @@
 
     </ScrollView>
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
-        android:layout_gravity="bottom"
-        app:cardElevation="@dimen/dp_4"
-        app:cardBackgroundColor="@android:color/white">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@color/page_bg_color">
-
-            <TextView
-                android:id="@+id/tvEdit"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/dp_0.5"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:clickable="true"
-                android:drawableTop="@drawable/ic_edit"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:paddingTop="@dimen/dp_10"
-                android:text="@string/edit"
-                android:textSize="@dimen/sp_12" />
-
-            <TextView
-                android:id="@+id/tvDelete"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="@dimen/dp_0.5"
-                android:paddingTop="@dimen/dp_10"
-                android:drawableTop="@drawable/ic_delete_red"
-                android:foreground="?attr/selectableItemBackground"
-                android:background="@android:color/white"
-                android:clickable="true"
-                android:onClick="onClick"
-                android:gravity="center"
-                android:textSize="@dimen/sp_12"
-                android:text="@string/delete"/>
-
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-</android.support.design.widget.CoordinatorLayout>
+</FrameLayout>
 </layout>

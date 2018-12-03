@@ -1,6 +1,7 @@
 package com.thimble.customer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +13,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import com.thimble.customer.R;
+import com.thimble.customer.activity.MainActivity;
+import com.thimble.customer.activity.ShowImagesActivity;
 import com.thimble.customer.databinding.ItemCustomersBinding;
 import com.thimble.customer.db.model.Customer;
 
@@ -29,6 +32,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
     private List<Customer> customerList,mFilteredList;
     private Context mContext;
     private OnItemClickListner listner;
+    private boolean isMultiSelect = false;
+    private int selectedCount = 0;
 
 
     public CustomerAdapter(Context mContext) {
@@ -43,7 +48,21 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
         this.listner = listner;
     }
 
+    public boolean isMultiSelect() {
+        return isMultiSelect;
+    }
 
+    public void setMultiSelect(boolean multiSelect) {
+        isMultiSelect = multiSelect;
+    }
+
+    public int getSelectedCount() {
+        return selectedCount;
+    }
+
+    public void setSelectedCount(int selectedCount) {
+        this.selectedCount = selectedCount;
+    }
 
     @NonNull
     @Override
@@ -54,11 +73,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
 
     @Override
     public void onBindViewHolder(@NonNull ItemRowHolder holder, int position) {
-//        holder.binding.setEdu(eduList.get(position));position
-
         holder.binding.tvCustName.setText(mFilteredList.get(position).getUserName());
 
-        if(mFilteredList.get(position).isSelect()){
+        if(mFilteredList.get(position).isSelected()){
             holder.binding.imvSelected.setVisibility(View.VISIBLE);
             holder.binding.listItem.setBackgroundColor(ContextCompat.getColor(mContext,R.color.list_selected_color));
         }else {
@@ -67,12 +84,34 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
         }
 
         holder.binding.listItem.setOnLongClickListener(view -> {
-            listner.onLongClick(position);
-            return false;
+            if(isMultiSelect) return true;
+            mFilteredList.get(position).setSelected(true);
+            notifyItemChanged(position);
+
+            ((MainActivity) mContext).onLongClick(isMultiSelect = true);
+            isMultiSelect = true;
+            selectedCount ++;
+
+//            listner.onLongClick(position);
+            return true;
         });
 
         holder.binding.listItem.setOnClickListener(view -> {
-            listner.onClick(position);
+            if(isMultiSelect){
+                if(mFilteredList.get(position).isSelected()){
+                    mFilteredList.get(position).setSelected(false);
+                    selectedCount --;
+                }else {
+                    mFilteredList.get(position).setSelected(true);
+                    selectedCount ++;
+                }
+               notifyItemChanged(position);
+                ((MainActivity) mContext).onLongClick(isMultiSelect = (selectedCount != 0));
+            }else {
+                mContext.startActivity(new Intent(mContext,ShowImagesActivity.class));
+            }
+
+//            listner.onClick(position);
         });
     }
 

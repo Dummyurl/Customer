@@ -3,16 +3,13 @@ package com.thimble.customer.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,9 +18,7 @@ import android.widget.Toast;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -31,9 +26,13 @@ import com.thimble.customer.R;
 import com.thimble.customer.adapter.ShowImgAdapter;
 import com.thimble.customer.base.AppConstant;
 import com.thimble.customer.databinding.ActivityEditImagesBinding;
-import com.thimble.customer.model.Image;
-import com.thimble.customer.util.CaptureImage;
+import com.thimble.customer.db.DBClient;
+import com.thimble.customer.db.model.Customer;
+import com.thimble.customer.db.model.Image;
+import com.thimble.customer.util.FileUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +113,8 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
                 requestPermission();
                 break;
             case R.id.tvSave:
-                startActivity(new Intent(this,EditDateTimeAddressActivity.class));
+                new SaveTask().execute();
+//                startActivity(new Intent(this,EditDateTimeAddressActivity.class));
                 break;
             case R.id.tvCancel:
                 onBackPressed();
@@ -185,17 +185,23 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
 
 
     private void addPictureInList(String imgType, Uri uri){
+//        File file = FileUtils.getFile(this, uri);
+//        Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+
         switch (imgType){
             case OUTSIDE_PIC:
-               outsideList.add(new Image(imgType,uri));
-               outsideAdapter.notifyDataSetChanged();
+                outsideList.add(new Image(imgType,uri));
+//                outsideList.add(new Image(imgType,uri,getBytes(bitmap)));
+                outsideAdapter.notifyDataSetChanged();
                 break;
             case INSIDE_PIC:
                 insideList.add(new Image(imgType,uri));
+//                insideList.add(new Image(imgType,uri,getBytes(bitmap)));
                 insideAdapter.notifyDataSetChanged();
                 break;
             case SECTION_PIC:
                 sectionList.add(new Image(imgType,uri));
+//                sectionList.add(new Image(imgType,uri,getBytes(bitmap)));
                 sectionAdapter.notifyDataSetChanged();
                 break;
         }
@@ -228,4 +234,109 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
                 break;
         }
     }
+
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
+    }
+
+
+    class SaveTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            long timeMillis = System.currentTimeMillis();
+
+            Customer customer = new Customer();
+            customer.setUserName(binding.etCustName.getText().toString().trim());
+            customer.setId(String.valueOf(timeMillis));
+
+            for (Image image : outsideList){
+                image.setUserId(String.valueOf(timeMillis));
+            }
+
+            for (Image image : insideList){
+                image.setUserId(String.valueOf(timeMillis));
+            }
+
+            for (Image image : sectionList){
+                image.setUserId(String.valueOf(timeMillis));
+            }
+
+
+//            customer.setEmailId("setAddress");
+//            customer.setLocAddress("setLocAddress");
+//            customer.setUserName("setAddress");
+
+//            DateTime dateTime = new DateTime();
+//            dateTime.setDate("nbjv,mnxc,mvn");
+//
+//            customer.setDateTime(dateTime);
+
+            //adding to database
+            DBClient.getInstance(getApplicationContext()).getAppDB()
+                    .customerDao().insert(customer);
+
+            DBClient.getInstance(getApplicationContext()).getAppDB()
+                    .imageDao().insertAll(outsideList);
+
+//            DBClient.getInstance(getApplicationContext()).getAppDB()
+//                    .imageDao().insertAll(insideList);
+//
+//            DBClient.getInstance(getApplicationContext()).getAppDB()
+//                    .imageDao().insertAll(sectionList);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+//            finish();
+//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+
+
+            new GetTasks().execute();
+        }
+    }
+
+    class GetTasks extends AsyncTask<Void, Void, List<Customer>> {
+
+        @Override
+        protected List<Customer> doInBackground(Void... voids) {
+            List<Customer> taskList = DBClient
+                    .getInstance(getApplicationContext())
+                    .getAppDB()
+                    .customerDao()
+                    .getAll();
+
+
+            List<Image> imgList = DBClient
+                    .getInstance(getApplicationContext())
+                    .getAppDB()
+                    .imageDao()
+                    .getAll();
+
+            if(true){
+
+            }
+
+            return taskList;
+        }
+
+        @Override
+        protected void onPostExecute(List<Customer> tasks) {
+            super.onPostExecute(tasks);
+
+            System.out.println("tasks:"+tasks.size());
+        }
+    }
+
+
+
+
+
 }

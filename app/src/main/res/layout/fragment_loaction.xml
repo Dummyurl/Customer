@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+    </data>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg_color">
+
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.thimble.customer.view.TypedfaceTextView
+                android:id="@+id/tvOutSide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:textSize="@dimen/sp_18"
+                android:text="@string/store_entrance"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp_30"
+                android:paddingBottom="@dimen/dp_30"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_20">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dp_100"
+                        android:layout_toLeftOf="@+id/imbAddress"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:padding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_map_marker"/>
+
+                        <EditText
+                            android:id="@+id/etAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:background="@null"
+                            android:gravity="start"
+                            android:hint="@string/store_entrance_hint"
+                            android:textColor="@color/text_color2"
+                            android:textSize="@dimen/sp_13"/>
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/etAddres"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dp_100"
+                        android:layout_toLeftOf="@+id/imbAddress"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:visibility="gone"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/store_entrance_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_5">
+
+                    <EditText
+                        android:id="@+id/etLat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbLat"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/lattitude_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbLat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_5">
+
+                    <EditText
+                        android:id="@+id/etLng"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbLng"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/longitude_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbLng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>
+</layout>

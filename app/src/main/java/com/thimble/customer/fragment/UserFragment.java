@@ -1,6 +1,5 @@
 package com.thimble.customer.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -10,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.thimble.customer.MainActivity;
+import com.thimble.customer.activity.MainActivity;
 import com.thimble.customer.R;
 import com.thimble.customer.activity.ShowImagesActivity;
 import com.thimble.customer.adapter.CustomerAdapter;
@@ -28,9 +27,12 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
 
     private CustomerAdapter adapter;
     private List<Customer> customers;
+    private boolean isMultiSelect = false;
+    private int selectedCount = 0;
 
 
     public UserFragment() {
+
     }
 
 
@@ -51,30 +53,69 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
         customers.add(new Customer("Ding dong"));
         customers.add(new Customer("Ping pong"));
 
-        adapter = new CustomerAdapter(getActivity(),this,customers);
-        binding.rvUser.setAdapter(adapter);
+
+        setUI(customers);
 
         return binding.getRoot();
     }
 
-    public void filterList(CharSequence charSequence){
+
+    private void setUI(List<Customer> customers){
+        adapter = new CustomerAdapter(getActivity(),this,customers);
+        binding.rvUser.setAdapter(adapter);
+    }
+
+
+    public void doFilter(CharSequence charSequence){
         adapter.getFilter().filter(charSequence);
     }
 
 
-
     @Override
     public void onClick(int position) {
-        startActivity(new Intent(getActivity(),ShowImagesActivity.class));
-
+//        if(isMultiSelect){
+//            if(customers.get(position).isSelected()){
+//                customers.get(position).setSelected(false);
+//                selectedCount --;
+//            }else {
+//                customers.get(position).setSelected(true);
+//                selectedCount ++;
+//            }
+//            adapter.notifyItemChanged(position);
+//            ((MainActivity) getActivity()).onLongClick(isMultiSelect = (selectedCount != 0));
+//        }else {
+//            startActivity(new Intent(getActivity(),ShowImagesActivity.class));
+//        }
     }
 
     @Override
     public void onLongClick(int position) {
-        customers.get(position).setSelect(true);
-        adapter.notifyDataSetChanged();
+//        if(isMultiSelect) return;
+//        customers.get(position).setSelected(true);
+//        adapter.notifyItemChanged(position);
 
-        ((MainActivity) getActivity()).onLongClick();
+//        ((MainActivity) getActivity()).onLongClick(isMultiSelect = true);
+//        isMultiSelect = true;
+//        selectedCount ++;
+
+//        doOnLongClickTask(position);
+    }
+
+    private void doOnLongClickTask(int position){
+//        adapter.notifyItemChanged(position);
+//        ((MainActivity) getActivity()).onLongClick();
+    }
+
+    public void doCancelMultiSelect(){
+//        if (!isMultiSelect) return;
+        for (Customer customer : customers){
+            customer.setSelected(false);
+        }
+        adapter.notifyDataSetChanged();
+        adapter.setMultiSelect(isMultiSelect = false);
+        adapter.setSelectedCount(selectedCount = 0);
+//        isMultiSelect = false;
+//        selectedCount = 0;
     }
 }
 

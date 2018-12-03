@@ -9,7 +9,8 @@ import android.view.View;
 import com.thimble.customer.R;
 import com.thimble.customer.adapter.ShowImgAdapter;
 import com.thimble.customer.databinding.ActivityShowImagesBinding;
-import com.thimble.customer.model.Image;
+import com.thimble.customer.db.model.Image;
+
 
 import java.util.ArrayList;
 import java.util.List;

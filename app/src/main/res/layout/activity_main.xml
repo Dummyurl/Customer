@@ -13,7 +13,7 @@
         android:id="@+id/codLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.thimble.customer.MainActivity">
+        tools:context="com.thimble.customer.activity.MainActivity">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -46,6 +46,17 @@
                         android:layout_height="match_parent"
                         android:paddingLeft="@dimen/dp_5"
                         android:paddingRight="@dimen/dp_5">
+
+                        <com.thimble.customer.view.TypedfaceTextView
+                            android:id="@+id/tvTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:paddingLeft="@dimen/dp_16"
+                            android:paddingRight="@dimen/dp_16"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/sp_14"
+                            android:text="@string/customer_profile_page_title"/>
 
                         <ImageButton
                             android:id="@+id/imbBack"
@@ -99,7 +110,7 @@
                             android:layout_centerVertical="true"
                             android:padding="@dimen/dp_5"
                             android:background="?attr/selectableItemBackgroundBorderless"
-                            android:src="@drawable/ic_delete"
+                            android:src="@drawable/ic_delete_red"
                             android:tint="@android:color/white"
                             android:visibility="gone"
                             android:onClick="onClick"/>
@@ -150,7 +161,9 @@
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                app:tabIndicatorHeight="@dimen/dp_2"
+                app:tabIndicatorColor="@android:color/white"/>
 
         </android.support.design.widget.AppBarLayout>
 

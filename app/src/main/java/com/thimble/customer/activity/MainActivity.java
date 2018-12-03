@@ -1,4 +1,4 @@
-package com.thimble.customer;
+package com.thimble.customer.activity;
 
 
 import android.animation.Animator;
@@ -8,15 +8,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.ActionMode;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,16 +22,12 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.thimble.customer.activity.EditImageActivity;
-import com.thimble.customer.adapter.CustomerAdapter;
+import com.thimble.customer.R;
 import com.thimble.customer.adapter.ViewPagerAdapter;
-import com.thimble.customer.db.AppDB;
 import com.thimble.customer.db.DBClient;
-import com.thimble.customer.db.dao.CustomerDao;
 import com.thimble.customer.db.model.Customer;
 import com.thimble.customer.db.model.DateTime;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.thimble.customer.databinding.ActivityMainBinding;
 import com.thimble.customer.fragment.UserFragment;
@@ -42,7 +35,7 @@ import com.thimble.customer.fragment.UserFragment;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
 
 
     private ActivityMainBinding binding;
@@ -66,27 +59,20 @@ public class MainActivity extends AppCompatActivity {
 
         setupViewPager(binding.viewpager);
         binding.tabs.setupWithViewPager(binding.viewpager);
+        binding.tabs.addOnTabSelectedListener(this);
 
         binding.etSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 int currentItem = binding.viewpager.getCurrentItem();
                 UserFragment userFrag = (UserFragment)adapter.getItem(currentItem);
-                userFrag.filterList(charSequence);
+                userFrag.doFilter(charSequence);
             }
-
             @Override
-            public void afterTextChanged(Editable editable) {
-//                int currentItem = binding.viewpager.getCurrentItem();
-//                UserFragment userFrag = (UserFragment)adapter.getItem(currentItem);
-
-
-            }
+            public void afterTextChanged(Editable editable) { }
         });
 
 
@@ -94,20 +80,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onLongClick(){
+    public void onLongClick(boolean isMultiSelect){
         if(isMultiSelect){
-            hideMultiSelectMode();
-        }else {
             showMultiSelectMode();
+        }else {
+            hideMultiSelectMode();
         }
     }
 
     private void showMultiSelectMode(){
         isMultiSelect = true;
-        binding.tabs.setVisibility(View.GONE);
+        binding.tvTitle.setVisibility(View.GONE);
         binding.imbSearch.setVisibility(View.GONE);
         binding.imbMenu.setVisibility(View.GONE);
-//        binding.imbBack.setVisibility(View.GONE);
 
         binding.imbDelete.setVisibility(View.VISIBLE);
         binding.imbCancelSelection.setVisibility(View.VISIBLE);
@@ -115,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void hideMultiSelectMode(){
         isMultiSelect = false;
-        binding.tabs.setVisibility(View.VISIBLE);
+        binding.tvTitle.setVisibility(View.VISIBLE);
         binding.imbSearch.setVisibility(View.VISIBLE);
         binding.imbMenu.setVisibility(View.VISIBLE);
 
@@ -147,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void openSearch() {
+    private void toggleSearch() {
         int cx = (rlRevealItems.getLeft() + rlRevealItems.getRight());
 //                int cy = (rlRevealItems.getTop() + rlRevealItems.getBottom())/2;
         int cy = rlRevealItems.getTop();
@@ -171,31 +156,20 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 animator_reverse.addListener(new SupportAnimator.AnimatorListener() {
                     @Override
-                    public void onAnimationStart() {
-
-                    }
-
+                    public void onAnimationStart() { }
                     @Override
                     public void onAnimationEnd() {
                         rlRevealItems.setVisibility(View.INVISIBLE);
                         hidden = true;
 //                        etSearch.setText("");
                         rlRevealItems.requestFocus();
-
                     }
-
                     @Override
-                    public void onAnimationCancel() {
-
-                    }
-
+                    public void onAnimationCancel() { }
                     @Override
-                    public void onAnimationRepeat() {
-
-                    }
+                    public void onAnimationRepeat() { }
                 });
                 animator_reverse.start();
-
             }
         } else {
             if (hidden) {
@@ -230,28 +204,49 @@ public class MainActivity extends AppCompatActivity {
                 setPopup();
                 break;
             case R.id.fabAdd:
-                startActivity(new Intent(this,EditImageActivity.class));
-                new GetTasks().execute();
+                startActivity(new Intent(this,AddCustomerActivity.class));
+//                startActivity(new Intent(this,EditImageActivity.class));
+//                new GetTasks().execute();
                 break;
             case R.id.imbSearch:
             case R.id.imbCancelSrch:
                 if (hidden){
                     binding.tabs.setVisibility(View.GONE);
                 } else {
+                    binding.etSearch.setText("");
                     binding.tabs.setVisibility(View.VISIBLE);
                 }
-                openSearch();
+                toggleSearch();
                 break;
             case R.id.imbDelete:
                 break;
             case R.id.imbCancelSelection:
+                UserFragment userFrag = (UserFragment)adapter.getItem(binding.viewpager.getCurrentItem());
+                userFrag.doCancelMultiSelect();
                 hideMultiSelectMode();
                 break;
 
         }
     }
 
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
 
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+        if (!isMultiSelect) return;
+        UserFragment userFrag = (UserFragment)adapter.getItem(binding.viewpager.getCurrentItem());
+        userFrag.doCancelMultiSelect();
+        hideMultiSelectMode();
+        isMultiSelect = false;
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
 
 
     class SaveTask extends AsyncTask<Void, Void, Void> {
@@ -260,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             Customer customer = new Customer();
+
             customer.setAddress("setAddress");
             customer.setEmailId("setAddress");
             customer.setLocAddress("setLocAddress");
@@ -325,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_select_all:
                 return true;
             case R.id.menu_search:
-                openSearch();
+                toggleSearch();
                return true;
             default:
                 return super.onOptionsItemSelected(item);

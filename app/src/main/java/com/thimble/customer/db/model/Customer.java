@@ -5,11 +5,7 @@ import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
-
-import com.thimble.customer.db.AnswerTypeConverter;
-
-import java.util.List;
+import android.support.annotation.NonNull;
 
 /**
  * Created by pasari on 28/11/18.
@@ -20,11 +16,13 @@ import java.util.List;
 //@TypeConverters(AnswerTypeConverter.class)
 public class Customer {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
     @ColumnInfo(name = "id")
-    private int id;
+    @NonNull
+    private String id;
 
-    private int userServerId;
+    private String userLocalId;
+    private String userServerId;
 
     private String userName;
     private String address;
@@ -36,7 +34,7 @@ public class Customer {
     private String locLongitude;
 
     @Ignore
-    private boolean isSelect;
+    private boolean isSelected;
 
 //    @Embedded
 //    private List<DateTime> dateTime;
@@ -52,19 +50,28 @@ public class Customer {
         this.userName = userName;
     }
 
-    public int getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getUserServerId() {
+    public String getUserLocalId() {
+        return userLocalId;
+    }
+
+    public void setUserLocalId(String userLocalId) {
+        this.userLocalId = userLocalId;
+    }
+
+    public String getUserServerId() {
         return userServerId;
     }
 
-    public void setUserServerId(int userServerId) {
+    public void setUserServerId(String userServerId) {
         this.userServerId = userServerId;
     }
 
@@ -140,12 +147,12 @@ public class Customer {
         this.dateTime = dateTime;
     }
 
-    public boolean isSelect() {
-        return isSelect;
+    public boolean isSelected() {
+        return isSelected;
     }
 
-    public void setSelect(boolean select) {
-        isSelect = select;
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     //    public List<DateTime> getDateTime() {

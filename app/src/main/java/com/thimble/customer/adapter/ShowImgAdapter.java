@@ -12,11 +12,14 @@ import android.view.ViewGroup;
 
 import com.thimble.customer.R;
 import com.thimble.customer.databinding.ItemImagesBinding;
-import com.thimble.customer.db.model.Customer;
-import com.thimble.customer.model.Image;
+import com.thimble.customer.db.model.Image;
+import com.thimble.customer.util.BitmapManager;
 import com.thimble.customer.util.CaptureImage;
+import com.thimble.customer.util.FileUtils;
 
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.List;
 
 
@@ -60,24 +63,35 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
     @Override
     public void onBindViewHolder(@NonNull ItemRowHolder holder, int position) {
 //        holder.binding.setEdu(eduList.get(position));
-        if(imageList.get(position).getImgUri() != null){
-            String imgPath = CaptureImage.getPath(mContext, imageList.get(position).getImgUri());
-            Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
-            holder.binding.imvItem.setImageBitmap(bitmap);
+        if(imageList.get(position).getImgBitmap() != null){
+//            File file = FileUtils.getFile(mContext, imageList.get(position).getImgUri());
+//            String imgPath = file.getPath();
+
+//            String imgPath = CaptureImage.getPath(mContext, imageList.get(position).getImgUri());
+//            Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
+//            imageList.get(position).setImage(BitmapManager.bitmapToByte(bitmap));
+            holder.binding.imvItem.setImageBitmap(imageList.get(position).getImgBitmap());
         }else {
 //            holder.binding.imvItem.setImageBitmap(null);
         }
 
 
         holder.binding.imvItem.setOnClickListener(view -> {
+            if (listener == null) return;
             listener.onItemClick(position,imageList.get(position).getImgType());
         });
 
         holder.binding.imbDelete.setOnClickListener(view -> {
+            if (listener == null) return;
             listener.onDeleteClick(position,imageList.get(position).getImgType());
         });
     }
 
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
+    }
 
 
     @Override
