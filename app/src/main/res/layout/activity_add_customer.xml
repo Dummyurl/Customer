@@ -31,12 +31,652 @@
         app:titleTextAppearance="@style/ToolbarTextAppearance"
         app:title="@string/customer_profile_page_title" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginBottom="@dimen/dp_60"/>
+        android:layout_marginBottom="@dimen/dp_60"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dp_30"
+            android:paddingTop="@dimen/dp_30"
+            android:background="@color/page_bg_color">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp_0"
+                android:paddingBottom="@dimen/dp_0"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30">
+
+                <EditText
+                    android:id="@+id/etCustName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:drawableLeft="@drawable/ic_user"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg"
+                    android:gravity="center_vertical"
+                    android:hint="@string/cust_name_hint"
+                    android:inputType="textCapWords"
+                    android:textSize="@dimen/sp_13"/>
+
+                <EditText
+                    android:id="@+id/etCustId"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:drawableLeft="@drawable/ic_user"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg"
+                    android:gravity="center_vertical"
+                    android:hint="@string/cust_id_hint"
+                    android:textSize="@dimen/sp_13"/>
+
+                <EditText
+                    android:id="@+id/etPh"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:padding="@dimen/dp_5"
+                    android:drawableLeft="@drawable/ic_phone"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg"
+                    android:hint="@string/phone_hint"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/text_color2" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:padding="@dimen/dp_5"
+                    android:drawableLeft="@drawable/ic_email"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg"
+                    android:hint="@string/email_hint"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/text_color2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_80"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:padding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_map_marker"/>
+
+                    <EditText
+                        android:id="@+id/etCustAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:background="@null"
+                        android:gravity="start"
+                        android:hint="@string/address_hint"
+                        android:textSize="@dimen/sp_13"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/etWeb"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginBottom="@dimen/dp_0"
+                    android:paddingTop="@dimen/dp_5"
+                    android:paddingBottom="@dimen/dp_5"
+                    android:paddingLeft="7.5dp"
+                    android:paddingRight="@dimen/dp_5"
+                    android:drawableLeft="@drawable/ic_web"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:background="@drawable/edt_round_bg"
+                    android:hint="@string/web_hint"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/text_color2" />
+
+                <com.thimble.customer.view.TypedfaceTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:textSize="@dimen/sp_18"
+                    android:text="@string/store_entrance"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etStoreAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbStoreAddress"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/store_entrance_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbStoreAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_5">
+
+                    <EditText
+                        android:id="@+id/etStoreLat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbStoreLat"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/lattitude_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbStoreLat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_5">
+
+                    <EditText
+                        android:id="@+id/etStoreLng"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbStoreLng"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/longitude_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbStoreLng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+                <com.thimble.customer.view.TypedfaceTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:textSize="@dimen/sp_18"
+                    android:text="@string/receiving_entrance"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etRcvAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbRcvAddress"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/receiving_entrance_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbRcvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_5">
+
+                    <EditText
+                        android:id="@+id/etRcvLat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbRcvLat"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/lattitude_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbRcvLat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_5">
+
+                    <EditText
+                        android:id="@+id/etRcvLng"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbRcvLng"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:hint="@string/longitude_hint"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/text_color2" />
+
+                    <ImageButton
+                        android:id="@+id/imbRcvLng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_my_location"
+                        android:onClick="onClick"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <com.thimble.customer.view.TypedfaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:textSize="@dimen/sp_18"
+                android:text="@string/entry_hours"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdbSunday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="SUN"/>
+
+                <RadioButton
+                    android:id="@+id/rdbMonday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="MON"/>
+
+                <RadioButton
+                    android:id="@+id/rdbTuesday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="TUE"/>
+
+                <RadioButton
+                    android:id="@+id/rdbWednesday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="WED"/>
+
+                <RadioButton
+                    android:id="@+id/rdbThursday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="THU"/>
+
+                <RadioButton
+                    android:id="@+id/rdbFriday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="FRI"/>
+
+                <RadioButton
+                    android:id="@+id/rdbSaturday"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:background="@drawable/rdb_week_day"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@android:color/white"
+                    android:text="SAT"/>
+
+            </RadioGroup>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:orientation="horizontal"
+                android:background="@color/radio_btn_active_color">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical">
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvFrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/dp_5"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:text="@string/time_from" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvTimeFrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_24"
+                        android:text="00:00 AM" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_marginRight="@dimen/dp_5"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:text="@string/time_to" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvTimeTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_24"
+                        android:text="00:00 AM" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <com.thimble.customer.view.TypedfaceTextView
+                android:id="@+id/tvOutSide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:textSize="@dimen/sp_16"
+                android:text="@string/upload_shop_outside_picture"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imvOutSide"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:padding="@dimen/dp_35"
+                    android:src="@drawable/ic_camera"
+                    android:background="@color/colorAccent"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:onClick="onClick"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvOutside"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    tools:listitem="@layout/item_images"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+            </LinearLayout>
+
+            <com.thimble.customer.view.TypedfaceTextView
+                android:id="@+id/tvInside"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:textSize="@dimen/sp_16"
+                android:text="@string/upload_shop_inside_picture"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imvInside"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:padding="@dimen/dp_35"
+                    android:src="@drawable/ic_camera"
+                    android:background="@color/colorAccent"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:onClick="onClick"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvInside"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    tools:listitem="@layout/item_images"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+            </LinearLayout>
+
+            <com.thimble.customer.view.TypedfaceTextView
+                android:id="@+id/tvSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:textSize="@dimen/sp_16"
+                android:text="@string/upload_section_picture"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imvSection"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:padding="@dimen/dp_35"
+                    android:src="@drawable/ic_camera"
+                    android:background="@color/colorAccent"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:onClick="onClick"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    tools:listitem="@layout/item_images"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

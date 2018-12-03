@@ -25,19 +25,19 @@ public class AddCustomerActivity extends AppCompatActivity implements ViewPager.
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_customer);
 
-        setupViewPager(binding.viewpager);
-        binding.viewpager.addOnPageChangeListener(this);
+//        setupViewPager(binding.viewpager);
+//        binding.viewpager.addOnPageChangeListener(this);
     }
 
 
     private void setupViewPager(ViewPager viewPager) {
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new AddImgFragment(), AddImgFragment.class.getSimpleName());
-        adapter.addFrag(new DateTimeAddressFragment(),  DateTimeAddressFragment.class.getSimpleName());
-        adapter.addFrag(new LocationFragment(), LocationFragment.class.getSimpleName());
-
-        viewPager.setOffscreenPageLimit(adapter.getCount() > 1 ? adapter.getCount() - 1 : 1);
-        viewPager.setAdapter(adapter);
+//        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+//        adapter.addFrag(new AddImgFragment(), AddImgFragment.class.getSimpleName());
+//        adapter.addFrag(new DateTimeAddressFragment(),  DateTimeAddressFragment.class.getSimpleName());
+//        adapter.addFrag(new LocationFragment(), LocationFragment.class.getSimpleName());
+//
+//        viewPager.setOffscreenPageLimit(adapter.getCount() > 1 ? adapter.getCount() - 1 : 1);
+//        viewPager.setAdapter(adapter);
     }
 
     public void onClick(View view){

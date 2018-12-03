@@ -31,6 +31,8 @@
     <string name="store_entrance_hint">Exact Location of Store Entrance</string>
     <string name="lattitude_hint">Lattitude</string>
     <string name="longitude_hint">Longitude</string>
+    <string name="receiving_entrance">Receiving Entrance</string>
+    <string name="receiving_entrance_hint">Exact Location of Receiving Entrance</string>
 
 
     <string name="cust_name_hint">Customer Name</string>
