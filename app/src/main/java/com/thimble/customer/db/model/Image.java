@@ -7,9 +7,6 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-
-import com.thimble.customer.util.BitmapManager;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
@@ -19,16 +16,17 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 
 @Entity(foreignKeys = @ForeignKey(entity = Customer.class, parentColumns = "id",
-        childColumns = "userId", onDelete = CASCADE,onUpdate = CASCADE))
+        childColumns = "customerId", onDelete = CASCADE,onUpdate = CASCADE))
 
 public class Image {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String userId;
+    private String customerId;
     private String imgType;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     private byte[] image;
+    private int synced;
 
     @Ignore
     private Bitmap imgBitmap;
@@ -41,16 +39,19 @@ public class Image {
     public Image() {
     }
 
+    @Ignore
     public Image(String imgType, Uri imgUri) {
         this.imgType = imgType;
         this.imgUri = imgUri;
     }
 
+    @Ignore
     public Image(String imgType, Bitmap imgBitmap) {
         this.imgType = imgType;
         this.imgBitmap = imgBitmap;
     }
 
+    @Ignore
     public Image(String imgType, byte[] image, Bitmap imgBitmap) {
         this.imgType = imgType;
         this.image = image;
@@ -65,12 +66,12 @@ public class Image {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getImgType() {
@@ -112,5 +113,13 @@ public class Image {
 
     public void setImgBitmap(Bitmap imgBitmap) {
         this.imgBitmap = imgBitmap;
+    }
+
+    public int getSynced() {
+        return synced;
+    }
+
+    public void setSynced(int synced) {
+        this.synced = synced;
     }
 }

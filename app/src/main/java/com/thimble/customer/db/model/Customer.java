@@ -1,11 +1,15 @@
 package com.thimble.customer.db.model;
 
 import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+
+import com.thimble.customer.db.DateTimeTypeConverter;
+
+import java.util.List;
 
 /**
  * Created by pasari on 28/11/18.
@@ -13,7 +17,7 @@ import android.support.annotation.NonNull;
 
 
 @Entity
-//@TypeConverters(AnswerTypeConverter.class)
+@TypeConverters(DateTimeTypeConverter.class)
 public class Customer {
 
     @PrimaryKey()
@@ -24,38 +28,44 @@ public class Customer {
     private String userLocalId;
     private String userServerId;
 
-    private String userName;
+    private String customerName;
     private String address;
     private String phNo;
     private String emailId;
     private String webLink;
-    private String locAddress;
-    private String locLattitude;
-    private String locLongitude;
+    private String storeAddress;
+    private String storeLat;
+    private String storeLng;
+    private String rcvAddress;
+    private String rcvLat;
+    private String rcvLng;
+    private int synced;
+
+    private List<DateTime> dateTime;
 
     @Ignore
     private boolean isSelected;
 
-//    @Embedded
-//    private List<DateTime> dateTime;
 
-    @Embedded
-    private DateTime dateTime;
+
+//    @Embedded
+//    private DateTime dateTime;
 
 
     public Customer() {
     }
 
     public Customer(String userName) {
-        this.userName = userName;
+        this.customerName = userName;
     }
 
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -75,12 +85,12 @@ public class Customer {
         this.userServerId = userServerId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getAddress() {
@@ -115,35 +125,75 @@ public class Customer {
         this.webLink = webLink;
     }
 
-    public String getLocAddress() {
-        return locAddress;
+    public String getStoreAddress() {
+        return storeAddress;
     }
 
-    public void setLocAddress(String locAddress) {
-        this.locAddress = locAddress;
+    public void setStoreAddress(String storeAddress) {
+        this.storeAddress = storeAddress;
     }
 
-    public String getLocLattitude() {
-        return locLattitude;
+    public String getStoreLat() {
+        return storeLat;
     }
 
-    public void setLocLattitude(String locLattitude) {
-        this.locLattitude = locLattitude;
+    public void setStoreLat(String storeLat) {
+        this.storeLat = storeLat;
     }
 
-    public String getLocLongitude() {
-        return locLongitude;
+    public String getStoreLng() {
+        return storeLng;
     }
 
-    public void setLocLongitude(String locLongitude) {
-        this.locLongitude = locLongitude;
+    public void setStoreLng(String storeLng) {
+        this.storeLng = storeLng;
     }
 
-    public DateTime getDateTime() {
+    public String getRcvAddress() {
+        return rcvAddress;
+    }
+
+    public void setRcvAddress(String rcvAddress) {
+        this.rcvAddress = rcvAddress;
+    }
+
+    public String getRcvLat() {
+        return rcvLat;
+    }
+
+    public void setRcvLat(String rcvLat) {
+        this.rcvLat = rcvLat;
+    }
+
+    public String getRcvLng() {
+        return rcvLng;
+    }
+
+    public void setRcvLng(String rcvLng) {
+        this.rcvLng = rcvLng;
+    }
+
+    public int getSynced() {
+        return synced;
+    }
+
+    public void setSynced(int synced) {
+        this.synced = synced;
+    }
+
+    //    public DateTime getDateTime() {
+//        return dateTime;
+//    }
+//
+//    public void setDateTime(DateTime dateTime) {
+//        this.dateTime = dateTime;
+//    }
+
+    public List<DateTime> getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(DateTime dateTime) {
+    public void setDateTime(List<DateTime> dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -154,12 +204,4 @@ public class Customer {
     public void setSelected(boolean selected) {
         isSelected = selected;
     }
-
-    //    public List<DateTime> getDateTime() {
-//        return dateTime;
-//    }
-//
-//    public void setDateTime(List<DateTime> dateTime) {
-//        this.dateTime = dateTime;
-//    }
 }

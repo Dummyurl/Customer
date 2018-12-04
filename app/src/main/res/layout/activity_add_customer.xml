@@ -31,7 +31,6 @@
         app:titleTextAppearance="@style/ToolbarTextAppearance"
         app:title="@string/customer_profile_page_title" />
 
-
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nsv"
         android:layout_width="match_parent"
@@ -70,7 +69,7 @@
                     android:gravity="center_vertical"
                     android:hint="@string/cust_name_hint"
                     android:inputType="textCapWords"
-                    android:textSize="@dimen/sp_13"/>
+                    android:textSize="@dimen/sp_14"/>
 
                 <EditText
                     android:id="@+id/etCustId"
@@ -84,7 +83,7 @@
                     android:background="@drawable/edt_round_bg"
                     android:gravity="center_vertical"
                     android:hint="@string/cust_id_hint"
-                    android:textSize="@dimen/sp_13"/>
+                    android:textSize="@dimen/sp_14"/>
 
                 <EditText
                     android:id="@+id/etPh"
@@ -95,9 +94,10 @@
                     android:drawableLeft="@drawable/ic_phone"
                     android:drawablePadding="@dimen/dp_10"
                     android:background="@drawable/edt_round_bg"
+                    android:inputType="number"
+                    android:maxLength="10"
                     android:hint="@string/phone_hint"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2" />
+                    android:textSize="@dimen/sp_14" />
 
                 <EditText
                     android:id="@+id/etEmail"
@@ -108,16 +108,19 @@
                     android:drawableLeft="@drawable/ic_email"
                     android:drawablePadding="@dimen/dp_10"
                     android:background="@drawable/edt_round_bg"
+                    android:inputType="textEmailAddress"
                     android:hint="@string/email_hint"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2" />
+                    android:textSize="@dimen/sp_14" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/dp_80"
                     android:layout_marginBottom="@dimen/dp_10"
-                    android:padding="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_4"
+                    android:paddingRight="@dimen/dp_5"
                     android:background="@drawable/edt_round_bg">
 
                     <ImageView
@@ -128,13 +131,13 @@
                     <EditText
                         android:id="@+id/etCustAddress"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:paddingLeft="@dimen/dp_10"
                         android:paddingRight="@dimen/dp_10"
                         android:background="@null"
                         android:gravity="start"
                         android:hint="@string/address_hint"
-                        android:textSize="@dimen/sp_13"/>
+                        android:textSize="@dimen/sp_14" />
 
                 </LinearLayout>
 
@@ -151,8 +154,7 @@
                     android:drawablePadding="@dimen/dp_10"
                     android:background="@drawable/edt_round_bg"
                     android:hint="@string/web_hint"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/text_color2" />
+                    android:textSize="@dimen/sp_14" />
 
                 <com.thimble.customer.view.TypedfaceTextView
                     android:layout_width="wrap_content"
@@ -179,9 +181,9 @@
                         android:background="@drawable/edt_round_bg"
                         android:singleLine="true"
                         android:ellipsize="end"
+                        android:inputType="textCapSentences"
                         android:hint="@string/store_entrance_hint"
-                        android:textSize="@dimen/sp_16"
-                        android:textColor="@color/text_color2" />
+                        android:textSize="@dimen/sp_16" />
 
                     <ImageButton
                         android:id="@+id/imbStoreAddress"
@@ -213,9 +215,9 @@
                         android:background="@drawable/edt_round_bg"
                         android:singleLine="true"
                         android:ellipsize="end"
+                        android:inputType="numberDecimal"
                         android:hint="@string/lattitude_hint"
-                        android:textSize="@dimen/sp_16"
-                        android:textColor="@color/text_color2" />
+                        android:textSize="@dimen/sp_16" />
 
                     <ImageButton
                         android:id="@+id/imbStoreLat"
@@ -247,9 +249,9 @@
                         android:background="@drawable/edt_round_bg"
                         android:singleLine="true"
                         android:ellipsize="end"
+                        android:inputType="numberDecimal"
                         android:hint="@string/longitude_hint"
-                        android:textSize="@dimen/sp_16"
-                        android:textColor="@color/text_color2" />
+                        android:textSize="@dimen/sp_16" />
 
                     <ImageButton
                         android:id="@+id/imbStoreLng"
@@ -289,9 +291,9 @@
                         android:background="@drawable/edt_round_bg"
                         android:singleLine="true"
                         android:ellipsize="end"
+                        android:inputType="textCapSentences"
                         android:hint="@string/receiving_entrance_hint"
-                        android:textSize="@dimen/sp_16"
-                        android:textColor="@color/text_color2" />
+                        android:textSize="@dimen/sp_16" />
 
                     <ImageButton
                         android:id="@+id/imbRcvAddress"
@@ -323,9 +325,9 @@
                         android:background="@drawable/edt_round_bg"
                         android:singleLine="true"
                         android:ellipsize="end"
+                        android:inputType="numberDecimal"
                         android:hint="@string/lattitude_hint"
-                        android:textSize="@dimen/sp_16"
-                        android:textColor="@color/text_color2" />
+                        android:textSize="@dimen/sp_16" />
 
                     <ImageButton
                         android:id="@+id/imbRcvLat"
@@ -357,9 +359,9 @@
                         android:background="@drawable/edt_round_bg"
                         android:singleLine="true"
                         android:ellipsize="end"
+                        android:inputType="numberDecimal"
                         android:hint="@string/longitude_hint"
-                        android:textSize="@dimen/sp_16"
-                        android:textColor="@color/text_color2" />
+                        android:textSize="@dimen/sp_16" />
 
                     <ImageButton
                         android:id="@+id/imbRcvLng"
@@ -386,6 +388,7 @@
                 android:text="@string/entry_hours"/>
 
             <RadioGroup
+                android:id="@+id/rgTime"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
                 android:orientation="horizontal">
@@ -515,7 +518,8 @@
                         android:layout_marginRight="@dimen/dp_5"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
-                        android:text="@string/time_from" />
+                        android:text="@string/time_from"
+                        android:tag="@string/time_from"/>
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvTimeFrom"
@@ -529,8 +533,8 @@
                         android:gravity="center_vertical"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/sp_24"
-                        android:text="00:00 AM" />
+                        android:textSize="@dimen/sp_22"
+                        android:text="-- : --" />
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvTo"
@@ -541,7 +545,8 @@
                         android:layout_marginRight="@dimen/dp_5"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
-                        android:text="@string/time_to" />
+                        android:text="@string/time_to"
+                        android:tag="@string/time_to"/>
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvTimeTo"
@@ -555,8 +560,8 @@
                         android:gravity="center_vertical"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/sp_24"
-                        android:text="00:00 AM" />
+                        android:textSize="@dimen/sp_22"
+                        android:text="-- : --" />
 
                 </LinearLayout>
 
@@ -579,8 +584,8 @@
 
                 <ImageView
                     android:id="@+id/imvOutSide"
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="@dimen/dp_100"
+                    android:layout_width="@dimen/dp_95"
+                    android:layout_height="@dimen/dp_95"
                     android:padding="@dimen/dp_35"
                     android:src="@drawable/ic_camera"
                     android:background="@color/colorAccent"
@@ -616,8 +621,8 @@
 
                 <ImageView
                     android:id="@+id/imvInside"
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="@dimen/dp_100"
+                    android:layout_width="@dimen/dp_95"
+                    android:layout_height="@dimen/dp_95"
                     android:padding="@dimen/dp_35"
                     android:src="@drawable/ic_camera"
                     android:background="@color/colorAccent"
@@ -653,8 +658,8 @@
 
                 <ImageView
                     android:id="@+id/imvSection"
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="@dimen/dp_100"
+                    android:layout_width="@dimen/dp_95"
+                    android:layout_height="@dimen/dp_95"
                     android:padding="@dimen/dp_35"
                     android:src="@drawable/ic_camera"
                     android:background="@color/colorAccent"
@@ -677,12 +682,10 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
         android:layout_gravity="bottom"
-        android:visibility="visible"
         app:cardElevation="@dimen/dp_4"
         app:cardBackgroundColor="@android:color/white">
 
@@ -693,36 +696,36 @@
             android:background="@color/page_bg_color">
 
             <TextView
-                android:id="@+id/tvEdit"
+                android:id="@+id/tvSave"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/dp_0.5"
                 android:paddingTop="@dimen/dp_10"
-                android:drawableTop="@drawable/ic_edit"
+                android:drawableTop="@drawable/ic_save"
                 android:foreground="?attr/selectableItemBackground"
                 android:background="@android:color/white"
                 android:clickable="true"
                 android:onClick="onClick"
                 android:gravity="center"
                 android:textSize="@dimen/sp_12"
-                android:text="@string/edit"/>
+                android:text="@string/save"/>
 
             <TextView
-                android:id="@+id/tvDelete"
+                android:id="@+id/tvCancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/dp_0.5"
                 android:paddingTop="@dimen/dp_10"
-                android:drawableTop="@drawable/ic_delete_red"
+                android:drawableTop="@drawable/ic_cancel"
                 android:foreground="?attr/selectableItemBackground"
                 android:background="@android:color/white"
                 android:clickable="true"
                 android:onClick="onClick"
                 android:gravity="center"
                 android:textSize="@dimen/sp_12"
-                android:text="@string/delete"/>
+                android:text="@string/cancel"/>
 
         </LinearLayout>
 

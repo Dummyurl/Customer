@@ -21,6 +21,12 @@ public interface CustomerDao {
     @Query("SELECT * FROM Customer")
     List<Customer> getAll();
 
+    @Query("SELECT id,customerName FROM Customer")
+    List<Customer> getAllCustomers();
+
+    @Query("SELECT * FROM Customer WHERE id=:id")
+    Customer getCustomerDetails(String id);
+
     @Insert
     void insert(Customer customer);
 

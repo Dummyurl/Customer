@@ -81,26 +81,28 @@
                             android:visibility="gone"/>
 
                         <ImageButton
-                            android:id="@+id/imbMenu"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:padding="@dimen/dp_5"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:src="@drawable/ic_menu"
-                            android:onClick="onClick"/>
-
-                        <ImageButton
                             android:id="@+id/imbSearch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/imbMenu"
+                            android:layout_alignParentRight="true"
                             android:padding="@dimen/dp_5"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_search"
                             android:onClick="onClick"/>
+
+                        <ImageButton
+                            android:id="@+id/imbSelectAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/imbDelete"
+                            android:layout_marginRight="@dimen/dp_5"
+                            android:padding="@dimen/dp_5"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_select_all"
+                            android:onClick="onClick"
+                            android:visibility="gone"/>
 
                         <ImageButton
                             android:id="@+id/imbDelete"

@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         isMultiSelect = true;
         binding.tvTitle.setVisibility(View.GONE);
         binding.imbSearch.setVisibility(View.GONE);
-        binding.imbMenu.setVisibility(View.GONE);
 
         binding.imbDelete.setVisibility(View.VISIBLE);
+        binding.imbSelectAll.setVisibility(View.VISIBLE);
         binding.imbCancelSelection.setVisibility(View.VISIBLE);
     }
 
@@ -102,9 +102,9 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         isMultiSelect = false;
         binding.tvTitle.setVisibility(View.VISIBLE);
         binding.imbSearch.setVisibility(View.VISIBLE);
-        binding.imbMenu.setVisibility(View.VISIBLE);
 
         binding.imbDelete.setVisibility(View.GONE);
+        binding.imbSelectAll.setVisibility(View.GONE);
         binding.imbCancelSelection.setVisibility(View.GONE);
     }
 
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
 
     private void setPopup(){
-        PopupMenu popup = new PopupMenu(MainActivity.this, binding.imbMenu);
+        PopupMenu popup = new PopupMenu(MainActivity.this, binding.imbSelectAll);
         popup.getMenuInflater().inflate(R.menu.menu_main, popup.getMenu());
         popup.setOnMenuItemClickListener(item -> {
             Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -200,8 +200,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         switch (view.getId()){
             case R.id.imbBack:
                 break;
-            case R.id.imbMenu:
-                setPopup();
+            case R.id.imbSelectAll:
+//                setPopup();
                 break;
             case R.id.fabAdd:
                 startActivity(new Intent(this,AddCustomerActivity.class));
@@ -249,62 +249,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     }
 
 
-    class SaveTask extends AsyncTask<Void, Void, Void> {
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            Customer customer = new Customer();
-
-            customer.setAddress("setAddress");
-            customer.setEmailId("setAddress");
-            customer.setLocAddress("setLocAddress");
-            customer.setUserName("setAddress");
-
-            DateTime dateTime = new DateTime();
-            dateTime.setDate("nbjv,mnxc,mvn");
-
-            customer.setDateTime(dateTime);
-
-            //adding to database
-            DBClient.getInstance(getApplicationContext()).getAppDB()
-                    .customerDao().insert(customer);
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-//            finish();
-//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
-
-
-//            new GetTasks().execute();
-        }
-    }
-
-
-    class GetTasks extends AsyncTask<Void, Void, List<Customer>> {
-
-        @Override
-        protected List<Customer> doInBackground(Void... voids) {
-            List<Customer> taskList = DBClient
-                    .getInstance(getApplicationContext())
-                    .getAppDB()
-                    .customerDao()
-                    .getAll();
-            return taskList;
-        }
-
-        @Override
-        protected void onPostExecute(List<Customer> tasks) {
-            super.onPostExecute(tasks);
-
-            System.out.println("tasks:"+tasks.size());
-        }
-    }
 
 
     @Override

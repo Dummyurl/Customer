@@ -6,7 +6,6 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.thimble.customer.db.model.Customer;
 import com.thimble.customer.db.model.Image;
 
 import java.util.List;
@@ -22,8 +21,8 @@ public interface ImageDao {
     @Query("SELECT * FROM Image")
     List<Image> getAll();
 
-    @Query("SELECT * FROM Image WHERE userId=:userId AND imgType=:imgType")
-    List<Image> getTypeWiseUserImages(int userId,String imgType);
+    @Query("SELECT * FROM Image WHERE customerId=:customerId AND imgType=:imgType")
+    List<Image> getTypeWiseCustomerImages(String customerId, String imgType);
 
     @Insert
     void insert(Image image);

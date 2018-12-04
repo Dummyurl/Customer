@@ -12,15 +12,16 @@ public class DateTime {
     private String fromTime;
     private String toTime;
 
-//    public DateTime() {
-//    }
+    public DateTime() {
 
-//    @Ignore
-//    public DateTime(String date, String fromTime, String toTime) {
-//        this.date = date;
-//        this.fromTime = fromTime;
-//        this.toTime = toTime;
-//    }
+    }
+
+    @Ignore
+    public DateTime(String date, String fromTime, String toTime) {
+        this.date = date;
+        this.fromTime = fromTime;
+        this.toTime = toTime;
+    }
 
     public String getDate() {
         return date;

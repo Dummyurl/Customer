@@ -64,12 +64,6 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
     public void onBindViewHolder(@NonNull ItemRowHolder holder, int position) {
 //        holder.binding.setEdu(eduList.get(position));
         if(imageList.get(position).getImgBitmap() != null){
-//            File file = FileUtils.getFile(mContext, imageList.get(position).getImgUri());
-//            String imgPath = file.getPath();
-
-//            String imgPath = CaptureImage.getPath(mContext, imageList.get(position).getImgUri());
-//            Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
-//            imageList.get(position).setImage(BitmapManager.bitmapToByte(bitmap));
             holder.binding.imvItem.setImageBitmap(imageList.get(position).getImgBitmap());
         }else {
 //            holder.binding.imvItem.setImageBitmap(null);

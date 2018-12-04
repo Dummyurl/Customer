@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,15 +28,11 @@ import com.thimble.customer.databinding.ActivityEditImagesBinding;
 import com.thimble.customer.db.DBClient;
 import com.thimble.customer.db.model.Customer;
 import com.thimble.customer.db.model.Image;
-import com.thimble.customer.util.FileUtils;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.thimble.customer.base.AppConstant.CAMERA_PERMISSION_REQUEST_CODE;
-import static com.thimble.customer.base.AppConstant.EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE;
 import static com.thimble.customer.base.AppConstant.INSIDE_PIC;
 import static com.thimble.customer.base.AppConstant.OUTSIDE_PIC;
 import static com.thimble.customer.base.AppConstant.SECTION_PIC;
@@ -250,25 +245,25 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
             long timeMillis = System.currentTimeMillis();
 
             Customer customer = new Customer();
-            customer.setUserName(binding.etCustName.getText().toString().trim());
+            customer.setCustomerName(binding.etCustName.getText().toString().trim());
             customer.setId(String.valueOf(timeMillis));
 
             for (Image image : outsideList){
-                image.setUserId(String.valueOf(timeMillis));
+                image.setCustomerId(String.valueOf(timeMillis));
             }
 
             for (Image image : insideList){
-                image.setUserId(String.valueOf(timeMillis));
+                image.setCustomerId(String.valueOf(timeMillis));
             }
 
             for (Image image : sectionList){
-                image.setUserId(String.valueOf(timeMillis));
+                image.setCustomerId(String.valueOf(timeMillis));
             }
 
 
 //            customer.setEmailId("setAddress");
 //            customer.setLocAddress("setLocAddress");
-//            customer.setUserName("setAddress");
+//            customer.setCustomerName("setAddress");
 
 //            DateTime dateTime = new DateTime();
 //            dateTime.setDate("nbjv,mnxc,mvn");

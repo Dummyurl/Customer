@@ -9,10 +9,10 @@ import com.thimble.customer.db.model.DateTime;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class AnswerTypeConverter {
+public class DateTimeTypeConverter {
 
     @TypeConverter
-    public static List<DateTime> stringToQuestionModels(String json) {
+    public static List<DateTime> stringToList(String json) {
         Gson gson = new Gson();
         Type type = new TypeToken<List<DateTime>>() {}.getType();
         List<DateTime> measurements = gson.fromJson(json, type);
@@ -20,7 +20,7 @@ public class AnswerTypeConverter {
     }
 
     @TypeConverter
-    public static String questionToString(List<DateTime> list) {
+    public static String listToString(List<DateTime> list) {
         Gson gson = new Gson();
         Type type = new TypeToken<List<DateTime>>() {}.getType();
         String json = gson.toJson(list, type);

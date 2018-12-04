@@ -13,14 +13,16 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import com.thimble.customer.R;
+import com.thimble.customer.activity.AddCustomerActivity;
 import com.thimble.customer.activity.MainActivity;
-import com.thimble.customer.activity.ShowImagesActivity;
 import com.thimble.customer.databinding.ItemCustomersBinding;
 import com.thimble.customer.db.model.Customer;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.thimble.customer.util.IntentExtras.CUSTOMER_ID;
 
 
 /**
@@ -73,7 +75,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
 
     @Override
     public void onBindViewHolder(@NonNull ItemRowHolder holder, int position) {
-        holder.binding.tvCustName.setText(mFilteredList.get(position).getUserName());
+        holder.binding.tvCustName.setText(mFilteredList.get(position).getCustomerName());
+        holder.binding.tvCustId.setText(mFilteredList.get(position).getId());
 
         if(mFilteredList.get(position).isSelected()){
             holder.binding.imvSelected.setVisibility(View.VISIBLE);
@@ -108,7 +111,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
                notifyItemChanged(position);
                 ((MainActivity) mContext).onLongClick(isMultiSelect = (selectedCount != 0));
             }else {
-                mContext.startActivity(new Intent(mContext,ShowImagesActivity.class));
+                mContext.startActivity(new Intent(mContext,AddCustomerActivity.class)
+                .putExtra(CUSTOMER_ID,customerList.get(position).getId()));
             }
 
 //            listner.onClick(position);
@@ -134,7 +138,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
                 } else {
                     ArrayList<Customer> filteredList = new ArrayList<>();
                     for (Customer customer : customerList) {
-                        if (customer.getUserName().toLowerCase().contains(charString.toLowerCase())) {
+                        if (customer.getCustomerName().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(customer);
                         }
                     }

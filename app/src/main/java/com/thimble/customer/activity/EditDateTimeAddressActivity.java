@@ -94,7 +94,7 @@ public class EditDateTimeAddressActivity extends AppCompatActivity {
 //            customer.setAddress("setAddress");
 //            customer.setEmailId("setAddress");
 //            customer.setLocAddress("setLocAddress");
-//            customer.setUserName("setAddress");
+//            customer.setCustomerName("setAddress");
 //
 //            DateTime dateTime = new DateTime();
 //            dateTime.setDate("nbjv,mnxc,mvn");
