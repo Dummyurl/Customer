@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -28,12 +29,23 @@ import com.thimble.customer.db.DBClient;
 import com.thimble.customer.db.model.Customer;
 import com.thimble.customer.db.model.DateTime;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.thimble.customer.databinding.ActivityMainBinding;
 import com.thimble.customer.fragment.UserFragment;
+import com.thimble.customer.rest.ApiClient;
+import com.thimble.customer.rest.ApiHelper;
+import com.thimble.customer.rest.ApiInterface;
+import com.thimble.customer.view.CustomLoder;
 
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
 
@@ -78,6 +90,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
 //        new SaveTask().execute();
 
+        details();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        hideMultiSelectMode();
     }
 
     public void onLongClick(boolean isMultiSelect){
@@ -219,6 +239,9 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 toggleSearch();
                 break;
             case R.id.imbDelete:
+                UserFragment user = (UserFragment)adapter.getItem(binding.viewpager.getCurrentItem());
+                user.deleteCustomer();
+                hideMultiSelectMode();
                 break;
             case R.id.imbCancelSelection:
                 UserFragment userFrag = (UserFragment)adapter.getItem(binding.viewpager.getCurrentItem());
@@ -271,5 +294,67 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+
+    private void details() {
+        CustomLoder.showCustomProgressBar(this);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put(ApiHelper.BROKER_ID, "015937");
+//        params.put(ApiHelper.SALESMAN_ID, "015937");
+        params.put(ApiHelper.COMPANY_ID, "2");
+
+        String header = "jiNaduK-WxFTmRLc5QV-yfoWx8QwNpJLVVT1-Q39nNKZf4SMAquTZKum5yNseN9TLpyB07G0utbIpC3l8pIoF0C4IOKWlabMD-XldZAUn5knhhsDZa4boHaA-8isSQk1BhXae9pEuaGhfrde2ANVQeikEJWAbK2TSVJGmqYgnTuFMSk7_5HGUkbaV5o1SLAe70VJrSKWZivo-bCcEYQUM6oPkfk8opR2M6I7BkvA_6kJJOuTFpPhi40lsNhhGktWvWs9xArqFDb4L3dCB3xJV-Dqn3QNgBCgbJMKWqGBSbyiw1T5k01B7JWn87nsuIKvKkGPCTaUxk7XdnLA2NxluyIaTOfNZTkC0m5PHgjdwWoHSlAYqFaTzYH6XyHU0nFSx5YqNcJ1VzXhJfQMwywy7jd_qiZd5-Qi3I2DlkUs5BxbjAlnCk99vv95Ezvb4Cpa8AvpX_d_KClihQFlhnodWp1qSRxbmQ2ZRDQncTMICHHoOo-Vp1xMOR5E8-cHaHgjoAxPJlOPV9IObqgBaM5txdhagfVbLx0QzoqlwszITL2z0qWIy_WwgbHnPX2ofsKZLRjfg";
+
+        ApiClient.getClient(this).create(ApiInterface.class).
+                details(header,params).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                System.out.println("response:"+response);
+                CustomLoder.dismisCustomProgressBar();
+                try {
+                    String responseBody=response.body().string();
+                    System.out.println("responseBody:"+responseBody);
+
+//                    if(response.code() == 200){
+//                        LoginResponse login = new Gson().fromJson(responseBody,LoginResponse.class);
+//                        if(login.getPayload().get(0).getAuthorization().toLowerCase().equals("success")){
+//
+//                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+//                            finish();
+//
+//                        }
+//                    }
+
+//                    switch (login.getStatus()){
+//                        case STATUS_SUCCESS:
+//
+//                            AppClass.getInstance().setUserData(login.getData());
+//
+//                            startActivity(new Intent(LystantLoginActivity.this,MainActivity.class)
+//                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
+//                                            Intent.FLAG_ACTIVITY_CLEAR_TOP |
+//                                            Intent.FLAG_ACTIVITY_NEW_TASK));
+//
+//                            finish();
+//
+//                            break;
+//                        case STATUS_MISSING:
+//                        case STATUS_ERROR:
+//                            Toast.makeText(LystantLoginActivity.this, login.getMsg(), Toast.LENGTH_SHORT).show();
+//                            break;
+//                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                t.printStackTrace();
+                CustomLoder.dismisCustomProgressBar();
+            }
+        });
     }
 }

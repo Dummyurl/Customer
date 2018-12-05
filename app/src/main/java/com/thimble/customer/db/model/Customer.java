@@ -3,6 +3,7 @@ package com.thimble.customer.db.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
@@ -16,13 +17,13 @@ import java.util.List;
  */
 
 
-@Entity
+@Entity(tableName = "Customer", indices = {@Index(value = "id", unique = true)})
 @TypeConverters(DateTimeTypeConverter.class)
 public class Customer {
 
-    @PrimaryKey()
-    @ColumnInfo(name = "id")
+    @PrimaryKey
     @NonNull
+    @ColumnInfo(name = "id")
     private String id;
 
     private String userLocalId;
@@ -55,6 +56,7 @@ public class Customer {
     public Customer() {
     }
 
+    @Ignore
     public Customer(String userName) {
         this.customerName = userName;
     }

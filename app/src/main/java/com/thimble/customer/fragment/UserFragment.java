@@ -1,6 +1,5 @@
 package com.thimble.customer.fragment;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,14 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.thimble.customer.activity.MainActivity;
 import com.thimble.customer.R;
-import com.thimble.customer.activity.ShowImagesActivity;
 import com.thimble.customer.adapter.CustomerAdapter;
 import com.thimble.customer.databinding.FragmentUserBinding;
 import com.thimble.customer.db.DBClient;
 import com.thimble.customer.db.model.Customer;
-import com.thimble.customer.db.model.Image;
+import com.thimble.customer.model.CustomerItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +26,7 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
     private FragmentUserBinding binding;
 
     private CustomerAdapter adapter;
-    private List<Customer> customers;
+    private List<CustomerItem> customers;
     private boolean isMultiSelect = false;
     private int selectedCount = 0;
 
@@ -43,20 +40,6 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false);
 
-//        customers = new ArrayList<>();
-//        customers.add(new Customer("Satyabrta Pasari"));
-//        customers.add(new Customer("Debaprasad kundu"));
-//        customers.add(new Customer("Subrata Pasari"));
-//        customers.add(new Customer("Puja Nandi"));
-//        customers.add(new Customer("Priti Nandi"));
-//        customers.add(new Customer("Priya Nandi"));
-//        customers.add(new Customer("Hasi Nayak"));
-//        customers.add(new Customer("Shovan Nayak"));
-//        customers.add(new Customer("Hello Abc"));
-//        customers.add(new Customer("Ding dong"));
-//        customers.add(new Customer("Ping pong"));
-
-
         setUI(customers = new ArrayList<>());
 
         return binding.getRoot();
@@ -69,7 +52,7 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
         fetchCustomerListFromDB();
     }
 
-    private void setUI(List<Customer> customers){
+    private void setUI(List<CustomerItem> customers){
         if(adapter == null){
             adapter = new CustomerAdapter(getActivity(),this,customers);
             binding.rvUser.setAdapter(adapter);
@@ -93,6 +76,11 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
     public void doFilter(CharSequence charSequence){
         adapter.getFilter().filter(charSequence);
     }
+
+    public void deleteCustomer(){
+        new DeleteCustomerTask().execute();
+    }
+
 
 
     @Override
@@ -132,7 +120,7 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
 
     public void doCancelMultiSelect(){
 //        if (!isMultiSelect) return;
-        for (Customer customer : customers){
+        for (CustomerItem customer : customers){
             customer.setSelected(false);
         }
         adapter.notifyDataSetChanged();
@@ -144,11 +132,10 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
 
 
 
-    class FetchCustomerTask extends AsyncTask<Void, Void, List<Customer>> {
-
+    class FetchCustomerTask extends AsyncTask<Void, Void, List<CustomerItem>> {
         @Override
-        protected List<Customer> doInBackground(Void... voids) {
-            List<Customer> customers = DBClient
+        protected List<CustomerItem> doInBackground(Void... voids) {
+            List<CustomerItem> customers  = DBClient
                     .getInstance(getActivity())
                     .getAppDB()
                     .customerDao()
@@ -158,11 +145,31 @@ public class UserFragment extends Fragment implements CustomerAdapter.OnItemClic
         }
 
         @Override
-        protected void onPostExecute(List<Customer> customers) {
+        protected void onPostExecute(List<CustomerItem> customers) {
             super.onPostExecute(customers);
             UserFragment.this.customers.clear();
             UserFragment.this.customers.addAll(customers);
             setUI(UserFragment.this.customers);
+        }
+    }
+
+    class DeleteCustomerTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            for(CustomerItem customer : customers){
+                if(customer.isSelected()){
+                    DBClient.getInstance(getActivity())
+                            .getAppDB()
+                            .customerDao()
+                            .deleteCustomers(customer.getId());
+                }
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void v) {
+            new FetchCustomerTask().execute();
         }
     }
 

@@ -41,7 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         switch (view.getId()){
             case R.id.tvSignIn:
                 if(validate()){
-                    login();
+//                    login();
+                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }
                 break;
             case R.id.tvForgotPWD:

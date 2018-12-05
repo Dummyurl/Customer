@@ -4,9 +4,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
@@ -15,13 +17,18 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
  */
 
 
-@Entity(foreignKeys = @ForeignKey(entity = Customer.class, parentColumns = "id",
+@Entity(tableName = "Image", indices = {@Index(value = {"customerId"}, unique = true)},
+        foreignKeys = @ForeignKey(entity = Customer.class, parentColumns = "id",
         childColumns = "customerId", onDelete = CASCADE,onUpdate = CASCADE))
 
 public class Image {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     private int id;
+
+    @NonNull
+    @ColumnInfo(name = "customerId")
     private String customerId;
     private String imgType;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)

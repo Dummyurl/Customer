@@ -17,6 +17,7 @@ import com.thimble.customer.activity.AddCustomerActivity;
 import com.thimble.customer.activity.MainActivity;
 import com.thimble.customer.databinding.ItemCustomersBinding;
 import com.thimble.customer.db.model.Customer;
+import com.thimble.customer.model.CustomerItem;
 
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import static com.thimble.customer.util.IntentExtras.CUSTOMER_ID;
 
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRowHolder> implements Filterable {
 
-    private List<Customer> customerList,mFilteredList;
+    private List<CustomerItem> customerList,mFilteredList;
     private Context mContext;
     private OnItemClickListner listner;
     private boolean isMultiSelect = false;
@@ -43,7 +44,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
     }
 
 
-    public CustomerAdapter(Context mContext, OnItemClickListner listner, List<Customer> customerList) {
+    public CustomerAdapter(Context mContext, OnItemClickListner listner, List<CustomerItem> customerList) {
         this.mContext = mContext;
         this.customerList = customerList;
         this.mFilteredList = customerList;
@@ -136,8 +137,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
                 if (charString.isEmpty()) {
                     mFilteredList = customerList;
                 } else {
-                    ArrayList<Customer> filteredList = new ArrayList<>();
-                    for (Customer customer : customerList) {
+                    ArrayList<CustomerItem> filteredList = new ArrayList<>();
+                    for (CustomerItem customer : customerList) {
                         if (customer.getCustomerName().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(customer);
                         }
@@ -151,7 +152,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
             }
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mFilteredList = (ArrayList<Customer>) filterResults.values;
+                mFilteredList = (ArrayList<CustomerItem>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

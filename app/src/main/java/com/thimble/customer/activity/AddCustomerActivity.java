@@ -481,7 +481,6 @@ public class AddCustomerActivity extends AppCompatActivity implements
 
         customer.setId(String.valueOf(System.currentTimeMillis()));
         customer.setCustomerName(binding.etCustName.getText().toString().trim());
-        customer.setId(binding.etCustName.getText().toString().trim());
         customer.setPhNo(binding.etPh.getText().toString().trim());
         customer.setEmailId(binding.etEmail.getText().toString().trim());
         customer.setAddress(binding.etCustAddress.getText().toString().trim());

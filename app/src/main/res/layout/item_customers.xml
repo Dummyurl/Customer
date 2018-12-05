@@ -51,7 +51,7 @@
         android:layout_toRightOf="@+id/tvCustId"
         android:layout_marginLeft="@dimen/dp_10"
         android:src="@drawable/ic_check_circle"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/imvArrow"

@@ -14,12 +14,14 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Url;
 
+import static com.thimble.customer.rest.ApiHelper.ACCESS_TOKEN;
 
 
 public interface ApiInterface {
@@ -28,6 +30,10 @@ public interface ApiInterface {
 
     @POST(ApiHelper.LOGIN)
     Call<ResponseBody> login(@Body Map<String, Object> params);
+
+
+    @POST(ApiHelper.CUST_DETAILS)
+    Call<ResponseBody> details(@Header("Authorization") String header,@Body Map<String, Object> params);
 
 
     @GET
