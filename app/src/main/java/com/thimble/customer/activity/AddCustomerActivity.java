@@ -18,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -139,24 +140,28 @@ public class AddCustomerActivity extends AppCompatActivity implements
 
 
     private void setUI(Customer customer,List<Image> outsideList,List<Image> insideList,List<Image> sectionList){
-        binding.etCustName.setText(customer.getCustomerName());
-        binding.etPh.setText(customer.getPhNo());
-        binding.etEmail.setText(customer.getEmailId());
-        binding.etCustAddress.setText(customer.getAddress());
-        binding.etWeb.setText(customer.getWebLink());
+        if(customer != null) {
+            binding.etCustName.setText(customer.getCustomerName());
+            binding.etPh.setText(customer.getPhNo());
+            binding.etEmail.setText(customer.getEmailId());
+            binding.etCustAddress.setText(customer.getAddress());
+            binding.etWeb.setText(customer.getWebLink());
 
-        binding.etStoreAddress.setText(customer.getStoreAddress());
-        binding.etStoreLat.setText(customer.getStoreLat());
-        binding.etStoreLng.setText(customer.getStoreLng());
+            binding.etStoreAddress.setText(customer.getStoreAddress());
+            binding.etStoreLat.setText(customer.getStoreLat());
+            binding.etStoreLng.setText(customer.getStoreLng());
 
-        binding.etRcvAddress.setText(customer.getRcvAddress());
-        binding.etRcvLat.setText(customer.getRcvLat());
-        binding.etRcvLng.setText(customer.getRcvLng());
+            binding.etRcvAddress.setText(customer.getRcvAddress());
+            binding.etRcvLat.setText(customer.getRcvLat());
+            binding.etRcvLng.setText(customer.getRcvLng());
 
-        dateTimes = customer.getDateTime() != null ? customer.getDateTime() : prepareDateTime();
-        binding.rdbSunday.setChecked(true);
+            dateTimes = customer.getDateTime() != null ? customer.getDateTime() : prepareDateTime();
+            binding.rdbSunday.setChecked(true);
 
-        setImageLists(outsideList,insideList,sectionList);
+            setImageLists(outsideList,insideList,sectionList);
+        }else {
+            finish();
+        }
     }
 
     private void setImageLists(List<Image> outsideList,List<Image> insideList,List<Image> sectionList){
@@ -191,8 +196,9 @@ public class AddCustomerActivity extends AppCompatActivity implements
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tvSave:
-                new SaveTask().execute();
-//                startActivity(new Intent(this,LocationActivity.class));
+                if(!TextUtils.isEmpty(binding.etCustName.getText().toString().trim())){
+                    new SaveTask().execute();
+                }
                 break;
             case R.id.tvCancel:
                 onBackPressed();
@@ -477,6 +483,11 @@ public class AddCustomerActivity extends AppCompatActivity implements
 
 
     private Customer collectCustomer(){
+
+        if(TextUtils.isEmpty(binding.etCustName.getText().toString().trim())){
+            return null;
+        }
+
         Customer customer = new Customer();
 
         customer.setId(String.valueOf(System.currentTimeMillis()));
@@ -504,43 +515,32 @@ public class AddCustomerActivity extends AppCompatActivity implements
         @Override
         protected Void doInBackground(Void... voids) {
 
-//            long timeMillis = System.currentTimeMillis();
-
             Customer customer = collectCustomer();
-//            customer.setCustomerName(binding.etCustName.getText().toString().trim());
-//            customer.setId(String.valueOf(timeMillis));
-//            customer.setPhNo(binding.etPh.getText().toString().trim());
-//            customer.setEmailId(binding.etEmail.getText().toString().trim());
-//            customer.setAddress(binding.etCustAddress.getText().toString().trim());
-//            customer.setWebLink(binding.etWeb.getText().toString().trim());
-//
-//            customer.setDateTime(dateTimes);
+            if(customer != null){
+                DBClient.getInstance(getApplicationContext()).getAppDB()
+                        .customerDao().insert(customer);
 
-            DBClient.getInstance(getApplicationContext()).getAppDB()
-                    .customerDao().insert(customer);
+                for (Image image : outsideList){
+                    image.setCustomerId(customer.getId());
+                }
 
+                for (Image image : insideList){
+                    image.setCustomerId(customer.getId());
+                }
 
-            for (Image image : outsideList){
-                image.setCustomerId(customer.getId());
+                for (Image image : sectionList){
+                    image.setCustomerId(customer.getId());
+                }
+
+                DBClient.getInstance(getApplicationContext()).getAppDB()
+                        .imageDao().insertAll(outsideList);
+
+                DBClient.getInstance(getApplicationContext()).getAppDB()
+                        .imageDao().insertAll(insideList);
+
+                DBClient.getInstance(getApplicationContext()).getAppDB()
+                        .imageDao().insertAll(sectionList);
             }
-
-            for (Image image : insideList){
-                image.setCustomerId(customer.getId());
-            }
-
-            for (Image image : sectionList){
-                image.setCustomerId(customer.getId());
-            }
-
-            DBClient.getInstance(getApplicationContext()).getAppDB()
-                    .imageDao().insertAll(outsideList);
-
-            DBClient.getInstance(getApplicationContext()).getAppDB()
-                    .imageDao().insertAll(insideList);
-
-            DBClient.getInstance(getApplicationContext()).getAppDB()
-                    .imageDao().insertAll(sectionList);
-
             return null;
         }
 
@@ -549,10 +549,10 @@ public class AddCustomerActivity extends AppCompatActivity implements
             super.onPostExecute(aVoid);
 //            finish();
 //            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
-
-
 //            new GetTasks().execute();
+
+            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 
@@ -610,7 +610,6 @@ public class AddCustomerActivity extends AppCompatActivity implements
 
             return null;
         }
-
         @Override
         protected void onPostExecute(Void v) {
             System.out.println("####################### onPostExecute #######################");

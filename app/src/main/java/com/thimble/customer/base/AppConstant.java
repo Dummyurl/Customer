@@ -17,7 +17,7 @@ public class AppConstant {
     public static final int PAGINATION_LIMIT = 10;
 
     // PREFERENCE KEYS
-    public static final String PREFS_NAME="AppLystant";
+    public static final String PREFS_NAME="AppCustomerAdd";
     public static final String ACCESS_TOKEN="access-token";
     public static final String IS_LOGIN="loggedIn";
     public static final String USER_TYPE="loggedin_user_type";

@@ -5,10 +5,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.databinding.DataBindingUtil;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,16 +25,13 @@ import android.widget.Toast;
 
 import com.thimble.customer.R;
 import com.thimble.customer.adapter.ViewPagerAdapter;
-import com.thimble.customer.db.DBClient;
-import com.thimble.customer.db.model.Customer;
-import com.thimble.customer.db.model.DateTime;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.thimble.customer.databinding.ActivityMainBinding;
-import com.thimble.customer.fragment.UserFragment;
+import com.thimble.customer.fragment.CustomerFragLocal;
+import com.thimble.customer.fragment.CustomerFragServer;
 import com.thimble.customer.rest.ApiClient;
 import com.thimble.customer.rest.ApiHelper;
 import com.thimble.customer.rest.ApiInterface;
@@ -79,9 +76,15 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                int currentItem = binding.viewpager.getCurrentItem();
-                UserFragment userFrag = (UserFragment)adapter.getItem(currentItem);
-                userFrag.doFilter(charSequence);
+                Fragment frag = adapter.getItem(binding.viewpager.getCurrentItem());
+                if(frag instanceof CustomerFragLocal){
+                    CustomerFragLocal fragLocal = (CustomerFragLocal)frag;
+                    fragLocal.doFilter(charSequence);
+                }
+                if(frag instanceof CustomerFragServer){
+                    CustomerFragServer fragServer = (CustomerFragServer)frag;
+                    fragServer.doFilter(charSequence);
+                }
             }
             @Override
             public void afterTextChanged(Editable editable) { }
@@ -90,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
 //        new SaveTask().execute();
 
-        details();
+//        details();
     }
 
     @Override
@@ -129,8 +132,6 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     }
 
 
-
-
     private void setPopup(){
         PopupMenu popup = new PopupMenu(MainActivity.this, binding.imbSelectAll);
         popup.getMenuInflater().inflate(R.menu.menu_main, popup.getMenu());
@@ -145,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new UserFragment(), "Server");
-        adapter.addFrag(new UserFragment(), "Local");
+        adapter.addFrag(new CustomerFragServer(), "Server");
+        adapter.addFrag(new CustomerFragLocal(), "Local");
         viewPager.setAdapter(adapter);
     }
 
@@ -239,13 +240,27 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 toggleSearch();
                 break;
             case R.id.imbDelete:
-                UserFragment user = (UserFragment)adapter.getItem(binding.viewpager.getCurrentItem());
-                user.deleteCustomer();
+                Fragment frag = adapter.getItem(binding.viewpager.getCurrentItem());
+                if(frag instanceof CustomerFragLocal){
+                    CustomerFragLocal fragLocal = (CustomerFragLocal)frag;
+                    fragLocal.deleteCustomer();
+                }
+                if(frag instanceof CustomerFragServer){
+                    CustomerFragServer fragServer = (CustomerFragServer)frag;
+//                    fragServer.deleteCustomer();
+                }
                 hideMultiSelectMode();
                 break;
             case R.id.imbCancelSelection:
-                UserFragment userFrag = (UserFragment)adapter.getItem(binding.viewpager.getCurrentItem());
-                userFrag.doCancelMultiSelect();
+                Fragment fragment = adapter.getItem(binding.viewpager.getCurrentItem());
+                if(fragment instanceof CustomerFragLocal){
+                    CustomerFragLocal fragLocal = (CustomerFragLocal)fragment;
+                    fragLocal.doCancelMultiSelect();
+                }
+                if(fragment instanceof CustomerFragServer){
+                    CustomerFragServer fragServer = (CustomerFragServer)fragment;
+                    fragServer.doCancelMultiSelect();
+                }
                 hideMultiSelectMode();
                 break;
 
@@ -260,8 +275,15 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     @Override
     public void onTabUnselected(TabLayout.Tab tab) {
         if (!isMultiSelect) return;
-        UserFragment userFrag = (UserFragment)adapter.getItem(binding.viewpager.getCurrentItem());
-        userFrag.doCancelMultiSelect();
+        Fragment fragment = adapter.getItem(tab.getPosition());
+        if(fragment instanceof CustomerFragLocal){
+            CustomerFragLocal fragLocal = (CustomerFragLocal)fragment;
+            fragLocal.doCancelMultiSelect();
+        }
+        if(fragment instanceof CustomerFragServer){
+            CustomerFragServer fragServer = (CustomerFragServer)fragment;
+            fragServer.doCancelMultiSelect();
+        }
         hideMultiSelectMode();
         isMultiSelect = false;
     }
@@ -294,67 +316,5 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-
-
-    private void details() {
-        CustomLoder.showCustomProgressBar(this);
-
-        Map<String, Object> params = new HashMap<>();
-        params.put(ApiHelper.BROKER_ID, "015937");
-//        params.put(ApiHelper.SALESMAN_ID, "015937");
-        params.put(ApiHelper.COMPANY_ID, "2");
-
-        String header = "jiNaduK-WxFTmRLc5QV-yfoWx8QwNpJLVVT1-Q39nNKZf4SMAquTZKum5yNseN9TLpyB07G0utbIpC3l8pIoF0C4IOKWlabMD-XldZAUn5knhhsDZa4boHaA-8isSQk1BhXae9pEuaGhfrde2ANVQeikEJWAbK2TSVJGmqYgnTuFMSk7_5HGUkbaV5o1SLAe70VJrSKWZivo-bCcEYQUM6oPkfk8opR2M6I7BkvA_6kJJOuTFpPhi40lsNhhGktWvWs9xArqFDb4L3dCB3xJV-Dqn3QNgBCgbJMKWqGBSbyiw1T5k01B7JWn87nsuIKvKkGPCTaUxk7XdnLA2NxluyIaTOfNZTkC0m5PHgjdwWoHSlAYqFaTzYH6XyHU0nFSx5YqNcJ1VzXhJfQMwywy7jd_qiZd5-Qi3I2DlkUs5BxbjAlnCk99vv95Ezvb4Cpa8AvpX_d_KClihQFlhnodWp1qSRxbmQ2ZRDQncTMICHHoOo-Vp1xMOR5E8-cHaHgjoAxPJlOPV9IObqgBaM5txdhagfVbLx0QzoqlwszITL2z0qWIy_WwgbHnPX2ofsKZLRjfg";
-
-        ApiClient.getClient(this).create(ApiInterface.class).
-                details(header,params).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                System.out.println("response:"+response);
-                CustomLoder.dismisCustomProgressBar();
-                try {
-                    String responseBody=response.body().string();
-                    System.out.println("responseBody:"+responseBody);
-
-//                    if(response.code() == 200){
-//                        LoginResponse login = new Gson().fromJson(responseBody,LoginResponse.class);
-//                        if(login.getPayload().get(0).getAuthorization().toLowerCase().equals("success")){
-//
-//                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-//                            finish();
-//
-//                        }
-//                    }
-
-//                    switch (login.getStatus()){
-//                        case STATUS_SUCCESS:
-//
-//                            AppClass.getInstance().setUserData(login.getData());
-//
-//                            startActivity(new Intent(LystantLoginActivity.this,MainActivity.class)
-//                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
-//                                            Intent.FLAG_ACTIVITY_CLEAR_TOP |
-//                                            Intent.FLAG_ACTIVITY_NEW_TASK));
-//
-//                            finish();
-//
-//                            break;
-//                        case STATUS_MISSING:
-//                        case STATUS_ERROR:
-//                            Toast.makeText(LystantLoginActivity.this, login.getMsg(), Toast.LENGTH_SHORT).show();
-//                            break;
-//                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                t.printStackTrace();
-                CustomLoder.dismisCustomProgressBar();
-            }
-        });
     }
 }

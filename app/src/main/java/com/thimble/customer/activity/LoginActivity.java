@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.thimble.customer.R;
+import com.thimble.customer.base.AppClass;
 import com.thimble.customer.databinding.ActivityLoginBinding;
 import com.thimble.customer.model.LoginResponse;
 import com.thimble.customer.rest.ApiClient;
@@ -41,8 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         switch (view.getId()){
             case R.id.tvSignIn:
                 if(validate()){
-//                    login();
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                    login();
+//                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }
                 break;
             case R.id.tvForgotPWD:
@@ -87,31 +88,15 @@ public class LoginActivity extends AppCompatActivity {
                     if(response.code() == 200){
                         LoginResponse login = new Gson().fromJson(responseBody,LoginResponse.class);
                         if(login.getPayload().get(0).getAuthorization().toLowerCase().equals("success")){
+
+                            AppClass.getInstance().setUserData(login.getPayload().get(0));
                             
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             finish();
-
                         }
-                    }
+                    } else {
 
-//                    switch (login.getStatus()){
-//                        case STATUS_SUCCESS:
-//
-//                            AppClass.getInstance().setUserData(login.getData());
-//
-//                            startActivity(new Intent(LystantLoginActivity.this,MainActivity.class)
-//                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
-//                                            Intent.FLAG_ACTIVITY_CLEAR_TOP |
-//                                            Intent.FLAG_ACTIVITY_NEW_TASK));
-//
-//                            finish();
-//
-//                            break;
-//                        case STATUS_MISSING:
-//                        case STATUS_ERROR:
-//                            Toast.makeText(LystantLoginActivity.this, login.getMsg(), Toast.LENGTH_SHORT).show();
-//                            break;
-//                    }
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

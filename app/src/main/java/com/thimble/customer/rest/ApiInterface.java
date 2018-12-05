@@ -15,6 +15,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -31,9 +32,9 @@ public interface ApiInterface {
     @POST(ApiHelper.LOGIN)
     Call<ResponseBody> login(@Body Map<String, Object> params);
 
-
+    @Headers("Content-Type: application/json")
     @POST(ApiHelper.CUST_DETAILS)
-    Call<ResponseBody> details(@Header("Authorization") String header,@Body Map<String, Object> params);
+    Call<ResponseBody> loadCustomers(/*@Header("Content-Type") String content, */@Header("Authorization") String auth,@Body Map<String, Object> params);
 
 
     @GET
