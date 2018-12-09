@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAccent"
+            app:contentInsetStartWithNavigation="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:titleTextAppearance="@style/ToolbarTextAppearance"
+            app:title="@string/customer_profile_page_title" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nsv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginBottom="@dimen/dp_60"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_30"
+                android:paddingTop="@dimen/dp_30"
+                android:background="@color/page_bg_color">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_0"
+                    android:paddingBottom="@dimen/dp_0"
+                    android:paddingLeft="@dimen/dp_30"
+                    android:paddingRight="@dimen/dp_30">
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:drawableLeft="@drawable/ic_user"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:hint="@string/cust_name_hint"
+                        android:inputType="textCapWords"
+                        android:textSize="@dimen/sp_14"/>
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvId"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:drawableLeft="@drawable/ic_user"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:hint="@string/cust_id_hint"
+                        android:textSize="@dimen/sp_14"/>
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginBottom="@dimen/dp_8"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:gravity="center_vertical"
+                        android:hint="@string/phone_hint"
+                        android:textSize="@dimen/sp_14" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginBottom="@dimen/dp_8"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/email_hint"
+                        android:textSize="@dimen/sp_14" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/dp_10">
+
+
+                        <com.thimble.customer.view.TypedfaceTextView
+                            android:id="@+id/tvCity"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="@dimen/dp_44"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dp_5"
+                            android:drawableLeft="@drawable/ic_city"
+                            android:drawablePadding="@dimen/dp_10"
+                            android:background="@drawable/edt_round_bg"
+                            android:gravity="center_vertical"
+                            android:hint="@string/city_hint"
+                            android:textSize="@dimen/sp_14" />
+
+                        <com.thimble.customer.view.TypedfaceTextView
+                            android:id="@+id/tvState"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="@dimen/dp_44"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/dp_1"
+                            android:layout_marginRight="@dimen/dp_1"
+                            android:padding="@dimen/dp_5"
+                            android:drawableLeft="@drawable/ic_map_marker"
+                            android:drawablePadding="@dimen/dp_10"
+                            android:background="@drawable/edt_round_bg"
+                            android:gravity="center_vertical"
+                            android:hint="@string/state_hint"
+                            android:textSize="@dimen/sp_14" />
+
+                        <com.thimble.customer.view.TypedfaceTextView
+                            android:id="@+id/tvZip"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="@dimen/dp_44"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dp_5"
+                            android:drawableLeft="@drawable/ic_pin"
+                            android:drawablePadding="@dimen/dp_10"
+                            android:background="@drawable/edt_round_bg"
+                            android:gravity="center_vertical"
+                            android:hint="@string/zip_hint"
+                            android:textSize="@dimen/sp_14" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dp_80"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_5"
+                        android:background="@drawable/edt_round_bg"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_map_marker"/>
+
+                        <com.thimble.customer.view.TypedfaceTextView
+                            android:id="@+id/etCustAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:background="@null"
+                            android:gravity="start"
+                            android:hint="@string/address_hint"
+                            android:textSize="@dimen/sp_14" />
+
+                    </LinearLayout>
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvWebsite"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginBottom="@dimen/dp_0"
+                        android:paddingTop="@dimen/dp_5"
+                        android:paddingBottom="@dimen/dp_5"
+                        android:paddingLeft="7.5dp"
+                        android:paddingRight="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_web"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:hint="@string/web_hint"
+                        android:textSize="@dimen/sp_14" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginBottom="@dimen/dp_20"
+                        android:textSize="@dimen/sp_18"
+                        android:text="@string/store_entrance"/>
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvStoreAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbStoreAddress"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:inputType="textCapSentences"
+                        android:hint="@string/store_entrance_hint"
+                        android:textSize="@dimen/sp_16" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvStoreLat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbStoreLat"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:inputType="numberDecimal"
+                        android:hint="@string/lattitude_hint"
+                        android:textSize="@dimen/sp_16" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvStoreLng"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbStoreLng"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:inputType="numberDecimal"
+                        android:hint="@string/longitude_hint"
+                        android:textSize="@dimen/sp_16" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginBottom="@dimen/dp_20"
+                        android:textSize="@dimen/sp_18"
+                        android:text="@string/receiving_entrance"/>
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvRcvAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbRcvAddress"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:inputType="textCapSentences"
+                        android:hint="@string/receiving_entrance_hint"
+                        android:textSize="@dimen/sp_16" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvRcvLat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbRcvLat"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:inputType="numberDecimal"
+                        android:hint="@string/lattitude_hint"
+                        android:textSize="@dimen/sp_16" />
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvRcvLng"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_toLeftOf="@+id/imbRcvLng"
+                        android:padding="@dimen/dp_5"
+                        android:drawableLeft="@drawable/ic_map_marker"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:inputType="numberDecimal"
+                        android:hint="@string/longitude_hint"
+                        android:textSize="@dimen/sp_16" />
+
+                </LinearLayout>
+
+                <com.thimble.customer.view.TypedfaceTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:textSize="@dimen/sp_18"
+                    android:text="@string/entry_hours"/>
+
+                <RadioGroup
+                    android:id="@+id/rgTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rdbSunday"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:background="@drawable/rdb_week_day"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@android:color/white"
+                        android:text="SUN"/>
+
+                    <RadioButton
+                        android:id="@+id/rdbMonday"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_marginLeft="@dimen/dp_0.5"
+                        android:background="@drawable/rdb_week_day"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@android:color/white"
+                        android:text="MON"/>
+
+                    <RadioButton
+                        android:id="@+id/rdbTuesday"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_marginLeft="@dimen/dp_0.5"
+                        android:background="@drawable/rdb_week_day"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@android:color/white"
+                        android:text="TUE"/>
+
+                    <RadioButton
+                        android:id="@+id/rdbWednesday"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_marginLeft="@dimen/dp_0.5"
+                        android:background="@drawable/rdb_week_day"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@android:color/white"
+                        android:text="WED"/>
+
+                    <RadioButton
+                        android:id="@+id/rdbThursday"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_marginLeft="@dimen/dp_0.5"
+                        android:background="@drawable/rdb_week_day"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@android:color/white"
+                        android:text="THU"/>
+
+                    <RadioButton
+                        android:id="@+id/rdbFriday"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_marginLeft="@dimen/dp_0.5"
+                        android:background="@drawable/rdb_week_day"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@android:color/white"
+                        android:text="FRI"/>
+
+                    <RadioButton
+                        android:id="@+id/rdbSaturday"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/dp_0.5"
+                        android:background="@drawable/rdb_week_day"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@android:color/white"
+                        android:text="SAT"/>
+
+                </RadioGroup>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal"
+                    android:background="@color/radio_btn_active_color">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical">
+
+                        <com.thimble.customer.view.TypedfaceTextView
+                            android:id="@+id/tvFrom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/dp_5"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/white"
+                            android:text="@string/time_from"
+                            android:tag="@string/time_from"/>
+
+                        <com.thimble.customer.view.TypedfaceTextView
+                            android:id="@+id/tvTimeFrom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:onClick="onClick"
+                            android:gravity="center_vertical"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/sp_22"
+                            android:text="-- : --" />
+
+                        <com.thimble.customer.view.TypedfaceTextView
+                            android:id="@+id/tvTo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/dp_5"
+                            android:layout_marginRight="@dimen/dp_5"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/white"
+                            android:text="@string/time_to"
+                            android:tag="@string/time_to"/>
+
+                        <com.thimble.customer.view.TypedfaceTextView
+                            android:id="@+id/tvTimeTo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:onClick="onClick"
+                            android:gravity="center_vertical"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/sp_22"
+                            android:text="-- : --" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <com.thimble.customer.view.TypedfaceTextView
+                    android:id="@+id/tvOutSide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:textSize="@dimen/sp_16"
+                    android:text="@string/upload_shop_outside_picture"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvNoOutsideImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_14"
+                        android:text="@string/no_outside_img" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvOutside"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:clipToPadding="false"
+                        tools:listitem="@layout/item_images"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+                </RelativeLayout>
+
+                <com.thimble.customer.view.TypedfaceTextView
+                    android:id="@+id/tvInside"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:textSize="@dimen/sp_16"
+                    android:text="@string/upload_shop_inside_picture"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvNoInsideImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_14"
+                        android:text="@string/no_outside_img" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvInside"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:clipToPadding="false"
+                        tools:listitem="@layout/item_images"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+                </RelativeLayout>
+
+                <com.thimble.customer.view.TypedfaceTextView
+                    android:id="@+id/tvSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:textSize="@dimen/sp_16"
+                    android:text="@string/upload_section_picture"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.thimble.customer.view.TypedfaceTextView
+                        android:id="@+id/tvNoSectionImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/sp_14"
+                        android:text="@string/no_section_img" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvSection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:clipToPadding="false"
+                        tools:listitem="@layout/item_images"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_gravity="bottom"
+            app:cardElevation="@dimen/dp_4"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@color/page_bg_color">
+
+                <TextView
+                    android:id="@+id/tvEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/dp_0.5"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:clickable="true"
+                    android:drawableTop="@drawable/ic_edit"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:onClick="onClick"
+                    android:paddingTop="@dimen/dp_10"
+                    android:text="@string/edit"
+                    android:textSize="@dimen/sp_12" />
+
+                <TextView
+                    android:id="@+id/tvDelete"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/dp_0.5"
+                    android:paddingTop="@dimen/dp_10"
+                    android:drawableTop="@drawable/ic_delete_red"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:background="@android:color/white"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:gravity="center"
+                    android:textSize="@dimen/sp_12"
+                    android:text="@string/delete"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>
+
+

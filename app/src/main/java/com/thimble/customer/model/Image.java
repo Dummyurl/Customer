@@ -1,7 +1,8 @@
 package com.thimble.customer.model;
 
-import android.net.Uri;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 
 /**
@@ -11,63 +12,75 @@ import android.net.Uri;
 
 public class Image {
 
-    private int id;
-    private int userId;
-    private String imgType;
-    private Uri imgUri;
-    private String imgUrl;
+    @SerializedName("CustomerID")
+    @Expose
+    private String customerID;
+    @SerializedName("CompanyID")
+    @Expose
+    private String companyID;
+    @SerializedName("SectionID")
+    @Expose
+    private String sectionID;
+    @SerializedName("SectionName")
+    @Expose
+    private String sectionName;
+    @SerializedName("SectionImagePath")
+    @Expose
+    private String sectionImagePath;
+    @SerializedName("SectionImageName")
+    @Expose
+    private String sectionImageName;
 
 
     public Image() {
     }
 
 
-    public Image(String imgType) {
-        this.imgType = imgType;
+    public String getCustomerID() {
+        return customerID;
     }
 
-    public Image(String imgType, Uri imgUri) {
-        this.imgType = imgType;
-        this.imgUri = imgUri;
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
     }
 
-    public int getId() {
-        return id;
+    public String getCompanyID() {
+        return companyID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCompanyID(String companyID) {
+        this.companyID = companyID;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getSectionID() {
+        return sectionID;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setSectionID(String sectionID) {
+        this.sectionID = sectionID;
     }
 
-    public String getImgType() {
-        return imgType;
+    public String getSectionName() {
+        return sectionName;
     }
 
-    public void setImgType(String imgType) {
-        this.imgType = imgType;
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
     }
 
-    public Uri getImgUri() {
-        return imgUri;
+    public String getSectionImagePath() {
+        return sectionImagePath;
     }
 
-    public void setImgUri(Uri imgUri) {
-        this.imgUri = imgUri;
+    public void setSectionImagePath(String sectionImagePath) {
+        this.sectionImagePath = sectionImagePath;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getSectionImageName() {
+        return sectionImageName;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setSectionImageName(String sectionImageName) {
+        this.sectionImageName = sectionImageName;
     }
 }

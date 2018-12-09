@@ -93,7 +93,7 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
     public void onClick(View view){
         switch (view.getId()){
             case R.id.imvOutSide:
-                if(outsideList.size()==3) return;
+                if(outsideList.size() == 3) return;
                 selectedImgType = AppConstant.OUTSIDE_PIC;
                 requestPermission();
                 break;
@@ -185,17 +185,17 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
 
         switch (imgType){
             case OUTSIDE_PIC:
-                outsideList.add(new Image(imgType,uri));
+//                outsideList.add(new Image(imgType,uri));
 //                outsideList.add(new Image(imgType,uri,getBytes(bitmap)));
                 outsideAdapter.notifyDataSetChanged();
                 break;
             case INSIDE_PIC:
-                insideList.add(new Image(imgType,uri));
+//                insideList.add(new Image(imgType,uri));
 //                insideList.add(new Image(imgType,uri,getBytes(bitmap)));
                 insideAdapter.notifyDataSetChanged();
                 break;
             case SECTION_PIC:
-                sectionList.add(new Image(imgType,uri));
+//                sectionList.add(new Image(imgType,uri));
 //                sectionList.add(new Image(imgType,uri,getBytes(bitmap)));
                 sectionAdapter.notifyDataSetChanged();
                 break;
@@ -245,8 +245,8 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
             long timeMillis = System.currentTimeMillis();
 
             Customer customer = new Customer();
-            customer.setCustomerName(binding.etCustName.getText().toString().trim());
-            customer.setId(String.valueOf(timeMillis));
+//            customer.setCustomerName(binding.etCustName.getText().toString().trim());
+//            customer.setId(String.valueOf(timeMillis));
 
             for (Image image : outsideList){
                 image.setCustomerId(String.valueOf(timeMillis));
@@ -265,17 +265,17 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
 //            customer.setLocAddress("setLocAddress");
 //            customer.setCustomerName("setAddress");
 
-//            DateTime dateTime = new DateTime();
+//            DateHours dateTime = new DateHours();
 //            dateTime.setDate("nbjv,mnxc,mvn");
 //
-//            customer.setDateTime(dateTime);
+//            customer.setDateHours(dateTime);
 
             //adding to database
             DBClient.getInstance(getApplicationContext()).getAppDB()
                     .customerDao().insert(customer);
 
             DBClient.getInstance(getApplicationContext()).getAppDB()
-                    .imageDao().insertAll(outsideList);
+                    .imageDao().insert(outsideList);
 
 //            DBClient.getInstance(getApplicationContext()).getAppDB()
 //                    .imageDao().insertAll(insideList);
@@ -308,16 +308,11 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
                     .customerDao()
                     .getAll();
 
-
             List<Image> imgList = DBClient
                     .getInstance(getApplicationContext())
                     .getAppDB()
                     .imageDao()
                     .getAll();
-
-            if(true){
-
-            }
 
             return taskList;
         }
@@ -325,7 +320,6 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
         @Override
         protected void onPostExecute(List<Customer> tasks) {
             super.onPostExecute(tasks);
-
             System.out.println("tasks:"+tasks.size());
         }
     }

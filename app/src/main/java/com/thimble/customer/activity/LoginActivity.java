@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private  ActivityLoginBinding binding;
+    private ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +91,43 @@ public class LoginActivity extends AppCompatActivity {
 
                             AppClass.getInstance().setUserData(login.getPayload().get(0));
                             
+                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            finish();
+                        }
+                    } else {
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                t.printStackTrace();
+                CustomLoder.dismisCustomProgressBar();
+            }
+        });
+    }
+
+    private void loadStates() {
+        CustomLoder.showCustomProgressBar(this);
+
+        ApiClient.getClient(this).create(ApiInterface.class)
+                .loadStates().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                System.out.println("response:"+response);
+                CustomLoder.dismisCustomProgressBar();
+                try {
+                    String responseBody=response.body().string();
+                    System.out.println("responseBody:"+responseBody);
+
+                    if(response.code() == 200){
+                        LoginResponse login = new Gson().fromJson(responseBody,LoginResponse.class);
+                        if(login.getPayload().get(0).getAuthorization().toLowerCase().equals("success")){
+
+                            AppClass.getInstance().setUserData(login.getPayload().get(0));
+
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             finish();
                         }

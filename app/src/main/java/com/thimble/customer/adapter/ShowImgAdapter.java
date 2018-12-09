@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.thimble.customer.R;
 import com.thimble.customer.databinding.ItemImagesBinding;
 import com.thimble.customer.db.model.Image;
+import com.thimble.customer.util.AppUtil;
 import com.thimble.customer.util.BitmapManager;
 import com.thimble.customer.util.CaptureImage;
 import com.thimble.customer.util.FileUtils;
@@ -62,12 +63,16 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
 
     @Override
     public void onBindViewHolder(@NonNull ItemRowHolder holder, int position) {
-//        holder.binding.setEdu(eduList.get(position));
-        if(imageList.get(position).getImgBitmap() != null){
-            holder.binding.imvItem.setImageBitmap(imageList.get(position).getImgBitmap());
-        }else {
+        if(imageList.get(position).getSynced() == 0){
+            if(imageList.get(position).getImgBitmap() != null){
+                holder.binding.imvItem.setImageBitmap(imageList.get(position).getImgBitmap());
+            }else {
 //            holder.binding.imvItem.setImageBitmap(null);
+            }
+        } else {
+            AppUtil.loadImage(holder.binding.imvItem,imageList.get(position).getImgUrl());
         }
+
 
 
         holder.binding.imvItem.setOnClickListener(view -> {

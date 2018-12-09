@@ -10,11 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thimble.customer.R;
 import com.thimble.customer.adapter.CustomerAdapter;
 import com.thimble.customer.base.AppClass;
+import com.thimble.customer.base.AppConstant;
 import com.thimble.customer.databinding.FragmentUserBinding;
 import com.thimble.customer.db.DBClient;
+import com.thimble.customer.db.model.Customer;
+import com.thimble.customer.db.model.Image;
 import com.thimble.customer.model.CustomerItem;
 import com.thimble.customer.model.ListResponse;
 import com.thimble.customer.rest.ApiClient;
@@ -22,6 +26,7 @@ import com.thimble.customer.rest.ApiHelper;
 import com.thimble.customer.rest.ApiInterface;
 import com.thimble.customer.view.CustomLoder;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +60,7 @@ public class CustomerFragServer extends Fragment implements CustomerAdapter.OnIt
 
         setUI(customers = new ArrayList<>());
 
-        loadCustomers();
+//        loadCustomers();
 
         return binding.getRoot();
     }
@@ -64,7 +69,7 @@ public class CustomerFragServer extends Fragment implements CustomerAdapter.OnIt
     public void onResume() {
         super.onResume();
 
-//        fetchCustomerListFromDB();
+        fetchCustomerListFromDB();
     }
 
     private void setUI(List<CustomerItem> customers){
@@ -152,7 +157,7 @@ public class CustomerFragServer extends Fragment implements CustomerAdapter.OnIt
                     .getInstance(getActivity())
                     .getAppDB()
                     .customerDao()
-                    .getAllCustomers();
+                    .getAllCustomers(1);
 
             return customers;
         }
@@ -160,9 +165,14 @@ public class CustomerFragServer extends Fragment implements CustomerAdapter.OnIt
         @Override
         protected void onPostExecute(List<CustomerItem> customers) {
             super.onPostExecute(customers);
-            CustomerFragServer.this.customers.clear();
-            CustomerFragServer.this.customers.addAll(customers);
-            setUI(CustomerFragServer.this.customers);
+            if(customers == null || customers.size() == 0){
+                loadCustomers();
+
+            } else {
+                CustomerFragServer.this.customers.clear();
+                CustomerFragServer.this.customers.addAll(customers);
+                setUI(CustomerFragServer.this.customers);
+            }
         }
     }
 
@@ -187,34 +197,85 @@ public class CustomerFragServer extends Fragment implements CustomerAdapter.OnIt
     }
 
 
+    class SaveCustomerTask extends AsyncTask<Void, Void, Void> {
+        private List<Customer> customers;
+        private List<Image> shopOutsideImg,shopInsideImg,sectionImg;
+
+        public SaveCustomerTask(List<Customer> customers) {
+            this.customers = customers;
+        }
+
+        public SaveCustomerTask(List<Customer> customers,  List<Image> shopOutsideImg,
+                                List<Image> shopInsideImg,  List<Image> sectionImg) {
+            this.customers = customers;
+            this.shopOutsideImg = shopOutsideImg;
+            this.shopInsideImg = shopInsideImg;
+            this.sectionImg = sectionImg;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            if(customers != null){
+                for (Customer customer : customers){
+                    customer.setSynced(1);
+                }
+
+                DBClient.getInstance(getActivity())
+                        .getAppDB()
+                        .customerDao()
+                        .insert(customers);
+
+                insertImages(shopOutsideImg,AppConstant.OUTSIDE_PIC);
+                insertImages(shopInsideImg,AppConstant.INSIDE_PIC);
+                insertImages(sectionImg,AppConstant.SECTION_PIC);
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void v) {
+            new FetchCustomerTask().execute();
+        }
+    }
+
+    private void insertImages(List<Image> images, String type){
+        if(images == null) return;
+
+        for (Image image : images){
+            image.setSynced(1);
+            image.setImgType(type);
+        }
+
+        DBClient.getInstance(getActivity())
+                .getAppDB()
+                .imageDao()
+                .insert(images);
+    }
+
+
     private void loadCustomers() {
         CustomLoder.showCustomProgressBar(getActivity());
 
         Map<String, Object> params = new HashMap<>();
-        params.put(ApiHelper.BROKER_ID, "015937");
-//        params.put(ApiHelper.SALESMAN_ID, "015937");
-        params.put(ApiHelper.COMPANY_ID, "2");
+        params.put(ApiHelper.SALESMAN_ID, "015937");
+        params.put(ApiHelper.SEARCH_TEXT, "");
 
-        String header = AppClass.getInstance().getUserData().getTokenType() + " " +
-                AppClass.getInstance().getUserData().getAccessToken();
-
-//        String header = "bearer 4TP4rvJ___LzHlIRsqbR1TuA7Ej3AaiU0J5K6EHCnYfQxsIYX0jAz8mXFmSoDkXodfa_gZVAEJu2FVXEihC-wF18C1qYNddcKNJDJiuSzcIC_YFqotYWXHl8Mwd3PXcJhLrsOOioyKAuihUr0et1U_QP0Ypgaqne00uTbU1K9ZGrQLKLsVP8z3aHtW6qUIyOwidsOY3c0rtdvy0GfNHy71GbN6XXcZX8fkcMwndubgkhYZVZJg_P2RS8p3I6W3p0KU-2Y1ifxn8WQdxljK_VEN8VvtVQjFiJgsEoW5Jvq3uvakYHDlLR-CfvMk1wLFqQqG9RJOOGKpVhdwcihg21QiT3wrLWcptBTjPsbRB2No8sH8IixnBo8FpNvAhSl_bTDf58atdOEcNxGOXPNuJvrh3aYmi2BXaQkuqSO10gskgMdweGgljpG5WjwXw2Jg6tBpblNMad62m9R4yDVg6b4KZMxLz9DRzqPr0fyo6cSxng9lT4OE-ra6MRpXjNTdFJq-jwuJQxb3DwGeB9gZcTO1R1_6HrcjhdjwOr4Wsi0KcW5D_-bYWTyIqQHfxWlg7szw66sg";
         ApiClient.getClient(getActivity()).create(ApiInterface.class).
-                loadCustomers(/*"application/json",*/header,params).enqueue(new Callback<ResponseBody>() {
+                loadCustomers(AppClass.getInstance().getAccessToken(),params)
+                .enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 System.out.println("response:"+response);
                 CustomLoder.dismisCustomProgressBar();
                 try {
-                    String responseBody=response.body().string();
+                    String responseBody = response.body().string();
                     System.out.println("responseBody:"+responseBody);
 
                     if(response.code() == 200){
-                        ListResponse result = new Gson().fromJson(responseBody,ListResponse.class);
+                        Gson gson = new Gson();
+                        ListResponse result = gson.fromJson(responseBody,ListResponse.class);
 
-                        CustomerFragServer.this.customers.clear();
-                        CustomerFragServer.this.customers.addAll(result.getPayload());
-                        setUI(CustomerFragServer.this.customers);
+                        new SaveCustomerTask(result.getCustomers(),result.getShopOutsideImg(),
+                                result.getShopInsideImg(),result.getSectionImg()).execute();
 
                     } else {
 

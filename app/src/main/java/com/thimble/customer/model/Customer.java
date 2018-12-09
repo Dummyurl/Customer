@@ -1,39 +1,18 @@
-package com.thimble.customer.db.model;
+package com.thimble.customer.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
-import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.thimble.customer.db.DateTimeTypeConverter;
+import com.thimble.customer.db.model.DateHours;
 
 import java.util.List;
 
-/**
- * Created by pasari on 28/11/18.
- */
-
-
-@Entity(tableName = "Customer", indices = {@Index(value = "id", unique = true)})
-@TypeConverters(DateTimeTypeConverter.class)
 public class Customer {
 
-    @PrimaryKey
-    @NonNull
-    @ColumnInfo(name = "id")
     @SerializedName("UserID")
     @Expose
     private String userID;
-
-//    private String userLocalId;
-//    private String userServerId;
-//
-
     @SerializedName("Name")
     @Expose
     private String name;
@@ -64,6 +43,9 @@ public class Customer {
     @SerializedName("SalesManID")
     @Expose
     private String salesManID;
+    @SerializedName("WHCompany")
+    @Expose
+    private String wHCompany;
     @SerializedName("Latitude")
     @Expose
     private String latitude;
@@ -93,30 +75,17 @@ public class Customer {
     private String receivingEntranceLongitude;
     private int synced;
 
-    private List<DateHours> dateHours;
+    private List<DateHours> dateTime;
 
     @Ignore
     private boolean isSelected;
 
-//    @Embedded
-//    private DateHours dateHours;
 
-
-    public Customer() {
-    }
-
-    @Ignore
-    public Customer(String name) {
-        this.name = name;
-    }
-
-
-    @NonNull
     public String getUserID() {
         return userID;
     }
 
-    public void setUserID(@NonNull String userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
@@ -200,6 +169,14 @@ public class Customer {
         this.salesManID = salesManID;
     }
 
+    public String getwHCompany() {
+        return wHCompany;
+    }
+
+    public void setwHCompany(String wHCompany) {
+        this.wHCompany = wHCompany;
+    }
+
     public String getLatitude() {
         return latitude;
     }
@@ -272,20 +249,12 @@ public class Customer {
         this.receivingEntranceLongitude = receivingEntranceLongitude;
     }
 
-    public int getSynced() {
-        return synced;
+    public List<DateHours> getDateTime() {
+        return dateTime;
     }
 
-    public void setSynced(int synced) {
-        this.synced = synced;
-    }
-
-    public List<DateHours> getDateHours() {
-        return dateHours;
-    }
-
-    public void setDateHours(List<DateHours> dateHours) {
-        this.dateHours = dateHours;
+    public void setDateTime(List<DateHours> dateTime) {
+        this.dateTime = dateTime;
     }
 
     public boolean isSelected() {

@@ -1,4 +1,4 @@
-package com.thimble.customer.db.model;
+package com.thimble.customer.model;
 
 import android.arch.persistence.room.Ignore;
 
@@ -6,18 +6,18 @@ import android.arch.persistence.room.Ignore;
  * Created by pasari on 29/11/18.
  */
 
-public class DateTime {
+public class DateHours {
 
     private String date;
     private String fromTime;
     private String toTime;
 
-    public DateTime() {
+    public DateHours() {
 
     }
 
     @Ignore
-    public DateTime(String date, String fromTime, String toTime) {
+    public DateHours(String date, String fromTime, String toTime) {
         this.date = date;
         this.fromTime = fromTime;
         this.toTime = toTime;

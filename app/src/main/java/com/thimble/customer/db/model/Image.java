@@ -10,6 +10,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 /**
@@ -17,7 +20,7 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
  */
 
 
-@Entity(tableName = "Image", indices = {@Index(value = {"customerId"}, unique = true)},
+@Entity(tableName = "Image", indices = {@Index(value = {"customerId"})},
         foreignKeys = @ForeignKey(entity = Customer.class, parentColumns = "id",
         childColumns = "customerId", onDelete = CASCADE,onUpdate = CASCADE))
 
@@ -27,8 +30,8 @@ public class Image {
     @ColumnInfo(name = "id")
     private int id;
 
-    @NonNull
-    @ColumnInfo(name = "customerId")
+    @SerializedName("CustomerID")
+    @Expose
     private String customerId;
     private String imgType;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
@@ -39,18 +42,23 @@ public class Image {
     private Bitmap imgBitmap;
 
     @Ignore
-    private Uri imgUri;
-    @Ignore
     private String imgUrl;
+
+    @SerializedName("CompanyID")
+    @Expose
+    @Ignore
+    private String companyID;
+    @SerializedName("UploadShopImagePath")
+    @Expose
+    private String imgPath;
+    @SerializedName("UploadShopImageName")
+    @Expose
+    private String imgName;
+
 
     public Image() {
     }
 
-    @Ignore
-    public Image(String imgType, Uri imgUri) {
-        this.imgType = imgType;
-        this.imgUri = imgUri;
-    }
 
     @Ignore
     public Image(String imgType, Bitmap imgBitmap) {
@@ -89,15 +97,6 @@ public class Image {
         this.imgType = imgType;
     }
 
-
-    public Uri getImgUri() {
-        return imgUri;
-    }
-
-    public void setImgUri(Uri imgUri) {
-        this.imgUri = imgUri;
-    }
-
     public String getImgUrl() {
         return imgUrl;
     }
@@ -128,5 +127,29 @@ public class Image {
 
     public void setSynced(int synced) {
         this.synced = synced;
+    }
+
+    public String getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(String companyID) {
+        this.companyID = companyID;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+    public String getImgName() {
+        return imgName;
+    }
+
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
     }
 }

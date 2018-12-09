@@ -2,64 +2,68 @@ package com.thimble.customer.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.thimble.customer.db.model.Customer;
+import com.thimble.customer.db.model.Image;
 
 import java.util.List;
 
 public class ListResponse {
 
-    @SerializedName("Domain")
+
+    @SerializedName("Table1")
     @Expose
-    private String domain;
-    @SerializedName("Event")
+    private List<com.thimble.customer.db.model.Customer> customers = null;
+    @SerializedName("SectionImg")
     @Expose
-    private String event;
-    @SerializedName("ClientData")
+    private List<Image> sectionImg = null;
+    @SerializedName("ShopOutsideImg")
     @Expose
-    private String clientData;
-    @SerializedName("Status")
+    private List<Image> shopOutsideImg = null;
+    @SerializedName("ShopInsideImg")
     @Expose
-    private String status;
-    @SerializedName("Payload")
+    private List<Image> shopInsideImg = null;
+    @SerializedName("DayHours")
     @Expose
-    private List<CustomerItem> payload = null;
+    private List<DateHours> dayHours = null;
 
-    public String getDomain() {
-        return domain;
+
+    public List<Customer> getCustomers() {
+        return customers;
     }
 
-    public void setDomain(String domain) {
-        this.domain = domain;
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 
-    public String getEvent() {
-        return event;
+    public List<Image> getSectionImg() {
+        return sectionImg;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setSectionImg(List<Image> sectionImg) {
+        this.sectionImg = sectionImg;
     }
 
-    public String getClientData() {
-        return clientData;
+    public List<Image> getShopOutsideImg() {
+        return shopOutsideImg;
     }
 
-    public void setClientData(String clientData) {
-        this.clientData = clientData;
+    public void setShopOutsideImg(List<Image> shopOutsideImg) {
+        this.shopOutsideImg = shopOutsideImg;
     }
 
-    public String getStatus() {
-        return status;
+    public List<Image> getShopInsideImg() {
+        return shopInsideImg;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setShopInsideImg(List<Image> shopInsideImg) {
+        this.shopInsideImg = shopInsideImg;
     }
 
-    public List<CustomerItem> getPayload() {
-        return payload;
+    public List<DateHours> getDayHours() {
+        return dayHours;
     }
 
-    public void setPayload(List<CustomerItem> payload) {
-        this.payload = payload;
+    public void setDayHours(List<DateHours> dayHours) {
+        this.dayHours = dayHours;
     }
 }

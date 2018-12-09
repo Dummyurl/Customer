@@ -28,7 +28,7 @@ public interface ImageDao {
     void insert(Image image);
 
     @Insert
-    void insertAll(List<Image> images);
+    void insert(List<Image> images);
 
 
     @Insert

@@ -7,60 +7,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class CustomerItem {
 
-//    private String id;
-//    private String customerName;
-
-    @SerializedName("USERID")
-    @Expose
     private String id;
-    @SerializedName("NAME")
-    @Expose
-    private String customerName;
-
-    @Ignore
-    @SerializedName("CONTACTNO")
-    @Expose
-    private String phNo;
-
-    @Ignore
-    @SerializedName("ADDRESS")
-    @Expose
-    private String address;
-
-    @Ignore
-    @SerializedName("STREET")
-    @Expose
-    private String street;
-
-    @Ignore
-    @SerializedName("CITY")
-    @Expose
-    private String city;
-
-    @Ignore
-    @SerializedName("STATE")
-    @Expose
-    private String state;
-
-    @Ignore
-    @SerializedName("ZIP")
-    @Expose
-    private String zip;
-
-    @Ignore
-    @SerializedName("COMPANYID")
-    @Expose
-    private String companyId;
-
-    @Ignore
-    @SerializedName("COMPANYNAME")
-    @Expose
-    private String companyName;
-
-
+    private String name;
+    private int synced;
 
     @Ignore
     private boolean isSelected;
+
 
     public String getId() {
         return id;
@@ -70,12 +23,20 @@ public class CustomerItem {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getName() {
+        return name;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSynced() {
+        return synced;
+    }
+
+    public void setSynced(int synced) {
+        this.synced = synced;
     }
 
     public boolean isSelected() {

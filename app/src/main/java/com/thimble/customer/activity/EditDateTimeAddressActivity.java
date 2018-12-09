@@ -96,10 +96,10 @@ public class EditDateTimeAddressActivity extends AppCompatActivity {
 //            customer.setLocAddress("setLocAddress");
 //            customer.setCustomerName("setAddress");
 //
-//            DateTime dateTime = new DateTime();
+//            DateHours dateTime = new DateHours();
 //            dateTime.setDate("nbjv,mnxc,mvn");
 //
-//            customer.setDateTime(dateTime);
+//            customer.setDateHours(dateTime);
 
             //adding to database
 //            DBClient.getInstance(getApplicationContext()).getAppDB()

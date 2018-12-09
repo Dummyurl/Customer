@@ -15,6 +15,7 @@ import android.widget.Filterable;
 import com.thimble.customer.R;
 import com.thimble.customer.activity.AddCustomerActivity;
 import com.thimble.customer.activity.MainActivity;
+import com.thimble.customer.activity.ShowCustomerActivity;
 import com.thimble.customer.databinding.ItemCustomersBinding;
 import com.thimble.customer.db.model.Customer;
 import com.thimble.customer.model.CustomerItem;
@@ -76,7 +77,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
 
     @Override
     public void onBindViewHolder(@NonNull ItemRowHolder holder, int position) {
-        holder.binding.tvCustName.setText(mFilteredList.get(position).getCustomerName());
+        holder.binding.tvCustName.setText(mFilteredList.get(position).getName());
         holder.binding.tvCustId.setText(mFilteredList.get(position).getId());
 
         if(mFilteredList.get(position).isSelected()){
@@ -112,8 +113,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
                notifyItemChanged(position);
                 ((MainActivity) mContext).onLongClick(isMultiSelect = (selectedCount != 0));
             }else {
-                mContext.startActivity(new Intent(mContext,AddCustomerActivity.class)
-                .putExtra(CUSTOMER_ID,customerList.get(position).getId()));
+                if(mFilteredList.get(position).getSynced() == 1){
+                    mContext.startActivity(new Intent(mContext,ShowCustomerActivity.class)
+                            .putExtra(CUSTOMER_ID,mFilteredList.get(position).getId()));
+                }else {
+                    mContext.startActivity(new Intent(mContext,AddCustomerActivity.class)
+                            .putExtra(CUSTOMER_ID,mFilteredList.get(position).getId()));
+                }
             }
 
 //            listner.onClick(position);
@@ -139,7 +145,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
                 } else {
                     ArrayList<CustomerItem> filteredList = new ArrayList<>();
                     for (CustomerItem customer : customerList) {
-                        if (customer.getCustomerName().toLowerCase().contains(charString.toLowerCase())) {
+                        if (customer.getId().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(customer);
                         }
                     }

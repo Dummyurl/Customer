@@ -84,49 +84,22 @@ public class CustomerFragLocal extends Fragment implements CustomerAdapter.OnIte
 
     @Override
     public void onClick(int position) {
-//        if(isMultiSelect){
-//            if(customers.get(position).isSelected()){
-//                customers.get(position).setSelected(false);
-//                selectedCount --;
-//            }else {
-//                customers.get(position).setSelected(true);
-//                selectedCount ++;
-//            }
-//            adapter.notifyItemChanged(position);
-//            ((MainActivity) getActivity()).onLongClick(isMultiSelect = (selectedCount != 0));
-//        }else {
-//            startActivity(new Intent(getActivity(),ShowImagesActivity.class));
-//        }
+
     }
 
     @Override
     public void onLongClick(int position) {
-//        if(isMultiSelect) return;
-//        customers.get(position).setSelected(true);
-//        adapter.notifyItemChanged(position);
 
-//        ((MainActivity) getActivity()).onLongClick(isMultiSelect = true);
-//        isMultiSelect = true;
-//        selectedCount ++;
-
-//        doOnLongClickTask(position);
     }
 
-    private void doOnLongClickTask(int position){
-//        adapter.notifyItemChanged(position);
-//        ((MainActivity) getActivity()).onLongClick();
-    }
 
     public void doCancelMultiSelect(){
-//        if (!isMultiSelect) return;
         for (CustomerItem customer : customers){
             customer.setSelected(false);
         }
         adapter.notifyDataSetChanged();
         adapter.setMultiSelect(isMultiSelect = false);
         adapter.setSelectedCount(selectedCount = 0);
-//        isMultiSelect = false;
-//        selectedCount = 0;
     }
 
 
@@ -138,7 +111,7 @@ public class CustomerFragLocal extends Fragment implements CustomerAdapter.OnIte
                     .getInstance(getActivity())
                     .getAppDB()
                     .customerDao()
-                    .getAllCustomers();
+                    .getAllCustomers(0);
 
             return customers;
         }

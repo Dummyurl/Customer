@@ -56,6 +56,11 @@ public class AppClass extends Application {
         setLogin(true);
     }
 
+    public String getAccessToken(){
+        return (userData.getTokenType() == null ? "" : userData.getTokenType()) + " " +
+                (userData.getAccessToken() == null ? "" : userData.getAccessToken());
+    }
+
     private void loadUserData(){
         if(getSharedPreferences(AppConstant.PREFS_NAME, Context.MODE_PRIVATE)
                 .getBoolean(AppConstant.IS_LOGIN,false)){

@@ -27,22 +27,25 @@ import static com.thimble.customer.rest.ApiHelper.ACCESS_TOKEN;
 
 public interface ApiInterface {
 
-
-
     @POST(ApiHelper.LOGIN)
     Call<ResponseBody> login(@Body Map<String, Object> params);
 
-    @Headers("Content-Type: application/json")
-    @POST(ApiHelper.CUST_DETAILS)
-    Call<ResponseBody> loadCustomers(/*@Header("Content-Type") String content, */@Header("Authorization") String auth,@Body Map<String, Object> params);
 
+    @Headers("Content-Type: application/json")
+    @POST(ApiHelper.CUST_LIST)
+    Call<ResponseBody> loadCustomers(@Header("Authorization") String auth,@Body Map<String, Object> params);
+
+
+    @Headers("Content-Type: application/json")
+    @POST(ApiHelper.SAVE_CUSTOMER)
+    Call<ResponseBody> saveCustomer(@Header("Authorization") String auth,@Body Map<String, Object> params);
+
+
+    @POST(ApiHelper.STATES)
+    Call<ResponseBody> loadStates();
 
     @GET
     Call<ResponseBody> getAddress(@Url String url);
-
-
-
-
 
 
     @Multipart

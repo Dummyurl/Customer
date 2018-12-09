@@ -22,14 +22,17 @@ public interface CustomerDao {
     @Query("SELECT * FROM Customer")
     List<Customer> getAll();
 
-    @Query("SELECT id,customerName FROM Customer")
-    List<CustomerItem> getAllCustomers();
+    @Query("SELECT id,name,synced FROM Customer WHERE synced =:synced")
+    List<CustomerItem> getAllCustomers(int synced);
 
     @Query("SELECT * FROM Customer WHERE id=:id Limit 1")
     Customer getCustomerDetails(String id);
 
     @Insert
     void insert(Customer customer);
+
+    @Insert
+    void insert(List<Customer> customers);
 
     @Update
      void update(Customer customer);
@@ -38,8 +41,8 @@ public interface CustomerDao {
      void deleteCustomer(Customer customer);
 
     @Delete
-    public void deleteCustomer(List<Customer> customers);
+     void deleteCustomer(List<Customer> customers);
 
     @Query("DELETE FROM Customer WHERE id = :id")
-    public void deleteCustomers(String id);
+     void deleteCustomers(String id);
 }

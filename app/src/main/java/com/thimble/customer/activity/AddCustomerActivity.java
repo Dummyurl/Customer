@@ -47,7 +47,7 @@ import com.thimble.customer.adapter.ShowImgAdapter;
 import com.thimble.customer.databinding.ActivityAddCustomerBinding;
 import com.thimble.customer.db.DBClient;
 import com.thimble.customer.db.model.Customer;
-import com.thimble.customer.db.model.DateTime;
+import com.thimble.customer.db.model.DateHours;
 import com.thimble.customer.db.model.Image;
 import com.thimble.customer.model.LocationResponse;
 import com.thimble.customer.rest.ApiClient;
@@ -88,7 +88,7 @@ public class AddCustomerActivity extends AppCompatActivity implements
     private List<Image> outsideList;
     private List<Image> insideList;
     private List<Image> sectionList;
-    private List<DateTime> dateTimes;
+    private List<DateHours> dateTimes;
 
     private ShowImgAdapter outsideAdapter;
     private ShowImgAdapter insideAdapter;
@@ -141,21 +141,21 @@ public class AddCustomerActivity extends AppCompatActivity implements
 
     private void setUI(Customer customer,List<Image> outsideList,List<Image> insideList,List<Image> sectionList){
         if(customer != null) {
-            binding.etCustName.setText(customer.getCustomerName());
-            binding.etPh.setText(customer.getPhNo());
-            binding.etEmail.setText(customer.getEmailId());
-            binding.etCustAddress.setText(customer.getAddress());
-            binding.etWeb.setText(customer.getWebLink());
+            binding.etCustName.setText(customer.getName());
+            binding.etPh.setText(customer.getContactNo());
+            binding.etEmail.setText(customer.getEmailID());
+            binding.etCustAddress.setText(customer.getLocation());
+            binding.etWeb.setText(customer.getWebsite());
 
-            binding.etStoreAddress.setText(customer.getStoreAddress());
-            binding.etStoreLat.setText(customer.getStoreLat());
-            binding.etStoreLng.setText(customer.getStoreLng());
+            binding.etStoreAddress.setText(customer.getStoreEntranceLocation());
+            binding.etStoreLat.setText(customer.getStoreEntranceLatitude());
+            binding.etStoreLng.setText(customer.getStoreEntranceLongitude());
 
-            binding.etRcvAddress.setText(customer.getRcvAddress());
-            binding.etRcvLat.setText(customer.getRcvLat());
-            binding.etRcvLng.setText(customer.getRcvLng());
+            binding.etRcvAddress.setText(customer.getReceivingEntranceLocation());
+            binding.etRcvLat.setText(customer.getReceivingEntranceLatitude());
+            binding.etRcvLng.setText(customer.getReceivingEntranceLongitude());
 
-            dateTimes = customer.getDateTime() != null ? customer.getDateTime() : prepareDateTime();
+            dateTimes = customer.getDateHours() != null ? customer.getDateHours() : prepareDateTime();
             binding.rdbSunday.setChecked(true);
 
             setImageLists(outsideList,insideList,sectionList);
@@ -178,16 +178,16 @@ public class AddCustomerActivity extends AppCompatActivity implements
                         this.sectionList = sectionList));
     }
 
-    private List<DateTime> prepareDateTime(){
-        List<DateTime> dateTimes;
-        dateTimes = new ArrayList<DateTime>(){{
-            add(new DateTime("SUN","",""));
-            add(new DateTime("MON","",""));
-            add(new DateTime("TUE","",""));
-            add(new DateTime("WED","",""));
-            add(new DateTime("THU","",""));
-            add(new DateTime("FRI","",""));
-            add(new DateTime("SAT","",""));
+    private List<DateHours> prepareDateTime(){
+        List<DateHours> dateTimes;
+        dateTimes = new ArrayList<DateHours>(){{
+            add(new DateHours("SUN","",""));
+            add(new DateHours("MON","",""));
+            add(new DateHours("TUE","",""));
+            add(new DateHours("WED","",""));
+            add(new DateHours("THU","",""));
+            add(new DateHours("FRI","",""));
+            add(new DateHours("SAT","",""));
         }};
 
         return dateTimes;
@@ -420,14 +420,10 @@ public class AddCustomerActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
-
-    }
+    public void onConnectionSuspended(int i) {}
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) { }
 
     @Override
     public void onLocationChanged(Location location) {
@@ -490,22 +486,23 @@ public class AddCustomerActivity extends AppCompatActivity implements
 
         Customer customer = new Customer();
 
-        customer.setId(String.valueOf(System.currentTimeMillis()));
-        customer.setCustomerName(binding.etCustName.getText().toString().trim());
-        customer.setPhNo(binding.etPh.getText().toString().trim());
-        customer.setEmailId(binding.etEmail.getText().toString().trim());
-        customer.setAddress(binding.etCustAddress.getText().toString().trim());
-        customer.setWebLink(binding.etWeb.getText().toString().trim());
+        customer.setUserID(String.valueOf(System.currentTimeMillis()));
+        customer.setName(binding.etCustName.getText().toString().trim());
+        customer.setContactNo(binding.etPh.getText().toString().trim());
 
-        customer.setStoreAddress(binding.etStoreAddress.getText().toString().trim());
-        customer.setStoreLat(binding.etStoreLat.getText().toString().trim());
-        customer.setStoreLng(binding.etStoreLng.getText().toString().trim());
+        customer.setEmailID(binding.etEmail.getText().toString().trim());
+        customer.setLocation(binding.etCustAddress.getText().toString().trim());
+        customer.setWebsite(binding.etWeb.getText().toString().trim());
 
-        customer.setRcvAddress(binding.etRcvAddress.getText().toString().trim());
-        customer.setRcvLat(binding.etRcvLat.getText().toString().trim());
-        customer.setRcvLng(binding.etRcvLng.getText().toString().trim());
+        customer.setStoreEntranceLocation(binding.etStoreAddress.getText().toString().trim());
+        customer.setStoreEntranceLatitude(binding.etStoreLat.getText().toString().trim());
+        customer.setStoreEntranceLongitude(binding.etStoreLng.getText().toString().trim());
 
-        customer.setDateTime(dateTimes);
+        customer.setReceivingEntranceLocation(binding.etRcvAddress.getText().toString().trim());
+        customer.setReceivingEntranceLatitude(binding.etRcvLat.getText().toString().trim());
+        customer.setReceivingEntranceLongitude(binding.etRcvLng.getText().toString().trim());
+
+        customer.setDateHours(dateTimes);
 
         return customer;
     }
@@ -521,25 +518,25 @@ public class AddCustomerActivity extends AppCompatActivity implements
                         .customerDao().insert(customer);
 
                 for (Image image : outsideList){
-                    image.setCustomerId(customer.getId());
+//                    image.setCustomerId(customer.getId());
                 }
 
                 for (Image image : insideList){
-                    image.setCustomerId(customer.getId());
+//                    image.setCustomerId(customer.getId());
                 }
 
                 for (Image image : sectionList){
-                    image.setCustomerId(customer.getId());
+//                    image.setCustomerId(customer.getId());
                 }
 
                 DBClient.getInstance(getApplicationContext()).getAppDB()
-                        .imageDao().insertAll(outsideList);
+                        .imageDao().insert(outsideList);
 
                 DBClient.getInstance(getApplicationContext()).getAppDB()
-                        .imageDao().insertAll(insideList);
+                        .imageDao().insert(insideList);
 
                 DBClient.getInstance(getApplicationContext()).getAppDB()
-                        .imageDao().insertAll(sectionList);
+                        .imageDao().insert(sectionList);
             }
             return null;
         }
@@ -710,7 +707,7 @@ public class AddCustomerActivity extends AppCompatActivity implements
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
 //                        CustomLoader.dismissLoader();
                 try {
-                    String responseBody=response.body().string();
+                    String responseBody = response.body().string();
                     System.out.println("response:"+responseBody);
                     LocationResponse result = new Gson().fromJson(responseBody, LocationResponse.class);
 
