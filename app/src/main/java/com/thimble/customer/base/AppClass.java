@@ -4,7 +4,10 @@ import android.app.Application;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.thimble.customer.db.model.States;
 import com.thimble.customer.model.LoginData;
+
+import java.util.List;
 
 /**
  * Created by pasari on 25/11/18.
@@ -17,6 +20,7 @@ public class AppClass extends Application {
 
     private LoginData userData;
     private boolean isLogin;
+    private List<States> states;
 
     @Override
     public void onCreate() {
@@ -73,7 +77,11 @@ public class AppClass extends Application {
     }
 
 
+    public List<States> getStates() {
+        return states;
+    }
 
-
-
+    public void setStates(List<States> states) {
+        this.states = states;
+    }
 }

@@ -40,9 +40,9 @@ public interface ApiInterface {
     @POST(ApiHelper.SAVE_CUSTOMER)
     Call<ResponseBody> saveCustomer(@Header("Authorization") String auth,@Body Map<String, Object> params);
 
-
+    @Headers("Content-Type: application/json")
     @POST(ApiHelper.STATES)
-    Call<ResponseBody> loadStates();
+    Call<ResponseBody> loadStates(@Header("Authorization") String auth);
 
     @GET
     Call<ResponseBody> getAddress(@Url String url);

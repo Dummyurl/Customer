@@ -77,6 +77,7 @@ public class ShowCustomerActivity extends AppCompatActivity implements
     private void setUI(Customer customer,List<Image> outsideList,List<Image> insideList,List<Image> sectionList){
         if(customer != null) {
             binding.tvName.setText(customer.getName());
+            binding.tvId.setText(customer.getUserID());
             binding.tvPhone.setText(customer.getContactNo());
             binding.tvEmail.setText(customer.getEmailID());
             binding.tvCity.setText(customer.getCity());
@@ -133,7 +134,7 @@ public class ShowCustomerActivity extends AppCompatActivity implements
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tvEdit:
-                startActivity(new Intent(this,ShowCustomerActivity.class)
+                startActivity(new Intent(this,AddCustomerActivity.class)
                         .putExtra(CUSTOMER_ID,customerID));
                 break;
             case R.id.tvDelete:

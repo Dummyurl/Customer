@@ -80,6 +80,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
         holder.binding.tvCustName.setText(mFilteredList.get(position).getName());
         holder.binding.tvCustId.setText(mFilteredList.get(position).getId());
 
+//        holder.binding.imvArrow.setVisibility(mFilteredList.get(position).getSynced() == 1 ? View.VISIBLE : View.INVISIBLE);
+//        holder.binding.imbUpload.setVisibility(mFilteredList.get(position).getSynced() == 0 ? View.VISIBLE : View.GONE);
+
         if(mFilteredList.get(position).isSelected()){
             holder.binding.imvSelected.setVisibility(View.VISIBLE);
             holder.binding.listItem.setBackgroundColor(ContextCompat.getColor(mContext,R.color.list_selected_color));
@@ -121,6 +124,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ItemRo
                             .putExtra(CUSTOMER_ID,mFilteredList.get(position).getId()));
                 }
             }
+
+            holder.binding.imbUpload.setOnClickListener(v -> {});
 
 //            listner.onClick(position);
         });

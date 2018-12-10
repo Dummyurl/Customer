@@ -7,6 +7,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import com.thimble.customer.db.model.Image;
+import com.thimble.customer.db.model.States;
 
 import java.util.List;
 
@@ -16,20 +17,16 @@ import java.util.List;
 
 
 @Dao
-public interface ImageDao {
+public interface StatesDao {
 
     @Query("SELECT * FROM Image")
-    List<Image> getAll();
-
-    @Query("SELECT * FROM Image WHERE customerId=:customerId AND imgType=:imgType")
-    List<Image> getTypeWiseCustomerImages(String customerId, String imgType);
+    List<States> getAll();
 
     @Insert
-    void insert(Image image);
+    void insert(States states);
 
     @Insert
-    void insert(List<Image> images);
-
+    void insert(List<States> states);
 
     @Insert
     void insertAll(Image... sounds);
@@ -37,9 +34,6 @@ public interface ImageDao {
 
     @Update
      void update(Image image);
-
-    @Update
-    void update(List<Image> images);
 
 
     @Delete

@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.thimble.customer.R;
 import com.thimble.customer.adapter.ShowImgAdapter;
+import com.thimble.customer.base.AppClass;
 import com.thimble.customer.databinding.ActivityAddCustomerBinding;
 import com.thimble.customer.db.DBClient;
 import com.thimble.customer.db.model.Customer;
@@ -113,6 +115,9 @@ public class AddCustomerActivity extends AppCompatActivity implements
 //
 //        }
 
+
+
+
         init();
     }
 
@@ -123,15 +128,34 @@ public class AddCustomerActivity extends AppCompatActivity implements
         binding.rgTime.setOnCheckedChangeListener(this::onCheckedChanged);
 
         if(customerID == null || customerID.equals("")){
+            binding.imbUpload.setVisibility(View.GONE);
             dateTimes = prepareDateTime();
             binding.rdbSunday.setChecked(true);
 
             setImageLists(new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
 
+            populateSpinner("");
+
         } else {
             fetchCustomerFromDB();
         }
+    }
 
+    private void populateSpinner(String state){
+        List<String> states = new ArrayList<String>();
+        int selected = 0;
+        for(int i = 0; i< AppClass.getInstance().getStates().size(); i++){
+            states.add(AppClass.getInstance().getStates().get(i).getStateName());
+
+            if(AppClass.getInstance().getStates().get(i).getStateName().equals(state)){
+                selected = i;
+            }
+        }
+
+        ArrayAdapter<String> genreAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, states);
+        binding.spnrState.setAdapter(genreAdapter);
+
+        binding.spnrState.setSelection(selected);
     }
 
     private void fetchCustomerFromDB(){
@@ -140,28 +164,31 @@ public class AddCustomerActivity extends AppCompatActivity implements
 
 
     private void setUI(Customer customer,List<Image> outsideList,List<Image> insideList,List<Image> sectionList){
-        if(customer != null) {
-            binding.etCustName.setText(customer.getName());
-            binding.etPh.setText(customer.getContactNo());
-            binding.etEmail.setText(customer.getEmailID());
-            binding.etCustAddress.setText(customer.getLocation());
-            binding.etWeb.setText(customer.getWebsite());
 
-            binding.etStoreAddress.setText(customer.getStoreEntranceLocation());
-            binding.etStoreLat.setText(customer.getStoreEntranceLatitude());
-            binding.etStoreLng.setText(customer.getStoreEntranceLongitude());
+        binding.imbUpload.setVisibility(customer.getSynced() == 1 ? View.GONE : View.VISIBLE);
 
-            binding.etRcvAddress.setText(customer.getReceivingEntranceLocation());
-            binding.etRcvLat.setText(customer.getReceivingEntranceLatitude());
-            binding.etRcvLng.setText(customer.getReceivingEntranceLongitude());
+        binding.etCustName.setText(customer.getName());
+        binding.etPh.setText(customer.getContactNo());
+        binding.etEmail.setText(customer.getEmailID());
+        binding.etStreet.setText(customer.getStreet());
+        binding.etCity.setText(customer.getCity());
+        binding.etZIP.setText(customer.getZip());
+        binding.etWeb.setText(customer.getWebsite());
 
-            dateTimes = customer.getDateHours() != null ? customer.getDateHours() : prepareDateTime();
-            binding.rdbSunday.setChecked(true);
+        binding.etStoreAddress.setText(customer.getStoreEntranceLocation());
+        binding.etStoreLat.setText(customer.getStoreEntranceLatitude());
+        binding.etStoreLng.setText(customer.getStoreEntranceLongitude());
 
-            setImageLists(outsideList,insideList,sectionList);
-        }else {
-            finish();
-        }
+        binding.etRcvAddress.setText(customer.getReceivingEntranceLocation());
+        binding.etRcvLat.setText(customer.getReceivingEntranceLatitude());
+        binding.etRcvLng.setText(customer.getReceivingEntranceLongitude());
+
+        dateTimes = customer.getDateHours() != null ? customer.getDateHours() : prepareDateTime();
+        binding.rdbSunday.setChecked(true);
+
+        setImageLists(outsideList,insideList,sectionList);
+
+        populateSpinner(customer.getState());
     }
 
     private void setImageLists(List<Image> outsideList,List<Image> insideList,List<Image> sectionList){
@@ -197,7 +224,7 @@ public class AddCustomerActivity extends AppCompatActivity implements
         switch (view.getId()){
             case R.id.tvSave:
                 if(!TextUtils.isEmpty(binding.etCustName.getText().toString().trim())){
-                    new SaveTask().execute();
+                    saveCustomer();
                 }
                 break;
             case R.id.tvCancel:
@@ -235,6 +262,8 @@ public class AddCustomerActivity extends AppCompatActivity implements
             case R.id.imbRcvLat:
             case R.id.imbRcvLng:
                 requestLocationPermission("receiving_entrance");
+                break;
+            case R.id.imbUpload:
                 break;
         }
     }
@@ -478,20 +507,39 @@ public class AddCustomerActivity extends AppCompatActivity implements
     }
 
 
-    private Customer collectCustomer(){
+    private void saveCustomer(){
+        Customer customer = collectCustomer();
+        if(customerID == null){
+            customer.setSynced(0);
+            customer.setUserID(String.valueOf(System.currentTimeMillis()));
+            new SaveTask(customer).execute();
+        } else {
+            if(customer.getSynced() == 0){
+                new UpdateTask(customer).execute();
+            } else {
 
+            }
+        }
+    }
+
+    private Customer collectCustomer(){
         if(TextUtils.isEmpty(binding.etCustName.getText().toString().trim())){
             return null;
         }
 
-        Customer customer = new Customer();
+        if(customer == null)
+            customer = new Customer();
 
-        customer.setUserID(String.valueOf(System.currentTimeMillis()));
+//        customer.setUserID(customerID != null ? customerID : String.valueOf(System.currentTimeMillis()));
         customer.setName(binding.etCustName.getText().toString().trim());
         customer.setContactNo(binding.etPh.getText().toString().trim());
 
         customer.setEmailID(binding.etEmail.getText().toString().trim());
-        customer.setLocation(binding.etCustAddress.getText().toString().trim());
+        customer.setStreet(binding.etStreet.getText().toString().trim());
+        customer.setCity(binding.etCity.getText().toString().trim());
+        customer.setZip(binding.etZIP.getText().toString().trim());
+        customer.setState(binding.spnrState.getSelectedItem().toString());
+
         customer.setWebsite(binding.etWeb.getText().toString().trim());
 
         customer.setStoreEntranceLocation(binding.etStoreAddress.getText().toString().trim());
@@ -508,25 +556,30 @@ public class AddCustomerActivity extends AppCompatActivity implements
     }
 
     class SaveTask extends AsyncTask<Void, Void, Void> {
+        private Customer customer;
+
+        public SaveTask(Customer customer) {
+            this.customer = customer;
+        }
 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            Customer customer = collectCustomer();
+//            Customer customer = collectCustomer();
             if(customer != null){
                 DBClient.getInstance(getApplicationContext()).getAppDB()
                         .customerDao().insert(customer);
 
                 for (Image image : outsideList){
-//                    image.setCustomerId(customer.getId());
+                    image.setCustomerId(customer.getUserID());
                 }
 
                 for (Image image : insideList){
-//                    image.setCustomerId(customer.getId());
+                    image.setCustomerId(customer.getUserID());
                 }
 
                 for (Image image : sectionList){
-//                    image.setCustomerId(customer.getId());
+                    image.setCustomerId(customer.getUserID());
                 }
 
                 DBClient.getInstance(getApplicationContext()).getAppDB()
@@ -553,9 +606,60 @@ public class AddCustomerActivity extends AppCompatActivity implements
         }
     }
 
+    class UpdateTask extends AsyncTask<Void, Void, Void> {
+        private Customer customer;
+
+        public UpdateTask(Customer customer) {
+            this.customer = customer;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            if(customer != null){
+                DBClient.getInstance(getApplicationContext()).getAppDB()
+                        .customerDao().update(customer);
+
+                for (Image image : outsideList){
+                    image.setCustomerId(customer.getUserID());
+                }
+
+                for (Image image : insideList){
+                    image.setCustomerId(customer.getUserID());
+                }
+
+                for (Image image : sectionList){
+                    image.setCustomerId(customer.getUserID());
+                }
+
+                DBClient.getInstance(getApplicationContext()).getAppDB()
+                        .imageDao().update(outsideList);
+
+                DBClient.getInstance(getApplicationContext()).getAppDB()
+                        .imageDao().update(insideList);
+
+                DBClient.getInstance(getApplicationContext()).getAppDB()
+                        .imageDao().update(sectionList);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+//            finish();
+//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//            new GetTasks().execute();
+
+            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+
+
 
     class FetchCustomerTask extends AsyncTask<Void, Void, Void> {
-        private Customer customer;
+//        private Customer customer;
         private List<Image> outsideList;
         private List<Image> insideList;
         private List<Image> sectionList;
@@ -568,7 +672,6 @@ public class AddCustomerActivity extends AppCompatActivity implements
 
         @Override
         protected Void doInBackground(Void... voids) {
-
              customer = DBClient
                     .getInstance(getApplicationContext())
                     .getAppDB()
@@ -604,13 +707,16 @@ public class AddCustomerActivity extends AppCompatActivity implements
             for(Image image : sectionList){
                 image.setImgBitmap(image.getImage() == null ? null : BitmapManager.byteToBitmap(image.getImage()));
             }
-
             return null;
         }
         @Override
         protected void onPostExecute(Void v) {
             System.out.println("####################### onPostExecute #######################");
-            setUI(customer,outsideList,insideList,sectionList);
+            if(customer != null){
+                setUI(customer,outsideList,insideList,sectionList);
+            }else {
+                finish();
+            }
         }
     }
 

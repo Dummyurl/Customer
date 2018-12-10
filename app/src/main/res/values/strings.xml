@@ -20,6 +20,9 @@
     <string name="shop_outside_picture">Shop Outside Picture</string>
     <string name="shop_inside_picture">Shop Inside Picture</string>
     <string name="section_picture">Section / Rack picture</string>
+    <string name="no_outside_img">No Outside Image Added</string>
+    <string name="no_inside_img">No Inside Image Added</string>
+    <string name="no_section_img">No Section Image Added</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
 
@@ -40,9 +43,6 @@
     <string name="upload_shop_outside_picture">Upload Shop Outside Picture</string>
     <string name="upload_shop_inside_picture">Upload Shop Inside Picture</string>
     <string name="upload_section_picture">Upload Section / Rack picture</string>
-    <string name="no_outside_img">No Outside Image Added</string>
-    <string name="no_inside_img">No Inside Image Added</string>
-    <string name="no_section_img">No Section Image Added</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
@@ -55,6 +55,7 @@
     <string name="zip_hint">Zip</string>
     <string name="phone_hint">Phone</string>
     <string name="email_hint">Email ID</string>
+    <string name="street_hint">Street</string>
     <string name="web_hint">https://…</string>
 
 
@@ -63,5 +64,16 @@
     <string name="pwd_blank_msg">Please enter password</string>
 
 
+
+
+    <string-array name="socialOption">
+        <item>Website</item>
+        <item>Facebook Link</item>
+        <item>Twitter Link</item>
+        <item>Instagram Link</item>
+        <item>Google Plus Link</item>
+        <item>Pinterest Link</item>
+        <item>Any Other Link</item>
+    </string-array>
 
 </resources>

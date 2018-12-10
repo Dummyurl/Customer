@@ -52,8 +52,8 @@
                     android:orientation="vertical"
                     android:paddingTop="@dimen/dp_0"
                     android:paddingBottom="@dimen/dp_0"
-                    android:paddingLeft="@dimen/dp_30"
-                    android:paddingRight="@dimen/dp_30">
+                    android:paddingLeft="@dimen/dp_25"
+                    android:paddingRight="@dimen/dp_25">
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvName"
@@ -109,7 +109,6 @@
                         android:drawablePadding="@dimen/dp_10"
                         android:background="@drawable/edt_round_bg"
                         android:gravity="center_vertical"
-                        android:inputType="textEmailAddress"
                         android:hint="@string/email_hint"
                         android:textSize="@dimen/sp_14" />
 
@@ -130,6 +129,8 @@
                             android:drawablePadding="@dimen/dp_10"
                             android:background="@drawable/edt_round_bg"
                             android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             android:hint="@string/city_hint"
                             android:textSize="@dimen/sp_14" />
 
@@ -145,6 +146,8 @@
                             android:drawablePadding="@dimen/dp_10"
                             android:background="@drawable/edt_round_bg"
                             android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             android:hint="@string/state_hint"
                             android:textSize="@dimen/sp_14" />
 
@@ -158,6 +161,8 @@
                             android:drawablePadding="@dimen/dp_10"
                             android:background="@drawable/edt_round_bg"
                             android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             android:hint="@string/zip_hint"
                             android:textSize="@dimen/sp_14" />
 
@@ -231,7 +236,6 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:ellipsize="end"
-                        android:inputType="textCapSentences"
                         android:hint="@string/store_entrance_hint"
                         android:textSize="@dimen/sp_16" />
 
@@ -248,7 +252,6 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:ellipsize="end"
-                        android:inputType="numberDecimal"
                         android:hint="@string/lattitude_hint"
                         android:textSize="@dimen/sp_16" />
 
@@ -264,7 +267,6 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:ellipsize="end"
-                        android:inputType="numberDecimal"
                         android:hint="@string/longitude_hint"
                         android:textSize="@dimen/sp_16" />
 
@@ -290,7 +292,6 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:ellipsize="end"
-                        android:inputType="textCapSentences"
                         android:hint="@string/receiving_entrance_hint"
                         android:textSize="@dimen/sp_16" />
 
@@ -526,7 +527,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginBottom="@dimen/dp_20"
                     android:textSize="@dimen/sp_16"
-                    android:text="@string/upload_shop_outside_picture"/>
+                    android:text="@string/shop_outside_picture"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -538,14 +539,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textAllCaps="true"
-                        android:textSize="@dimen/sp_14"
+                        android:textSize="@dimen/sp_12"
                         android:text="@string/no_outside_img" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvOutside"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dp_50"
                         android:orientation="horizontal"
                         android:clipToPadding="false"
                         tools:listitem="@layout/item_images"
@@ -561,7 +562,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginBottom="@dimen/dp_20"
                     android:textSize="@dimen/sp_16"
-                    android:text="@string/upload_shop_inside_picture"/>
+                    android:text="@string/shop_inside_picture"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -573,14 +574,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textAllCaps="true"
-                        android:textSize="@dimen/sp_14"
+                        android:textSize="@dimen/sp_12"
                         android:text="@string/no_outside_img" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvInside"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dp_50"
                         android:orientation="horizontal"
                         android:clipToPadding="false"
                         tools:listitem="@layout/item_images"
@@ -596,7 +597,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginBottom="@dimen/dp_20"
                     android:textSize="@dimen/sp_16"
-                    android:text="@string/upload_section_picture"/>
+                    android:text="@string/section_picture"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -608,14 +609,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textAllCaps="true"
-                        android:textSize="@dimen/sp_14"
+                        android:textSize="@dimen/sp_12"
                         android:text="@string/no_section_img" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="@dimen/dp_50"
                         android:orientation="horizontal"
                         android:clipToPadding="false"
                         tools:listitem="@layout/item_images"

@@ -2,6 +2,7 @@ package com.thimble.customer.activity;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,13 +14,18 @@ import com.google.gson.Gson;
 import com.thimble.customer.R;
 import com.thimble.customer.base.AppClass;
 import com.thimble.customer.databinding.ActivityLoginBinding;
+import com.thimble.customer.db.DBClient;
+import com.thimble.customer.db.model.States;
+import com.thimble.customer.model.LoginData;
 import com.thimble.customer.model.LoginResponse;
+import com.thimble.customer.model.StatesResponse;
 import com.thimble.customer.rest.ApiClient;
 import com.thimble.customer.rest.ApiHelper;
 import com.thimble.customer.rest.ApiInterface;
 import com.thimble.customer.view.CustomLoder;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -67,6 +73,37 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    class SaveTask extends AsyncTask<Void, Void, Void> {
+        private List<States> states;
+        private LoginData loginData;
+
+        public SaveTask(List<States> states,LoginData loginData) {
+            this.states = states;
+            this.loginData = loginData;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            AppClass.getInstance().setStates(states);
+
+                DBClient.getInstance(getApplicationContext()).getAppDB()
+                        .statesDao().insert(states);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            AppClass.getInstance().setUserData(loginData);
+
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            finish();
+        }
+    }
+
+
     private void login() {
         CustomLoder.showCustomProgressBar(this);
 
@@ -89,10 +126,12 @@ public class LoginActivity extends AppCompatActivity {
                         LoginResponse login = new Gson().fromJson(responseBody,LoginResponse.class);
                         if(login.getPayload().get(0).getAuthorization().toLowerCase().equals("success")){
 
-                            AppClass.getInstance().setUserData(login.getPayload().get(0));
-                            
-                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                            finish();
+//                            AppClass.getInstance().setUserData(login.getPayload().get(0));
+//
+//                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+//                            finish();
+
+                            loadStates(login.getPayload().get(0));
                         }
                     } else {
 
@@ -109,28 +148,24 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loadStates() {
+    private void loadStates(LoginData loginData) {
         CustomLoder.showCustomProgressBar(this);
 
         ApiClient.getClient(this).create(ApiInterface.class)
-                .loadStates().enqueue(new Callback<ResponseBody>() {
+                .loadStates(loginData.getTokenType() + " " + loginData.getAccessToken()).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 System.out.println("response:"+response);
                 CustomLoder.dismisCustomProgressBar();
                 try {
-                    String responseBody=response.body().string();
+                    String responseBody = response.body().string();
                     System.out.println("responseBody:"+responseBody);
 
                     if(response.code() == 200){
-                        LoginResponse login = new Gson().fromJson(responseBody,LoginResponse.class);
-                        if(login.getPayload().get(0).getAuthorization().toLowerCase().equals("success")){
+                        StatesResponse result = new Gson().fromJson(responseBody,StatesResponse.class);
 
-                            AppClass.getInstance().setUserData(login.getPayload().get(0));
+                        new SaveTask(result.getPayload(),loginData).execute();
 
-                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                            finish();
-                        }
                     } else {
 
                     }
