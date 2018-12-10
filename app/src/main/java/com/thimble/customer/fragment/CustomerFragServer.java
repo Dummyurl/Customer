@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.thimble.customer.R;
 import com.thimble.customer.adapter.CustomerAdapter;
 import com.thimble.customer.base.AppClass;
@@ -26,7 +25,6 @@ import com.thimble.customer.rest.ApiHelper;
 import com.thimble.customer.rest.ApiInterface;
 import com.thimble.customer.view.CustomLoder;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +58,7 @@ public class CustomerFragServer extends Fragment implements CustomerAdapter.OnIt
 
         setUI(customers = new ArrayList<>());
 
-//        loadCustomers();
+        loadCustomers();
 
         return binding.getRoot();
     }
@@ -69,7 +67,10 @@ public class CustomerFragServer extends Fragment implements CustomerAdapter.OnIt
     public void onResume() {
         super.onResume();
 
-        fetchCustomerListFromDB();
+        if(AppClass.getInstance().isChanged()){
+            fetchCustomerListFromDB();
+        }
+
     }
 
     private void setUI(List<CustomerItem> customers){
@@ -165,14 +166,21 @@ public class CustomerFragServer extends Fragment implements CustomerAdapter.OnIt
         @Override
         protected void onPostExecute(List<CustomerItem> customers) {
             super.onPostExecute(customers);
-            if(customers == null || customers.size() == 0){
-                loadCustomers();
+            System.out.println("customers:"+customers.size());
 
-            } else {
-                CustomerFragServer.this.customers.clear();
-                CustomerFragServer.this.customers.addAll(customers);
-                setUI(CustomerFragServer.this.customers);
-            }
+            CustomerFragServer.this.customers.clear();
+            CustomerFragServer.this.customers.addAll(customers);
+            setUI(CustomerFragServer.this.customers);
+
+
+//            if(customers == null || customers.size() == 0){
+//                loadCustomers();
+//
+//            } else {
+//                CustomerFragServer.this.customers.clear();
+//                CustomerFragServer.this.customers.addAll(customers);
+//                setUI(CustomerFragServer.this.customers);
+//            }
         }
     }
 
@@ -207,6 +215,7 @@ public class CustomerFragServer extends Fragment implements CustomerAdapter.OnIt
 
         public SaveCustomerTask(List<Customer> customers,  List<Image> shopOutsideImg,
                                 List<Image> shopInsideImg,  List<Image> sectionImg) {
+
             this.customers = customers;
             this.shopOutsideImg = shopOutsideImg;
             this.shopInsideImg = shopInsideImg;

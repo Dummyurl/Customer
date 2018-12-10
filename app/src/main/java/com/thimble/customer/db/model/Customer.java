@@ -93,13 +93,15 @@ public class Customer {
     private String receivingEntranceLongitude;
     private int synced;
 
-    private List<DateHours> dateHours;
+    @SerializedName("DayHours")
+    @Expose
+    private List<DateHours> dayHours;
 
     @Ignore
     private boolean isSelected;
 
 //    @Embedded
-//    private DateHours dateHours;
+//    private DateHours dayHours;
 
 
     public Customer() {
@@ -280,12 +282,12 @@ public class Customer {
         this.synced = synced;
     }
 
-    public List<DateHours> getDateHours() {
-        return dateHours;
+    public List<DateHours> getDayHours() {
+        return dayHours;
     }
 
-    public void setDateHours(List<DateHours> dateHours) {
-        this.dateHours = dateHours;
+    public void setDayHours(List<DateHours> dayHours) {
+        this.dayHours = dayHours;
     }
 
     public boolean isSelected() {

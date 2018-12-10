@@ -31,8 +31,7 @@ import static com.thimble.customer.base.AppConstant.OUTSIDE_PIC;
 import static com.thimble.customer.base.AppConstant.SECTION_PIC;
 import static com.thimble.customer.util.IntentExtras.CUSTOMER_ID;
 
-public class ShowCustomerActivity extends AppCompatActivity implements
-        ShowImgAdapter.onItemClickListener {
+public class ShowCustomerActivity extends AppCompatActivity {
 
     private ActivityShowCustomerBinding binding;
 
@@ -60,13 +59,19 @@ public class ShowCustomerActivity extends AppCompatActivity implements
         else init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        fetchCustomerFromDB();
+    }
+
     private void init(){
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
 
         binding.rgTime.setOnCheckedChangeListener(this::onCheckedChanged);
 
-        fetchCustomerFromDB();
     }
 
     private void fetchCustomerFromDB(){
@@ -89,11 +94,11 @@ public class ShowCustomerActivity extends AppCompatActivity implements
             binding.tvStoreLat.setText(customer.getStoreEntranceLatitude());
             binding.tvStoreLng.setText(customer.getStoreEntranceLongitude());
 
-            binding.tvStoreLng.setText(customer.getReceivingEntranceLocation());
+            binding.tvRcvAddress.setText(customer.getReceivingEntranceLocation());
             binding.tvRcvLat.setText(customer.getReceivingEntranceLatitude());
             binding.tvRcvLng.setText(customer.getReceivingEntranceLongitude());
 
-            dateTimes = customer.getDateHours() != null ? customer.getDateHours() : prepareDateTime();
+            dateTimes = customer.getDayHours() != null ? customer.getDayHours() : prepareDateTime();
             binding.rdbSunday.setChecked(true);
 
             setImageLists(outsideList,insideList,sectionList);
@@ -103,18 +108,13 @@ public class ShowCustomerActivity extends AppCompatActivity implements
     }
 
     private void setImageLists(List<Image> outsideList,List<Image> insideList,List<Image> sectionList){
-        binding.rvOutside.setAdapter(
-                outsideAdapter = new ShowImgAdapter(this,this,
-                        this.outsideList = outsideList));
+        binding.rvOutside.setAdapter(new ShowImgAdapter(this, outsideList));
 
-        binding.rvInside.setAdapter(
-                insideAdapter = new ShowImgAdapter(this,this,
-                        this.insideList = insideList));
+        binding.rvInside.setAdapter(new ShowImgAdapter(this, insideList));
 
-        binding.rvSection.setAdapter(
-                sectionAdapter = new ShowImgAdapter(this,this,
-                        this.sectionList = sectionList));
+        binding.rvSection.setAdapter(new ShowImgAdapter(this, sectionList));
     }
+
 
     private List<DateHours> prepareDateTime(){
         List<DateHours> dateTimes;
@@ -189,33 +189,6 @@ public class ShowCustomerActivity extends AppCompatActivity implements
 
 
     @Override
-    public void onItemClick(int position, String imgType) {
-//        this.clickedPosition = position;
-//        this.selectedImgType = imgType;
-//        requestPermission();
-    }
-
-    @Override
-    public void onDeleteClick(int position, String imgType) {
-        switch (imgType){
-            case OUTSIDE_PIC:
-                outsideList.remove(position);
-                outsideAdapter.notifyDataSetChanged();
-                break;
-            case INSIDE_PIC:
-                insideList.remove(position);
-                insideAdapter.notifyDataSetChanged();
-                break;
-            case SECTION_PIC:
-                sectionList.remove(position);
-                sectionAdapter.notifyDataSetChanged();
-                break;
-        }
-    }
-
-
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
@@ -239,7 +212,6 @@ public class ShowCustomerActivity extends AppCompatActivity implements
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            System.out.println("####################### onPreExecute #######################");
         }
 
         @Override
@@ -285,7 +257,6 @@ public class ShowCustomerActivity extends AppCompatActivity implements
         }
         @Override
         protected void onPostExecute(Void v) {
-            System.out.println("####################### onPostExecute #######################");
             setUI(customer,outsideList,insideList,sectionList);
         }
     }

@@ -21,6 +21,7 @@ public class AppClass extends Application {
     private LoginData userData;
     private boolean isLogin;
     private List<States> states;
+    private boolean changed;
 
     @Override
     public void onCreate() {
@@ -83,5 +84,13 @@ public class AppClass extends Application {
 
     public void setStates(List<States> states) {
         this.states = states;
+    }
+
+    public boolean isChanged() {
+        return changed;
+    }
+
+    public void setChanged(boolean changed) {
+        this.changed = changed;
     }
 }

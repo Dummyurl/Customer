@@ -42,7 +42,6 @@ public class ShowImgAdapter extends RecyclerView.Adapter<ShowImgAdapter.ItemRowH
 
     public ShowImgAdapter(Context mContext, List<Image> imageList) {
         this.mContext = mContext;
-        this.listener = listener;
         this.imageList = imageList;
     }
 

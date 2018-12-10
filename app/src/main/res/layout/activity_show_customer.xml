@@ -19,16 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorAccent"
-            app:contentInsetStartWithNavigation="0dp"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
-            app:contentInsetRight="0dp"
             app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            app:titleTextAppearance="@style/ToolbarTextAppearance"
-            app:title="@string/customer_profile_page_title" />
+            app:title="@string/customer_profile_page_title"
+            app:titleTextAppearance="@style/ToolbarTextAppearance" />
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nsv"
@@ -41,62 +41,62 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/page_bg_color"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/dp_30"
                 android:paddingTop="@dimen/dp_30"
-                android:background="@color/page_bg_color">
+                android:paddingBottom="@dimen/dp_30">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/dp_0"
-                    android:paddingBottom="@dimen/dp_0"
                     android:paddingLeft="@dimen/dp_25"
-                    android:paddingRight="@dimen/dp_25">
+                    android:paddingTop="@dimen/dp_0"
+                    android:paddingRight="@dimen/dp_25"
+                    android:paddingBottom="@dimen/dp_0">
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvName"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
                         android:layout_marginBottom="@dimen/dp_10"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:paddingRight="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_user"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
                         android:gravity="center_vertical"
                         android:hint="@string/cust_name_hint"
                         android:inputType="textCapWords"
-                        android:textSize="@dimen/sp_14"/>
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:textSize="@dimen/sp_14" />
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvId"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
                         android:layout_marginBottom="@dimen/dp_10"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:paddingRight="@dimen/dp_10"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_user"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
                         android:gravity="center_vertical"
                         android:hint="@string/cust_id_hint"
-                        android:textSize="@dimen/sp_14"/>
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:textSize="@dimen/sp_14" />
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvPhone"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
                         android:layout_marginBottom="@dimen/dp_8"
-                        android:padding="@dimen/dp_5"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_phone"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
-                        android:inputType="number"
-                        android:maxLength="10"
                         android:gravity="center_vertical"
                         android:hint="@string/phone_hint"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:padding="@dimen/dp_5"
                         android:textSize="@dimen/sp_14" />
 
                     <com.thimble.customer.view.TypedfaceTextView
@@ -104,19 +104,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
                         android:layout_marginBottom="@dimen/dp_8"
-                        android:padding="@dimen/dp_5"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_email"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
                         android:gravity="center_vertical"
                         android:hint="@string/email_hint"
+                        android:padding="@dimen/dp_5"
                         android:textSize="@dimen/sp_14" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="@dimen/dp_10">
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:orientation="horizontal">
 
 
                         <com.thimble.customer.view.TypedfaceTextView
@@ -124,31 +124,31 @@
                             android:layout_width="@dimen/dp_0"
                             android:layout_height="@dimen/dp_44"
                             android:layout_weight="1"
-                            android:padding="@dimen/dp_5"
+                            android:background="@drawable/edt_round_bg"
                             android:drawableLeft="@drawable/ic_city"
                             android:drawablePadding="@dimen/dp_10"
-                            android:background="@drawable/edt_round_bg"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
                             android:ellipsize="end"
+                            android:gravity="center_vertical"
                             android:hint="@string/city_hint"
+                            android:maxLines="1"
+                            android:padding="@dimen/dp_5"
                             android:textSize="@dimen/sp_14" />
 
                         <com.thimble.customer.view.TypedfaceTextView
                             android:id="@+id/tvState"
                             android:layout_width="@dimen/dp_0"
                             android:layout_height="@dimen/dp_44"
-                            android:layout_weight="1"
                             android:layout_marginLeft="@dimen/dp_1"
                             android:layout_marginRight="@dimen/dp_1"
-                            android:padding="@dimen/dp_5"
+                            android:layout_weight="1"
+                            android:background="@drawable/edt_round_bg"
                             android:drawableLeft="@drawable/ic_map_marker"
                             android:drawablePadding="@dimen/dp_10"
-                            android:background="@drawable/edt_round_bg"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
                             android:ellipsize="end"
+                            android:gravity="center_vertical"
                             android:hint="@string/state_hint"
+                            android:maxLines="1"
+                            android:padding="@dimen/dp_5"
                             android:textSize="@dimen/sp_14" />
 
                         <com.thimble.customer.view.TypedfaceTextView
@@ -156,14 +156,14 @@
                             android:layout_width="@dimen/dp_0"
                             android:layout_height="@dimen/dp_44"
                             android:layout_weight="1"
-                            android:padding="@dimen/dp_5"
+                            android:background="@drawable/edt_round_bg"
                             android:drawableLeft="@drawable/ic_pin"
                             android:drawablePadding="@dimen/dp_10"
-                            android:background="@drawable/edt_round_bg"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
                             android:ellipsize="end"
+                            android:gravity="center_vertical"
                             android:hint="@string/zip_hint"
+                            android:maxLines="1"
+                            android:padding="@dimen/dp_5"
                             android:textSize="@dimen/sp_14" />
 
                     </LinearLayout>
@@ -171,29 +171,29 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="@dimen/dp_80"
                         android:layout_marginBottom="@dimen/dp_10"
-                        android:paddingTop="@dimen/dp_10"
-                        android:paddingBottom="@dimen/dp_10"
-                        android:paddingLeft="@dimen/dp_4"
-                        android:paddingRight="@dimen/dp_5"
                         android:background="@drawable/edt_round_bg"
+                        android:minHeight="@dimen/dp_80"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_5"
+                        android:paddingBottom="@dimen/dp_10"
                         android:visibility="gone">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_map_marker"/>
+                            android:src="@drawable/ic_map_marker" />
 
                         <com.thimble.customer.view.TypedfaceTextView
                             android:id="@+id/etCustAddress"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
                             android:background="@null"
                             android:gravity="start"
                             android:hint="@string/address_hint"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
                             android:textSize="@dimen/sp_14" />
 
                     </LinearLayout>
@@ -203,15 +203,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
                         android:layout_marginBottom="@dimen/dp_0"
-                        android:paddingTop="@dimen/dp_5"
-                        android:paddingBottom="@dimen/dp_5"
-                        android:paddingLeft="7.5dp"
-                        android:paddingRight="@dimen/dp_5"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_web"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
                         android:gravity="center_vertical"
                         android:hint="@string/web_hint"
+                        android:paddingLeft="7.5dp"
+                        android:paddingTop="@dimen/dp_5"
+                        android:paddingRight="@dimen/dp_5"
+                        android:paddingBottom="@dimen/dp_5"
                         android:textSize="@dimen/sp_14" />
 
                     <com.thimble.customer.view.TypedfaceTextView
@@ -220,39 +220,39 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/dp_20"
                         android:layout_marginBottom="@dimen/dp_20"
-                        android:textSize="@dimen/sp_18"
-                        android:text="@string/store_entrance"/>
+                        android:text="@string/store_entrance"
+                        android:textSize="@dimen/sp_18" />
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvStoreAddress"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
-                        android:layout_toLeftOf="@+id/imbStoreAddress"
                         android:layout_marginBottom="@dimen/dp_5"
-                        android:padding="@dimen/dp_5"
+                        android:layout_toLeftOf="@+id/imbStoreAddress"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_map_marker"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
-                        android:gravity="center_vertical"
-                        android:singleLine="true"
                         android:ellipsize="end"
+                        android:gravity="center_vertical"
                         android:hint="@string/store_entrance_hint"
+                        android:padding="@dimen/dp_5"
+                        android:singleLine="true"
                         android:textSize="@dimen/sp_16" />
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvStoreLat"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
-                        android:layout_toLeftOf="@+id/imbStoreLat"
                         android:layout_marginBottom="@dimen/dp_5"
-                        android:padding="@dimen/dp_5"
+                        android:layout_toLeftOf="@+id/imbStoreLat"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_map_marker"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
-                        android:gravity="center_vertical"
-                        android:singleLine="true"
                         android:ellipsize="end"
+                        android:gravity="center_vertical"
                         android:hint="@string/lattitude_hint"
+                        android:padding="@dimen/dp_5"
+                        android:singleLine="true"
                         android:textSize="@dimen/sp_16" />
 
                     <com.thimble.customer.view.TypedfaceTextView
@@ -260,14 +260,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
                         android:layout_toLeftOf="@+id/imbStoreLng"
-                        android:padding="@dimen/dp_5"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_map_marker"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
-                        android:gravity="center_vertical"
-                        android:singleLine="true"
                         android:ellipsize="end"
+                        android:gravity="center_vertical"
                         android:hint="@string/longitude_hint"
+                        android:padding="@dimen/dp_5"
+                        android:singleLine="true"
                         android:textSize="@dimen/sp_16" />
 
                     <com.thimble.customer.view.TypedfaceTextView
@@ -276,40 +276,40 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/dp_20"
                         android:layout_marginBottom="@dimen/dp_20"
-                        android:textSize="@dimen/sp_18"
-                        android:text="@string/receiving_entrance"/>
+                        android:text="@string/receiving_entrance"
+                        android:textSize="@dimen/sp_18" />
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvRcvAddress"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
-                        android:layout_toLeftOf="@+id/imbRcvAddress"
                         android:layout_marginBottom="@dimen/dp_5"
-                        android:padding="@dimen/dp_5"
+                        android:layout_toLeftOf="@+id/imbRcvAddress"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_map_marker"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
-                        android:gravity="center_vertical"
-                        android:singleLine="true"
                         android:ellipsize="end"
+                        android:gravity="center_vertical"
                         android:hint="@string/receiving_entrance_hint"
+                        android:padding="@dimen/dp_5"
+                        android:singleLine="true"
                         android:textSize="@dimen/sp_16" />
 
                     <com.thimble.customer.view.TypedfaceTextView
                         android:id="@+id/tvRcvLat"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
-                        android:layout_toLeftOf="@+id/imbRcvLat"
                         android:layout_marginBottom="@dimen/dp_5"
-                        android:padding="@dimen/dp_5"
+                        android:layout_toLeftOf="@+id/imbRcvLat"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_map_marker"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
-                        android:gravity="center_vertical"
-                        android:singleLine="true"
                         android:ellipsize="end"
-                        android:inputType="numberDecimal"
+                        android:gravity="center_vertical"
                         android:hint="@string/lattitude_hint"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/dp_5"
+                        android:singleLine="true"
                         android:textSize="@dimen/sp_16" />
 
                     <com.thimble.customer.view.TypedfaceTextView
@@ -317,15 +317,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_44"
                         android:layout_toLeftOf="@+id/imbRcvLng"
-                        android:padding="@dimen/dp_5"
+                        android:background="@drawable/edt_round_bg"
                         android:drawableLeft="@drawable/ic_map_marker"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/edt_round_bg"
-                        android:gravity="center_vertical"
-                        android:singleLine="true"
                         android:ellipsize="end"
-                        android:inputType="numberDecimal"
+                        android:gravity="center_vertical"
                         android:hint="@string/longitude_hint"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/dp_5"
+                        android:singleLine="true"
                         android:textSize="@dimen/sp_16" />
 
                 </LinearLayout>
@@ -336,8 +336,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginBottom="@dimen/dp_20"
-                    android:textSize="@dimen/sp_18"
-                    android:text="@string/entry_hours"/>
+                    android:text="@string/entry_hours"
+                    android:textSize="@dimen/sp_18" />
 
                 <RadioGroup
                     android:id="@+id/rgTime"
@@ -349,112 +349,112 @@
                         android:id="@+id/rdbSunday"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_weight="1"
                         android:background="@drawable/rdb_week_day"
-                        android:gravity="center"
                         android:button="@null"
+                        android:gravity="center"
+                        android:text="SUN"
                         android:textAllCaps="true"
-                        android:textSize="@dimen/sp_16"
                         android:textColor="@android:color/white"
-                        android:text="SUN"/>
+                        android:textSize="@dimen/sp_16" />
 
                     <RadioButton
                         android:id="@+id/rdbMonday"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/dp_0.5"
                         android:layout_marginLeft="@dimen/dp_0.5"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_weight="1"
                         android:background="@drawable/rdb_week_day"
-                        android:gravity="center"
                         android:button="@null"
+                        android:gravity="center"
+                        android:text="MON"
                         android:textAllCaps="true"
-                        android:textSize="@dimen/sp_16"
                         android:textColor="@android:color/white"
-                        android:text="MON"/>
+                        android:textSize="@dimen/sp_16" />
 
                     <RadioButton
                         android:id="@+id/rdbTuesday"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/dp_0.5"
                         android:layout_marginLeft="@dimen/dp_0.5"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_weight="1"
                         android:background="@drawable/rdb_week_day"
-                        android:gravity="center"
                         android:button="@null"
+                        android:gravity="center"
+                        android:text="TUE"
                         android:textAllCaps="true"
-                        android:textSize="@dimen/sp_16"
                         android:textColor="@android:color/white"
-                        android:text="TUE"/>
+                        android:textSize="@dimen/sp_16" />
 
                     <RadioButton
                         android:id="@+id/rdbWednesday"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/dp_0.5"
                         android:layout_marginLeft="@dimen/dp_0.5"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_weight="1"
                         android:background="@drawable/rdb_week_day"
-                        android:gravity="center"
                         android:button="@null"
+                        android:gravity="center"
+                        android:text="WED"
                         android:textAllCaps="true"
-                        android:textSize="@dimen/sp_16"
                         android:textColor="@android:color/white"
-                        android:text="WED"/>
+                        android:textSize="@dimen/sp_16" />
 
                     <RadioButton
                         android:id="@+id/rdbThursday"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/dp_0.5"
                         android:layout_marginLeft="@dimen/dp_0.5"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_weight="1"
                         android:background="@drawable/rdb_week_day"
-                        android:gravity="center"
                         android:button="@null"
+                        android:gravity="center"
+                        android:text="THU"
                         android:textAllCaps="true"
-                        android:textSize="@dimen/sp_16"
                         android:textColor="@android:color/white"
-                        android:text="THU"/>
+                        android:textSize="@dimen/sp_16" />
 
                     <RadioButton
                         android:id="@+id/rdbFriday"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/dp_0.5"
                         android:layout_marginLeft="@dimen/dp_0.5"
+                        android:layout_marginRight="@dimen/dp_0.5"
+                        android:layout_weight="1"
                         android:background="@drawable/rdb_week_day"
-                        android:gravity="center"
                         android:button="@null"
+                        android:gravity="center"
+                        android:text="FRI"
                         android:textAllCaps="true"
-                        android:textSize="@dimen/sp_16"
                         android:textColor="@android:color/white"
-                        android:text="FRI"/>
+                        android:textSize="@dimen/sp_16" />
 
                     <RadioButton
                         android:id="@+id/rdbSaturday"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_marginLeft="@dimen/dp_0.5"
+                        android:layout_weight="1"
                         android:background="@drawable/rdb_week_day"
-                        android:gravity="center"
                         android:button="@null"
+                        android:gravity="center"
+                        android:text="SAT"
                         android:textAllCaps="true"
-                        android:textSize="@dimen/sp_16"
                         android:textColor="@android:color/white"
-                        android:text="SAT"/>
+                        android:textSize="@dimen/sp_16" />
 
                 </RadioGroup>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal"
-                    android:background="@color/radio_btn_active_color">
+                    android:background="@color/radio_btn_active_color"
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -468,25 +468,25 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="@dimen/dp_5"
-                            android:textAllCaps="true"
-                            android:textColor="@android:color/white"
+                            android:tag="@string/time_from"
                             android:text="@string/time_from"
-                            android:tag="@string/time_from"/>
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/white" />
 
                         <com.thimble.customer.view.TypedfaceTextView
                             android:id="@+id/tvTimeFrom"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
                             android:background="?attr/selectableItemBackground"
                             android:clickable="true"
-                            android:onClick="onClick"
                             android:gravity="center_vertical"
+                            android:onClick="onClick"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="-- : --"
                             android:textAllCaps="true"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/sp_22"
-                            android:text="-- : --" />
+                            android:textSize="@dimen/sp_22" />
 
                         <com.thimble.customer.view.TypedfaceTextView
                             android:id="@+id/tvTo"
@@ -495,25 +495,25 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/dp_5"
                             android:layout_marginRight="@dimen/dp_5"
-                            android:textAllCaps="true"
-                            android:textColor="@android:color/white"
+                            android:tag="@string/time_to"
                             android:text="@string/time_to"
-                            android:tag="@string/time_to"/>
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/white" />
 
                         <com.thimble.customer.view.TypedfaceTextView
                             android:id="@+id/tvTimeTo"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
                             android:background="?attr/selectableItemBackground"
                             android:clickable="true"
-                            android:onClick="onClick"
                             android:gravity="center_vertical"
+                            android:onClick="onClick"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="-- : --"
                             android:textAllCaps="true"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/sp_22"
-                            android:text="-- : --" />
+                            android:textSize="@dimen/sp_22" />
 
                     </LinearLayout>
 
@@ -526,8 +526,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginBottom="@dimen/dp_20"
-                    android:textSize="@dimen/sp_16"
-                    android:text="@string/shop_outside_picture"/>
+                    android:text="@string/shop_outside_picture"
+                    android:textSize="@dimen/sp_16" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -539,18 +539,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textSize="@dimen/sp_12"
-                        android:text="@string/no_outside_img" />
+                        android:visibility="gone"
+                        android:text="@string/no_outside_img"
+                        android:textSize="@dimen/sp_12" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvOutside"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clipToPadding="false"
                         android:minHeight="@dimen/dp_50"
                         android:orientation="horizontal"
-                        android:clipToPadding="false"
-                        tools:listitem="@layout/item_images"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_images" />
 
                 </RelativeLayout>
 
@@ -561,8 +562,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginBottom="@dimen/dp_20"
-                    android:textSize="@dimen/sp_16"
-                    android:text="@string/shop_inside_picture"/>
+                    android:text="@string/shop_inside_picture"
+                    android:textSize="@dimen/sp_16" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -574,18 +575,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textSize="@dimen/sp_12"
-                        android:text="@string/no_outside_img" />
+                        android:visibility="gone"
+                        android:text="@string/no_outside_img"
+                        android:textSize="@dimen/sp_12" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvInside"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clipToPadding="false"
                         android:minHeight="@dimen/dp_50"
                         android:orientation="horizontal"
-                        android:clipToPadding="false"
-                        tools:listitem="@layout/item_images"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_images" />
 
                 </RelativeLayout>
 
@@ -596,8 +598,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginBottom="@dimen/dp_20"
-                    android:textSize="@dimen/sp_16"
-                    android:text="@string/section_picture"/>
+                    android:text="@string/section_picture"
+                    android:textSize="@dimen/sp_16" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -609,18 +611,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textSize="@dimen/sp_12"
-                        android:text="@string/no_section_img" />
+                        android:visibility="gone"
+                        android:text="@string/no_section_img"
+                        android:textSize="@dimen/sp_12" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clipToPadding="false"
                         android:minHeight="@dimen/dp_50"
                         android:orientation="horizontal"
-                        android:clipToPadding="false"
-                        tools:listitem="@layout/item_images"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_images" />
 
                 </RelativeLayout>
 
@@ -632,14 +635,14 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
             android:layout_gravity="bottom"
-            app:cardElevation="@dimen/dp_4"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardBackgroundColor="@android:color/white"
+            app:cardElevation="@dimen/dp_4">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="@color/page_bg_color">
+                android:background="@color/page_bg_color"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvEdit"
@@ -661,17 +664,17 @@
                     android:id="@+id/tvDelete"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginLeft="@dimen/dp_0.5"
-                    android:paddingTop="@dimen/dp_10"
-                    android:drawableTop="@drawable/ic_delete_red"
-                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_weight="1"
                     android:background="@android:color/white"
                     android:clickable="true"
-                    android:onClick="onClick"
+                    android:drawableTop="@drawable/ic_delete_red"
+                    android:foreground="?attr/selectableItemBackground"
                     android:gravity="center"
-                    android:textSize="@dimen/sp_12"
-                    android:text="@string/delete"/>
+                    android:onClick="onClick"
+                    android:paddingTop="@dimen/dp_10"
+                    android:text="@string/delete"
+                    android:textSize="@dimen/sp_12" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>

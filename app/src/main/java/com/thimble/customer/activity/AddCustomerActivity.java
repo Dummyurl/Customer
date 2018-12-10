@@ -183,7 +183,7 @@ public class AddCustomerActivity extends AppCompatActivity implements
         binding.etRcvLat.setText(customer.getReceivingEntranceLatitude());
         binding.etRcvLng.setText(customer.getReceivingEntranceLongitude());
 
-        dateTimes = customer.getDateHours() != null ? customer.getDateHours() : prepareDateTime();
+        dateTimes = customer.getDayHours() != null ? customer.getDayHours() : prepareDateTime();
         binding.rdbSunday.setChecked(true);
 
         setImageLists(outsideList,insideList,sectionList);
@@ -324,19 +324,41 @@ public class AddCustomerActivity extends AppCompatActivity implements
     public void onDeleteClick(int position, String imgType) {
         switch (imgType){
             case OUTSIDE_PIC:
+                deleteImgFromDB(outsideList.get(position));
                 outsideList.remove(position);
                 outsideAdapter.notifyDataSetChanged();
                 break;
             case INSIDE_PIC:
+                deleteImgFromDB(insideList.get(position));
                 insideList.remove(position);
                 insideAdapter.notifyDataSetChanged();
                 break;
             case SECTION_PIC:
+                deleteImgFromDB(sectionList.get(position));
                 sectionList.remove(position);
                 sectionAdapter.notifyDataSetChanged();
                 break;
         }
     }
+
+    private void deleteImgFromDB(Image image){
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                DBClient.getInstance(getApplicationContext())
+                        .getAppDB()
+                        .imageDao()
+                        .delete(image);
+
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void v) {
+            }
+        }.execute();
+    }
+
 
     private synchronized void buildGoogleApiClient(String locationFor) {
         if (mGoogleApiClient != null) return;
@@ -379,23 +401,23 @@ public class AddCustomerActivity extends AppCompatActivity implements
         int mMinute = c.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view, hourOfDay, minute) ->{
-            showTime(textView,hourOfDay,minute); }, mHour, mMinute, false);
+            showTime(textView,hourOfDay,minute); }, mHour, mMinute, true);
         timePickerDialog.show();
     }
 
     public void showTime(TextView textView,int hourOfDay, int minute) {
         String format = "";
-        if (hourOfDay == 0) {
-            hourOfDay += 12;
-            format = "AM";
-        } else if (hourOfDay == 12) {
-            format = "PM";
-        } else if (hourOfDay > 12) {
-            hourOfDay -= 12;
-            format = "PM";
-        } else {
-            format = "AM";
-        }
+//        if (hourOfDay == 0) {
+//            hourOfDay += 12;
+//            format = "AM";
+//        } else if (hourOfDay == 12) {
+//            format = "PM";
+//        } else if (hourOfDay > 12) {
+//            hourOfDay -= 12;
+//            format = "PM";
+//        } else {
+//            format = "AM";
+//        }
 
         String time = new StringBuilder().append(String.format("%02d", hourOfDay)).append(" : ")
                 .append(String.format("%02d", minute)).append(" ").append(format).toString();
@@ -510,15 +532,10 @@ public class AddCustomerActivity extends AppCompatActivity implements
     private void saveCustomer(){
         Customer customer = collectCustomer();
         if(customerID == null){
-            customer.setSynced(0);
             customer.setUserID(String.valueOf(System.currentTimeMillis()));
             new SaveTask(customer).execute();
         } else {
-            if(customer.getSynced() == 0){
-                new UpdateTask(customer).execute();
-            } else {
-
-            }
+            new UpdateTask(customer).execute();
         }
     }
 
@@ -531,6 +548,7 @@ public class AddCustomerActivity extends AppCompatActivity implements
             customer = new Customer();
 
 //        customer.setUserID(customerID != null ? customerID : String.valueOf(System.currentTimeMillis()));
+        customer.setSynced(0);
         customer.setName(binding.etCustName.getText().toString().trim());
         customer.setContactNo(binding.etPh.getText().toString().trim());
 
@@ -550,7 +568,7 @@ public class AddCustomerActivity extends AppCompatActivity implements
         customer.setReceivingEntranceLatitude(binding.etRcvLat.getText().toString().trim());
         customer.setReceivingEntranceLongitude(binding.etRcvLng.getText().toString().trim());
 
-        customer.setDateHours(dateTimes);
+        customer.setDayHours(dateTimes);
 
         return customer;
     }
@@ -612,7 +630,6 @@ public class AddCustomerActivity extends AppCompatActivity implements
         public UpdateTask(Customer customer) {
             this.customer = customer;
         }
-
         @Override
         protected Void doInBackground(Void... voids) {
 
@@ -633,13 +650,13 @@ public class AddCustomerActivity extends AppCompatActivity implements
                 }
 
                 DBClient.getInstance(getApplicationContext()).getAppDB()
-                        .imageDao().update(outsideList);
+                        .imageDao().insert(outsideList);
 
                 DBClient.getInstance(getApplicationContext()).getAppDB()
-                        .imageDao().update(insideList);
+                        .imageDao().insert(insideList);
 
                 DBClient.getInstance(getApplicationContext()).getAppDB()
-                        .imageDao().update(sectionList);
+                        .imageDao().insert(sectionList);
             }
             return null;
         }
@@ -655,8 +672,6 @@ public class AddCustomerActivity extends AppCompatActivity implements
             finish();
         }
     }
-
-
 
     class FetchCustomerTask extends AsyncTask<Void, Void, Void> {
 //        private Customer customer;

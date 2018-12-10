@@ -3,6 +3,7 @@ package com.thimble.customer.db.dao;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
@@ -24,10 +25,10 @@ public interface ImageDao {
     @Query("SELECT * FROM Image WHERE customerId=:customerId AND imgType=:imgType")
     List<Image> getTypeWiseCustomerImages(String customerId, String imgType);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Image image);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(List<Image> images);
 
 
@@ -35,10 +36,10 @@ public interface ImageDao {
     void insertAll(Image... sounds);
 
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
      void update(Image image);
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(List<Image> images);
 
 

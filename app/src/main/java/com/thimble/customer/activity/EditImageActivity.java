@@ -268,7 +268,7 @@ public class EditImageActivity extends AppCompatActivity  implements ShowImgAdap
 //            DateHours dateTime = new DateHours();
 //            dateTime.setDate("nbjv,mnxc,mvn");
 //
-//            customer.setDateHours(dateTime);
+//            customer.setDayHours(dateTime);
 
             //adding to database
             DBClient.getInstance(getApplicationContext()).getAppDB()

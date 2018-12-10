@@ -3,6 +3,7 @@ package com.thimble.customer.db.dao;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
@@ -28,10 +29,10 @@ public interface CustomerDao {
     @Query("SELECT * FROM Customer WHERE id=:id Limit 1")
     Customer getCustomerDetails(String id);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Customer customer);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(List<Customer> customers);
 
     @Update
